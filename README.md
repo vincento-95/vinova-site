@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Landing Page — Agence IA Vin
 
-## Getting Started
+Landing page pour un service d'automatisation IA destiné aux importateurs et négociants de vin.
 
-First, run the development server:
+## Stack technique
+
+- **Next.js 15** (App Router, TypeScript)
+- **Tailwind CSS v4**
+- **Formspree** pour le formulaire de contact
+- Prêt à déployer sur **Vercel**
+
+## Installation locale
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site est accessible sur [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Personnaliser les informations
 
-## Learn More
+Modifiez le fichier `src/lib/constants.ts` :
 
-To learn more about Next.js, take a look at the following resources:
+```typescript
+export const AGENCY_NAME = "Votre Agence";
+export const AGENCY_EMAIL = "contact@votre-agence.com";
+export const AGENCY_LINKEDIN = "https://linkedin.com/in/votre-profil";
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Configurer Formspree
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Créez un compte sur [formspree.io](https://formspree.io)
+2. Créez un nouveau formulaire
+3. Copiez l'ID du formulaire (ex: `xrgnoklp`)
+4. Créez un fichier `.env.local` à la racine :
 
-## Deploy on Vercel
+```
+NEXT_PUBLIC_FORMSPREE_ID=votre_id_formspree
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. Remplacer les visuels
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Remplacez `public/og-image.png` par votre image Open Graph (1200x630px)
+- Les blocs Avant/Après dans `src/components/BeforeAfterSection.tsx` sont des placeholders à remplacer par vos visuels
+
+## Déploiement sur Vercel
+
+1. Poussez le code sur GitHub
+2. Importez le repo dans [Vercel](https://vercel.com)
+3. Ajoutez la variable d'environnement `NEXT_PUBLIC_FORMSPREE_ID` dans les settings du projet
+4. Déployez
+
+## Structure
+
+```
+src/
+├── app/
+│   ├── globals.css        # Thème Tailwind (couleurs wine, cream)
+│   ├── layout.tsx         # Layout racine + SEO
+│   └── page.tsx           # Assemblage des sections
+├── components/
+│   ├── Header.tsx         # Navigation sticky
+│   ├── HeroSection.tsx    # Accroche + CTA
+│   ├── ProblemSection.tsx # Pain points
+│   ├── BeforeAfterSection.tsx
+│   ├── HowItWorksSection.tsx
+│   ├── PricingSection.tsx
+│   ├── ContactSection.tsx # Formulaire Formspree
+│   ├── Footer.tsx
+│   ├── ScrollLink.tsx     # Smooth scroll
+│   ├── SectionWrapper.tsx # Container réutilisable
+│   └── icons/
+└── lib/
+    └── constants.ts       # Infos à personnaliser
+```
