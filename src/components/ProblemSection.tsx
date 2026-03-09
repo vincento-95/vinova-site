@@ -24,8 +24,8 @@ const painPoints = [
 
 export default function ProblemSection() {
   return (
-    <SectionWrapper id={SECTION_IDS.problem} bgColor="white">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-16">
+    <SectionWrapper id={SECTION_IDS.problem} bgColor="surface">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-16 font-serif">
         Vos fiches techniques vous coûtent{" "}
         <span className="text-wine">du temps et des ventes</span>
       </h2>
@@ -33,13 +33,13 @@ export default function ProblemSection() {
         {painPoints.map((point) => (
           <div
             key={point.title}
-            className="bg-cream rounded-xl p-8 text-center"
+            className="bg-accent rounded-[var(--radius)] p-8 text-center shadow-[var(--shadow-card)] border border-border"
           >
             <div className="text-4xl mb-4">{point.icon}</div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">
+            <h3 className="text-xl font-semibold text-text mb-3">
               {point.title}
             </h3>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-text-secondary leading-relaxed">
               {point.description}
             </p>
           </div>

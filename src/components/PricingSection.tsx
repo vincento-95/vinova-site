@@ -32,26 +32,26 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <SectionWrapper id={SECTION_IDS.pricing} bgColor="cream">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+    <SectionWrapper id={SECTION_IDS.pricing} bgColor="bg">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif">
         Tarifs <span className="text-wine">simples et transparents</span>
       </h2>
-      <p className="text-center text-gray-500 mb-16">
+      <p className="text-center text-text-secondary mb-16">
         Setup initial : 490 € — sans engagement de durée
       </p>
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {plans.map((plan) => (
           <div
             key={plan.name}
-            className={`rounded-2xl p-8 md:p-10 ${
+            className={`rounded-[var(--radius-lg)] p-8 md:p-10 ${
               plan.highlighted
-                ? "bg-wine text-white ring-4 ring-wine/20"
-                : "bg-white border border-gray-200"
+                ? "bg-wine text-white shadow-[var(--shadow-card-lg)]"
+                : "bg-surface border border-border shadow-[var(--shadow-card)]"
             }`}
           >
             <h3
-              className={`text-xl font-semibold mb-2 ${
-                plan.highlighted ? "text-white" : "text-gray-900"
+              className={`text-xl font-semibold mb-2 font-serif ${
+                plan.highlighted ? "text-white" : "text-text"
               }`}
             >
               {plan.name}
@@ -60,7 +60,7 @@ export default function PricingSection() {
               <span className="text-4xl font-bold">{plan.price} €</span>
               <span
                 className={`text-sm ${
-                  plan.highlighted ? "text-white/70" : "text-gray-500"
+                  plan.highlighted ? "text-white/70" : "text-text-secondary"
                 }`}
               >
                 {plan.period}
@@ -78,7 +78,7 @@ export default function PricingSection() {
                   </span>
                   <span
                     className={
-                      plan.highlighted ? "text-white/90" : "text-gray-600"
+                      plan.highlighted ? "text-white/90" : "text-text-secondary"
                     }
                   >
                     {f}
@@ -88,9 +88,9 @@ export default function PricingSection() {
             </ul>
             <ScrollLink
               href={`#${SECTION_IDS.contact}`}
-              className={`block text-center py-3 px-6 rounded-lg font-medium transition-colors ${
+              className={`block text-center py-3 px-6 rounded-[var(--radius)] font-medium transition-colors ${
                 plan.highlighted
-                  ? "bg-white text-wine hover:bg-cream"
+                  ? "bg-white text-wine hover:bg-accent"
                   : "bg-wine text-white hover:bg-wine-dark"
               }`}
             >

@@ -1,5 +1,5 @@
-export const AGENCY_NAME = "[NOM_DE_TON_AGENCE]";
-export const AGENCY_EMAIL = "[TON_EMAIL]";
+export const AGENCY_NAME = "Vinova";
+export const AGENCY_EMAIL = "ledomaine.ai@gmail.com";
 export const AGENCY_LINKEDIN = "[TON_LINKEDIN]";
 
 export const SECTION_IDS = {

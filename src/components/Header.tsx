@@ -16,11 +16,11 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-gray-200/50">
-      <nav className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[rgba(255,255,255,0.95)] backdrop-blur-[12px] border-b border-border">
+      <nav className="mx-auto max-w-6xl flex items-center justify-between px-6 h-14">
         <ScrollLink
           href={`#${SECTION_IDS.hero}`}
-          className="text-lg font-semibold text-wine"
+          className="text-lg font-semibold text-wine font-serif"
         >
           {AGENCY_NAME}
         </ScrollLink>
@@ -31,7 +31,7 @@ export default function Header() {
             <ScrollLink
               key={link.href}
               href={link.href}
-              className="text-sm text-gray-600 hover:text-wine transition-colors"
+              className="text-sm text-text-secondary hover:text-wine transition-colors"
             >
               {link.label}
             </ScrollLink>
@@ -41,7 +41,7 @@ export default function Header() {
         {/* Mobile hamburger */}
         <button
           type="button"
-          className="md:hidden p-2 text-gray-600 hover:text-wine transition-colors"
+          className="md:hidden p-2 text-text-secondary hover:text-wine transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Menu de navigation"
         >
@@ -59,13 +59,13 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-cream/95 backdrop-blur-sm border-b border-gray-200/50 px-6 pb-4">
+        <div className="md:hidden bg-[rgba(255,255,255,0.95)] backdrop-blur-[12px] border-b border-border px-6 pb-4">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <ScrollLink
                 key={link.href}
                 href={link.href}
-                className="text-sm text-gray-600 hover:text-wine transition-colors py-1"
+                className="text-sm text-text-secondary hover:text-wine transition-colors py-1"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}

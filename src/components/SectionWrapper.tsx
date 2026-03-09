@@ -2,18 +2,19 @@ interface SectionWrapperProps {
   id?: string;
   children: React.ReactNode;
   className?: string;
-  bgColor?: "cream" | "white" | "wine";
+  bgColor?: "bg" | "surface" | "accent" | "wine";
 }
 
 export default function SectionWrapper({
   id,
   children,
   className = "",
-  bgColor = "cream",
+  bgColor = "bg",
 }: SectionWrapperProps) {
   const bgClasses: Record<string, string> = {
-    cream: "bg-cream",
-    white: "bg-white",
+    bg: "bg-bg",
+    surface: "bg-surface",
+    accent: "bg-accent",
     wine: "bg-wine text-white",
   };
 

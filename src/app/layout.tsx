@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
-
 export const metadata: Metadata = {
-  title: "Fiches techniques vin automatisées | [NOM_DE_TON_AGENCE]",
+  title: "Fiches techniques vin automatisées | Vinova",
   description:
     "Générez vos fiches techniques vin en 30 secondes grâce à l'IA. Solution pour importateurs gérant 50 à 300 références.",
   keywords: [
@@ -23,7 +16,7 @@ export const metadata: Metadata = {
     title: "Fiches techniques vin générées en 30 secondes",
     description:
       "Solution IA pour importateurs de vin. Générez vos fiches techniques automatiquement.",
-    siteName: "[NOM_DE_TON_AGENCE]",
+    siteName: "Vinova",
     images: [
       {
         url: "/og-image.png",
@@ -47,8 +40,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={inter.variable}>
-      <body className={inter.className}>{children}</body>
+    <html lang="fr">
+      <body>{children}</body>
     </html>
   );
 }

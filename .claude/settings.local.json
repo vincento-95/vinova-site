@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(npx --version)",
+      "WebFetch(domain:formspree.io)",
+      "Bash(npx create-next-app@latest site --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npx create-next-app@latest temp-site --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npm install @formspree/react)",
+      "Bash(npm ls tailwindcss)",
+      "Bash(npm run build)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git add README.md package-lock.json package.json src/app/globals.css src/app/layout.tsx src/app/page.tsx src/components/ src/lib/ .env.example)",
+      "Bash(git rm public/next.svg public/vercel.svg)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
