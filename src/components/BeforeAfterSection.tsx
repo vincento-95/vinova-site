@@ -1,10 +1,13 @@
+"use client";
+
+import Image from "next/image";
 import SectionWrapper from "./SectionWrapper";
 import { SECTION_IDS } from "@/lib/constants";
 
-const comparisons = [
+const highlights = [
   {
     before: "Fiche Word générique sans mise en forme",
-    after: "Fiche PDF brandée avec votre logo",
+    after: "Fiche PDF brandée avec votre identité",
   },
   {
     before: "Données copiées-collées, erreurs fréquentes",
@@ -23,29 +26,54 @@ export default function BeforeAfterSection() {
         Le même vin.{" "}
         <span className="text-wine">Deux présentations.</span>
       </h2>
-      <p className="text-center text-text-secondary mb-16">
+      <p className="text-center text-text-secondary mb-12">
         Comparez la version classique et la version générée par notre IA.
       </p>
-      <div className="space-y-8">
-        {comparisons.map((comp, i) => (
-          <div key={i} className="grid md:grid-cols-2 gap-4">
-            {/* Avant */}
-            <div className="bg-border/50 rounded-[var(--radius)] h-48 flex flex-col items-center justify-center px-6">
-              <span className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-2">
-                Avant
-              </span>
-              <span className="text-text-secondary font-medium text-center">
-                {comp.before}
-              </span>
+
+      {/* Comparatif visuel */}
+      <div className="grid md:grid-cols-2 gap-6 mb-12 max-w-5xl mx-auto">
+        {/* Avant */}
+        <div className="relative">
+          <div className="absolute -top-3 left-4 bg-gray-400 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full z-10">
+            Avant
+          </div>
+          <div className="border-2 border-gray-300 rounded-xl overflow-hidden shadow-sm bg-white opacity-80">
+            <Image
+              src="/fiche-avant.png"
+              alt="Fiche technique classique - avant"
+              width={800}
+              height={1100}
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+
+        {/* Après */}
+        <div className="relative">
+          <div className="absolute -top-3 left-4 bg-wine text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full z-10">
+            Après — Version IA
+          </div>
+          <div className="border-2 border-wine/30 rounded-xl overflow-hidden shadow-lg">
+            <Image
+              src="/fiche-apres.png"
+              alt="Fiche technique IA Vinova - après"
+              width={800}
+              height={1100}
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Points clés */}
+      <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        {highlights.map((h, i) => (
+          <div key={i} className="text-center">
+            <div className="text-text-secondary text-sm line-through mb-2">
+              {h.before}
             </div>
-            {/* Après */}
-            <div className="bg-sheet rounded-[var(--radius)] h-48 flex flex-col items-center justify-center px-6 border-2 border-wine/20 shadow-[var(--shadow-card)]">
-              <span className="text-xs font-semibold uppercase tracking-wider text-wine mb-2">
-                Après — Version IA
-              </span>
-              <span className="text-wine-dark font-medium text-center">
-                {comp.after}
-              </span>
+            <div className="text-wine font-semibold text-sm">
+              {h.after}
             </div>
           </div>
         ))}
