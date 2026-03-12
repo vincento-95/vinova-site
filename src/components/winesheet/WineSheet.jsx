@@ -65,7 +65,6 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
   const bodyRef = useRef(null);
   const contentRef = useRef(null);
   const [bodyScale, setBodyScale] = useState(1);
-  const [shouldStretch, setShouldStretch] = useState(false);
 
   useLayoutEffect(() => {
     if (compact || !bodyRef.current || !contentRef.current) return;
@@ -75,15 +74,13 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
       const contentH = contentRef.current.scrollHeight;
       if (contentH > availableH + 5 && availableH > 0) {
         setBodyScale(Math.max(0.48, availableH / contentH));
-        setShouldStretch(false);
       } else {
         setBodyScale(1);
-        setShouldStretch(true);
       }
     };
     recalc();
-    const timer = setTimeout(recalc, 150);
-    return () => clearTimeout(timer);
+    const t = setTimeout(recalc, 150);
+    return () => clearTimeout(t);
   }, [wine, compact, lang, blendedImage]);
 
   const sectionHeading = {
@@ -186,15 +183,11 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
             transform: `scale(${bodyScale})`,
             transformOrigin: 'top left',
             width: `${100 / bodyScale}%`,
-          } : shouldStretch ? {
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100%',
           } : {}),
         }}>
 
         {/* LE DOMAINE + image + quick stats */}
-        <div style={{ display: 'flex', gap: p(30), marginBottom: p(26), alignItems: 'stretch', position: 'relative', flexShrink: 0 }}>
+        <div style={{ display: 'flex', gap: p(30), marginBottom: p(26), alignItems: 'stretch', position: 'relative' }}>
           {wine.image && (
             <div style={{
               width: p(175),
@@ -203,7 +196,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
               alignItems: 'flex-end',
               justifyContent: 'center',
               position: 'relative',
-              marginTop: p(-95),
+              marginTop: p(-50),
               zIndex: 2,
             }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -269,48 +262,9 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
           </div>
         </div>
 
-        {/* CRITIC SCORES */}
-        {wine.critics && wine.critics.length > 0 && (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: p(10),
-            marginBottom: p(26),
-            flexWrap: 'wrap',
-            flexShrink: 0,
-          }}>
-            <span style={{
-              fontSize: p(11),
-              fontWeight: 700,
-              color: '#888',
-              textTransform: 'uppercase',
-              letterSpacing: 1.5,
-            }}>
-              {labels.notesCritiques}
-            </span>
-            {wine.critics.map((c, i) => (
-              <span key={i} style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 4,
-                padding: `${p(3)}px ${p(10)}px`,
-                background: `${wc}10`,
-                border: `1px solid ${wc}25`,
-                borderRadius: 20,
-                fontSize: p(11.5),
-                fontWeight: 600,
-                color: '#333',
-              }}>
-                <span style={{ color: wc, fontWeight: 700 }}>{c.score}</span>
-                <span style={{ color: '#777', fontWeight: 400, fontSize: p(10.5) }}>{c.name}</span>
-              </span>
-            ))}
-          </div>
-        )}
-
         {/* NOTES DE DÉGUSTATION */}
         {(wine.oeil || wine.nez || wine.bouche) && (
-          <div style={{ marginBottom: p(22), flexShrink: 0 }}>
+          <div style={{ marginBottom: p(22) }}>
             <h3 style={sectionHeading}>
               {labels.notesDegustation}
             </h3>
@@ -355,7 +309,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
         )}
 
         {/* ACCORDS METS-VINS & SERVICE */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: p(36), flex: '1 0 auto', alignContent: 'start' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: p(36) }}>
           {wine.accords && wine.accords.length > 0 && (
             <div>
               <h3 style={sectionHeading}>
