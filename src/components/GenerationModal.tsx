@@ -43,7 +43,7 @@ export default function GenerationModal() {
 
         const bottleImage = localStorage.getItem("vinova_bottle_image");
         if (bottleImage) {
-          data.wine.bottleImage = bottleImage;
+          data.wine.image = bottleImage;
           localStorage.removeItem("vinova_bottle_image");
         }
 
