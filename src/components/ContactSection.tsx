@@ -261,7 +261,7 @@ export default function ContactSection() {
             )}
           </div>
           <p className="text-xs text-text-secondary mt-1">
-            Optionnel — Le fond sera automatiquement supprimé.
+            Obligatoire — Le fond sera automatiquement supprimé.
           </p>
         </div>
 
