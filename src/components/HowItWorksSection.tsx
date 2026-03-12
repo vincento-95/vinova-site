@@ -8,23 +8,23 @@ const steps = [
   {
     Icon: UploadIcon,
     step: "1",
-    title: "Envoyez-moi votre liste de vins",
+    title: "Décrivez votre vin",
     description:
-      "Transmettez votre catalogue existant, dans n'importe quel format : Excel, PDF, ou même un simple email.",
+      "Remplissez le formulaire : nom, domaine, cépage, appellation, millésime… Notre IA complète le reste.",
   },
   {
     Icon: LightningIcon,
     step: "2",
-    title: "L'IA génère vos fiches en 30 secondes",
+    title: "Payez en ligne",
     description:
-      "Notre moteur analyse, structure et met en forme chaque fiche avec les informations clés de chaque vin.",
+      "Paiement sécurisé par carte bancaire via Stripe. Aucun abonnement requis.",
   },
   {
     Icon: DocumentIcon,
     step: "3",
-    title: "Recevez vos PDF prêts à envoyer",
+    title: "Téléchargez votre fiche PDF",
     description:
-      "Des fiches techniques professionnelles, aux couleurs de votre marque, prêtes à transmettre à vos clients.",
+      "Votre fiche technique professionnelle est générée instantanément et prête à télécharger.",
   },
 ];
 

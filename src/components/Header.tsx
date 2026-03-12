@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Solution", href: `#${SECTION_IDS.beforeAfter}` },
   { label: "Méthode", href: `#${SECTION_IDS.howItWorks}` },
   { label: "Tarifs", href: `#${SECTION_IDS.pricing}` },
-  { label: "Contact", href: `#${SECTION_IDS.contact}` },
+  { label: "Générer", href: `#${SECTION_IDS.contact}` },
 ];
 
 export default function Header() {

@@ -1,6 +1,8 @@
 export const AGENCY_NAME = "Vinova";
-export const AGENCY_EMAIL = "ledomaine.ai@gmail.com";
+export const AGENCY_EMAIL = "";
 export const AGENCY_LINKEDIN = "[TON_LINKEDIN]";
+
+export const PRICE_PER_FICHE = 100; // en centimes (1€)
 
 export const SECTION_IDS = {
   hero: "hero",
@@ -8,5 +10,5 @@ export const SECTION_IDS = {
   beforeAfter: "avant-apres",
   howItWorks: "comment-ca-marche",
   pricing: "tarifs",
-  contact: "contact",
+  contact: "generer",
 } as const;

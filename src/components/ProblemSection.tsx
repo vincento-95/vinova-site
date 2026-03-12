@@ -4,21 +4,21 @@ import { SECTION_IDS } from "@/lib/constants";
 const painPoints = [
   {
     icon: "⏱️",
-    title: "40 heures de travail",
+    title: "Optimisez 40h de travail",
     description:
-      "30 min par fiche × 80 références = 40 heures perdues à copier-coller et reformater.",
+      "30 min par fiche × 80 références\n= 40 heures perdues\nà copier-coller et reformater",
   },
   {
     icon: "📄",
     title: "Des fiches qui ne vendent pas",
     description:
-      "Des fiches Word basiques qui ne donnent pas envie d'acheter. Vos vins méritent mieux.",
+      "Des fiches Word basiques qui ne donnent pas envie d'acheter : vos vins méritent mieux",
   },
   {
     icon: "🔄",
     title: "Un catalogue jamais à jour",
     description:
-      "Un catalogue jamais à jour, des commerciaux qui improvisent devant les clients.",
+      "Vos commerciaux méritent des supports à jour et prêts à convaincre dès le premier rendez-vous",
   },
 ];
 
@@ -39,7 +39,7 @@ export default function ProblemSection() {
             <h3 className="text-xl font-semibold text-text mb-3">
               {point.title}
             </h3>
-            <p className="text-text-secondary leading-relaxed">
+            <p className="text-text-secondary leading-relaxed whitespace-pre-line">
               {point.description}
             </p>
           </div>

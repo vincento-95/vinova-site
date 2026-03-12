@@ -1,0 +1,178 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect, useRef, useCallback, Suspense } from "react";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+
+// Dynamic import to avoid SSR issues with html2canvas
+const WineSheet = dynamic(
+  () => import("@/components/winesheet/WineSheet"),
+  { ssr: false }
+);
+
+interface WineData {
+  [key: string]: unknown;
+  name: string;
+  domaine: string;
+  lang?: string;
+}
+
+function SuccessContent() {
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get("session_id");
+
+  const [status, setStatus] = useState<"loading" | "generating" | "ready" | "error">("loading");
+  const [wine, setWine] = useState<WineData | null>(null);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [downloading, setDownloading] = useState(false);
+  const sheetRef = useRef<HTMLDivElement>(null);
+
+  // Generate wine data after payment
+  useEffect(() => {
+    if (!sessionId) {
+      setStatus("error");
+      setErrorMsg("Aucune session de paiement trouvée.");
+      return;
+    }
+
+    setStatus("generating");
+
+    fetch("/api/generate-fiche", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sessionId }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Erreur de génération");
+
+        // Retrieve bottle image from localStorage
+        const bottleImage = localStorage.getItem("vinova_bottle_image");
+        if (bottleImage) {
+          data.wine.bottleImage = bottleImage;
+          localStorage.removeItem("vinova_bottle_image");
+        }
+
+        setWine(data.wine);
+        setStatus("ready");
+      })
+      .catch((err) => {
+        setErrorMsg(err instanceof Error ? err.message : "Erreur inconnue");
+        setStatus("error");
+      });
+  }, [sessionId]);
+
+  // Download PDF using html2canvas
+  const handleDownload = useCallback(async () => {
+    if (!sheetRef.current || !wine) return;
+    setDownloading(true);
+
+    try {
+      const { exportSingleWinePDF } = await import("@/lib/pdfExport");
+      const el = sheetRef.current.querySelector(".wine-sheet");
+      if (el instanceof HTMLElement) {
+        await exportSingleWinePDF(el, wine);
+      }
+    } catch (err) {
+      console.error("PDF export error:", err);
+      alert("Erreur lors de l'export PDF. Veuillez réessayer.");
+    } finally {
+      setDownloading(false);
+    }
+  }, [wine]);
+
+  // Error state
+  if (status === "error") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-bg px-6">
+        <div className="text-center max-w-md">
+          <div className="text-5xl mb-6">!</div>
+          <h1 className="text-2xl font-bold text-text mb-4 font-serif">
+            Une erreur est survenue
+          </h1>
+          <p className="text-text-secondary mb-8">{errorMsg}</p>
+          <Link
+            href="/"
+            className="inline-block bg-wine hover:bg-wine-dark text-white px-6 py-3 rounded-[var(--radius)] font-medium transition-colors"
+          >
+            Retour &agrave; l&apos;accueil
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Loading / generating state
+  if (status === "loading" || status === "generating") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-bg px-6">
+        <div className="text-center max-w-md">
+          <div className="w-16 h-16 border-4 border-wine/20 border-t-wine rounded-full animate-spin mx-auto mb-8" />
+          <h1 className="text-2xl font-bold text-text mb-4 font-serif">
+            {status === "generating"
+              ? "Notre IA analyse votre vin..."
+              : "Vérification du paiement..."}
+          </h1>
+          <p className="text-text-secondary">
+            {status === "generating"
+              ? "Recherche des informations, rédaction des notes de dégustation et mise en forme de la fiche. Cela peut prendre 30 à 60 secondes."
+              : "Un instant..."}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Ready state — show WineSheet + download button
+  return (
+    <div className="min-h-screen bg-[#f0ece4] py-8 px-4">
+      {/* Top bar */}
+      <div className="max-w-[850px] mx-auto mb-6 flex items-center justify-between">
+        <Link
+          href="/#generer"
+          className="text-wine hover:text-wine-dark font-medium transition-colors text-sm"
+        >
+          &larr; Générer une autre fiche
+        </Link>
+        <button
+          onClick={handleDownload}
+          disabled={downloading}
+          className="bg-wine hover:bg-wine-dark text-white px-6 py-3 rounded-[var(--radius)] font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[var(--shadow-card)]"
+        >
+          {downloading ? "Export en cours..." : "Télécharger le PDF"}
+        </button>
+      </div>
+
+      {/* Wine Sheet */}
+      <div ref={sheetRef} className="max-w-[850px] mx-auto">
+        <WineSheet wine={wine} lang={wine?.lang || "FR"} />
+      </div>
+
+      {/* Bottom download button */}
+      <div className="max-w-[850px] mx-auto mt-6 text-center">
+        <button
+          onClick={handleDownload}
+          disabled={downloading}
+          className="bg-wine hover:bg-wine-dark text-white px-8 py-4 rounded-[var(--radius)] font-medium text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[var(--shadow-card)]"
+        >
+          {downloading ? "Export en cours..." : "Télécharger le PDF"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-bg">
+          <p className="text-text-secondary">Chargement...</p>
+        </div>
+      }
+    >
+      <SuccessContent />
+    </Suspense>
+  );
+}

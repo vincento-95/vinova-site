@@ -31,7 +31,7 @@ export default function BeforeAfterSection() {
       </p>
 
       {/* Comparatif visuel */}
-      <div className="grid md:grid-cols-2 gap-6 mb-12 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-6 mb-12 max-w-5xl mx-auto items-end">
         {/* Avant */}
         <div className="relative">
           <div className="absolute -top-3 left-4 bg-gray-400 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full z-10">
@@ -65,19 +65,6 @@ export default function BeforeAfterSection() {
         </div>
       </div>
 
-      {/* Points clés */}
-      <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-        {highlights.map((h, i) => (
-          <div key={i} className="text-center">
-            <div className="text-text-secondary text-sm line-through mb-2">
-              {h.before}
-            </div>
-            <div className="text-wine font-semibold text-sm">
-              {h.after}
-            </div>
-          </div>
-        ))}
-      </div>
     </SectionWrapper>
   );
 }
