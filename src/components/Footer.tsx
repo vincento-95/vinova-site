@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AGENCY_NAME, AGENCY_EMAIL, AGENCY_LINKEDIN } from "@/lib/constants";
+import { AGENCY_NAME, AGENCY_LINKEDIN } from "@/lib/constants";
 
 export default function Footer() {
   return (
@@ -30,14 +30,6 @@ export default function Footer() {
             >
               LinkedIn
             </a>
-            {AGENCY_EMAIL && (
-              <a
-                href={`mailto:${AGENCY_EMAIL}`}
-                className="hover:text-white transition-colors"
-              >
-                {AGENCY_EMAIL}
-              </a>
-            )}
           </div>
         </div>
 
