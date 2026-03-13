@@ -7,7 +7,7 @@ const plans = [
     price: "1 €",
     priceSuffix: "/fiche",
     badge: "Pour tester",
-    highlighted: false,
+    style: "default" as const,
     features: [
       "1 fiche technique PDF",
       "Dégustation IA structurée",
@@ -22,7 +22,7 @@ const plans = [
     price: "790 €",
     priceSuffix: "/mois HT",
     badge: "Le plus populaire",
-    highlighted: true,
+    style: "highlighted" as const,
     features: [
       "Fiches illimitées",
       "Mise en page brandée (votre logo, vos couleurs)",
@@ -39,7 +39,7 @@ const plans = [
     price: "1 190 €",
     priceSuffix: "/mois HT",
     badge: "Pour les exportateurs",
-    highlighted: false,
+    style: "premium" as const,
     features: [
       "Tout le Standard +",
       "Catalogue PDF automatisé",
@@ -49,6 +49,18 @@ const plans = [
     setup: "Setup initial : 490 €",
     cta: "Demander mes 5 fiches gratuites",
     ctaHref: `#${SECTION_IDS.contactForm}`,
+  },
+];
+
+const guarantees = [
+  {
+    text: "Satisfait ou refait — Toute fiche qui ne vous convient pas est corrigée gratuitement",
+  },
+  {
+    text: "Sans engagement — Résiliez quand vous voulez, pas de durée minimum",
+  },
+  {
+    text: "Test gratuit — Jugez sur 5 fiches avant de vous engager",
   },
 ];
 
@@ -64,68 +76,87 @@ export default function PricingSection() {
         </p>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`rounded-[var(--radius-lg)] p-8 flex flex-col h-full ${
-                plan.highlighted
-                  ? "bg-wine text-white border-2 border-wine shadow-[var(--shadow-card-lg)] relative md:-mt-4 md:mb-0 md:py-10"
-                  : "bg-surface border border-border shadow-[var(--shadow-card)]"
-              }`}
-            >
-              {/* Badge */}
-              <span
-                className={`inline-block self-start text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 ${
-                  plan.highlighted
-                    ? "bg-white/20 text-white"
-                    : "bg-primary-light text-wine"
+          {plans.map((plan) => {
+            const isHighlighted = plan.style === "highlighted";
+            const isPremium = plan.style === "premium";
+
+            return (
+              <div
+                key={plan.name}
+                className={`rounded-[var(--radius-lg)] p-8 flex flex-col h-full transition-all duration-300 hover:scale-[1.02] ${
+                  isHighlighted
+                    ? "bg-wine text-white border-2 border-wine shadow-[0_8px_40px_rgba(114,47,55,0.3)] relative md:-mt-4 md:mb-0 md:py-10 scale-[1.01] hover:shadow-[0_12px_48px_rgba(114,47,55,0.4)]"
+                    : "bg-surface border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-lg)]"
                 }`}
               >
-                {plan.badge}
-              </span>
-
-              <h3 className={`text-xl font-semibold mb-2 font-serif ${plan.highlighted ? "" : "text-text"}`}>
-                {plan.name}
-              </h3>
-
-              <div className="flex items-baseline gap-1 mb-6">
-                <span className={`text-4xl font-bold ${plan.highlighted ? "" : "text-text"}`}>{plan.price}</span>
-                <span className={`text-sm ${plan.highlighted ? "text-white/70" : "text-text-secondary"}`}>
-                  {plan.priceSuffix}
+                {/* Badge */}
+                <span
+                  className={`inline-block self-start text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 ${
+                    isHighlighted
+                      ? "bg-white/20 text-white"
+                      : "bg-primary-light text-wine"
+                  }`}
+                >
+                  {plan.badge}
                 </span>
+
+                <h3 className={`text-xl font-semibold mb-2 font-serif ${isHighlighted ? "" : "text-text"}`}>
+                  {plan.name}
+                </h3>
+
+                <div className="flex items-baseline gap-1 mb-6">
+                  <span className={`text-4xl font-bold ${isHighlighted ? "" : "text-text"}`}>{plan.price}</span>
+                  <span className={`text-sm ${isHighlighted ? "text-white/70" : "text-text-secondary"}`}>
+                    {plan.priceSuffix}
+                  </span>
+                </div>
+
+                <ul className="space-y-3 mb-6 flex-1">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm">
+                      <span className={`mt-0.5 ${isHighlighted ? "text-white/80" : "text-wine"}`}>&#10003;</span>
+                      <span className={isHighlighted ? "text-white/90" : "text-text-secondary"}>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {plan.setup && (
+                  <p className={`text-xs mb-4 ${isHighlighted ? "text-white/60" : "text-text-secondary"}`}>
+                    {plan.setup}
+                  </p>
+                )}
+
+                <ScrollLink
+                  href={plan.ctaHref}
+                  className={`block text-center py-3.5 px-6 rounded-[var(--radius)] font-medium transition-colors ${
+                    isHighlighted
+                      ? "bg-white text-wine hover:bg-accent text-base"
+                      : isPremium
+                        ? "border-2 border-wine text-wine hover:bg-wine hover:text-white text-sm"
+                        : "border border-border text-text-secondary hover:border-wine hover:text-wine text-sm"
+                  }`}
+                >
+                  {plan.cta}
+                </ScrollLink>
               </div>
+            );
+          })}
+        </div>
 
-              <ul className="space-y-3 mb-6 flex-1">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm">
-                    <span className={`mt-0.5 ${plan.highlighted ? "text-white/80" : "text-wine"}`}>&#10003;</span>
-                    <span className={plan.highlighted ? "text-white/90" : "text-text-secondary"}>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {plan.setup && (
-                <p className={`text-xs mb-4 ${plan.highlighted ? "text-white/60" : "text-text-secondary"}`}>
-                  {plan.setup}
-                </p>
-              )}
-
-              <ScrollLink
-                href={plan.ctaHref}
-                className={`block text-center py-3 px-6 rounded-[var(--radius)] font-medium transition-colors text-sm ${
-                  plan.highlighted
-                    ? "bg-white text-wine hover:bg-accent"
-                    : "bg-wine text-white hover:bg-wine-dark"
-                }`}
-              >
-                {plan.cta}
-              </ScrollLink>
-            </div>
-          ))}
+        {/* Bandeau garantie */}
+        <div className="mt-10 max-w-4xl mx-auto bg-wine-50 rounded-[var(--radius-lg)] p-6 md:p-8 border border-wine-100">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+            {guarantees.map((g) => (
+              <div key={g.text} className="flex items-start gap-2 text-sm text-text">
+                <span className="text-green-600 font-bold mt-0.5 flex-shrink-0">&#10003;</span>
+                <span>{g.text}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Encadré comparaison */}
-        <div className="mt-12 max-w-3xl mx-auto bg-accent rounded-[var(--radius-lg)] p-6 md:p-8 border border-border text-center">
+        <div className="mt-8 max-w-3xl mx-auto bg-accent rounded-[var(--radius-lg)] p-6 md:p-8 border border-border text-center">
           <p className="text-text leading-relaxed">
             <span className="font-semibold">Comparez :</span> un graphiste freelance facture 30-50 € par fiche.
             Pour 100 fiches, c&apos;est 3 000 à 5 000 €.

@@ -62,6 +62,21 @@ export default function HowItWorksSection() {
           </div>
         ))}
       </div>
+
+      {/* Video placeholder */}
+      <div className="mt-16 max-w-xl mx-auto">
+        <div className="relative bg-gradient-to-br from-[#2d2d2d] to-[#1a1a1a] rounded-[var(--radius-lg)] overflow-hidden" style={{ aspectRatio: "16/9" }}>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-white/80">
+            <div className="w-16 h-16 bg-wine/80 rounded-full flex items-center justify-center mb-4 hover:bg-wine transition-colors">
+              <svg className="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+            <p className="text-sm font-medium">Voir Vinova en action</p>
+            <p className="text-xs text-white/50 mt-1">Démo disponible bientôt</p>
+          </div>
+        </div>
+      </div>
     </SectionWrapper>
   );
 }

@@ -7,11 +7,14 @@ import BeforeAfterSection from "@/components/BeforeAfterSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import AboutSection from "@/components/AboutSection";
 import FAQSection from "@/components/FAQSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import GenerationModal from "@/components/GenerationModal";
+import ScrollAnimations from "@/components/ScrollAnimations";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
 
 export default function Home() {
   return (
@@ -25,6 +28,7 @@ export default function Home() {
         <HowItWorksSection />
         <PricingSection />
         <TestimonialsSection />
+        <AboutSection />
         <FAQSection />
         <ContactFormSection />
         <ContactSection />
@@ -33,6 +37,8 @@ export default function Home() {
       <Suspense>
         <GenerationModal />
       </Suspense>
+      <ScrollAnimations />
+      <StickyMobileCTA />
     </>
   );
 }

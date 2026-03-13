@@ -76,7 +76,7 @@ export default function ContactFormSection() {
           Testez gratuitement sur 5 de vos vins
         </h2>
         <p className="text-center text-white/80 mb-10">
-          Envoyez-nous vos infos, on vous livre 5 fiches professionnelles sous 24h. Sans engagement.
+          Envoyez-nous vos infos, on vous répond sous 2h en jour ouvré et on vous livre 5 fiches professionnelles sous 24h. Sans engagement.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -167,6 +167,13 @@ export default function ContactFormSection() {
           {error && (
             <p className="text-red-200 text-sm text-center">{error}</p>
           )}
+
+          <p className="text-white/70 text-xs text-center flex items-center justify-center gap-1.5">
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+            Vos informations sont confidentielles et ne seront jamais partagées.
+          </p>
 
           <button
             type="submit"
