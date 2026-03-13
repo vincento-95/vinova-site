@@ -89,7 +89,7 @@ export default function PricingSection() {
               {[
                 "1 fiche technique PDF",
                 "Dégustation IA structurée",
-                "Accords mets-vins",
+                "Accords mets-vins développés",
                 "Téléchargement immédiat",
               ].map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm">
