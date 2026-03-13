@@ -28,7 +28,7 @@ const faqs = [
   {
     question: "Est-ce que ça marche pour les vins étrangers ?",
     answer:
-      "Absolument. Notre IA couvre les vins français et internationaux. Nous gérons aussi la traduction en anglais, italien et espagnol (pack Premium).",
+      "Absolument. Notre IA couvre les vins français et internationaux. La traduction en anglais, italien et espagnol est incluse dans l'abonnement.",
   },
   {
     question: "490 €/mois, c'est cher pour des fiches techniques.",
