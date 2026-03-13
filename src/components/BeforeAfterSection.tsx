@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import SectionWrapper from "./SectionWrapper";
 import { SECTION_IDS } from "@/lib/constants";
@@ -15,16 +15,29 @@ const improvements = [
 
 function ComparisonSlider() {
   const [sliderPos, setSliderPos] = useState(50);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleMove = useCallback((clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    setSliderPos((x / rect.width) * 100);
+  }, []);
 
   return (
-    <div className="relative max-w-lg mx-auto rounded-xl overflow-hidden shadow-[var(--shadow-card-lg)] border border-border select-none">
+    <div
+      ref={containerRef}
+      className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-[var(--shadow-card-lg)] border border-border select-none cursor-col-resize"
+      style={{ aspectRatio: "3/4" }}
+      onMouseMove={(e) => e.buttons === 1 && handleMove(e.clientX)}
+      onTouchMove={(e) => handleMove(e.touches[0].clientX)}
+    >
       {/* After image (background) */}
       <Image
         src="/fiche-apres.png"
         alt="Fiche technique IA Vinova - après"
-        width={800}
-        height={1100}
-        className="w-full h-auto block"
+        fill
+        className="object-contain"
         draggable={false}
       />
 
@@ -36,9 +49,8 @@ function ComparisonSlider() {
         <Image
           src="/fiche-avant.png"
           alt="Fiche technique classique - avant"
-          width={800}
-          height={1100}
-          className="w-full h-auto block"
+          fill
+          className="object-contain"
           draggable={false}
         />
       </div>
@@ -50,28 +62,26 @@ function ComparisonSlider() {
       >
         {/* Handle */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
-          <svg className="w-5 h-5 text-wine" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-          </svg>
+          <span className="text-gray-500 text-sm font-bold">&lsaquo;&rsaquo;</span>
         </div>
       </div>
 
       {/* Labels */}
-      <div className="absolute top-3 left-3 bg-gray-500/80 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full z-10">
+      <div className="absolute top-3 left-3 bg-gray-800/70 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded z-10">
         Avant
       </div>
-      <div className="absolute top-3 right-3 bg-wine/90 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full z-10">
+      <div className="absolute top-3 right-3 bg-wine/90 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded z-10">
         Après — Vinova
       </div>
 
-      {/* Range input overlay */}
+      {/* Hidden range input for accessibility */}
       <input
         type="range"
         min={0}
         max={100}
         value={sliderPos}
         onChange={(e) => setSliderPos(Number(e.target.value))}
-        className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
+        className="absolute inset-0 w-full h-full opacity-0 cursor-col-resize z-30"
         aria-label="Comparer avant et après"
       />
     </div>

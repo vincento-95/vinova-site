@@ -29,35 +29,9 @@ const testimonials = [
     scoreBefore: 6,
     scoreAfter: 8.5,
     result:
-      "Accords mets-vins enrichis, dégustations restructurées, intégration du logo. Des fiches qui donnent envie d\u2019acheter.",
+      "Accords mets-vins enrichis, dégustations restructurées, intégration du logo. Des fiches qui donnent envie d'acheter.",
   },
 ];
-
-function ScoreBar({ before, after }: { before: number; after: number }) {
-  return (
-    <div className="mb-4">
-      <div className="flex items-center justify-between text-sm mb-2">
-        <span className="text-text-secondary">
-          <span className="font-bold text-gray-400">{before}/10</span>
-        </span>
-        <svg className="w-4 h-4 text-wine mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-        </svg>
-        <span className="font-bold text-wine text-lg">{after}/10</span>
-      </div>
-      <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
-        <div
-          className="absolute inset-y-0 left-0 bg-gray-300 rounded-full"
-          style={{ width: `${(before / 10) * 100}%` }}
-        />
-        <div
-          className="absolute inset-y-0 left-0 bg-wine rounded-full transition-all duration-700"
-          style={{ width: `${(after / 10) * 100}%` }}
-        />
-      </div>
-    </div>
-  );
-}
 
 export default function TestimonialsSection() {
   return (
@@ -75,7 +49,7 @@ export default function TestimonialsSection() {
             key={t.profile}
             className="bg-accent rounded-[var(--radius-lg)] p-8 shadow-[var(--shadow-card)] border border-border flex flex-col"
           >
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-3">
               <span className="text-3xl">{t.flag}</span>
               <div>
                 <p className="text-sm font-semibold text-text">{t.profile}</p>
@@ -83,7 +57,12 @@ export default function TestimonialsSection() {
               </div>
             </div>
 
-            <ScoreBar before={t.scoreBefore} after={t.scoreAfter} />
+            {/* Score visuel */}
+            <div className="flex items-center gap-2 my-3">
+              <span className="text-2xl text-gray-400 line-through">{t.scoreBefore}</span>
+              <span className="text-2xl text-text-secondary">&rarr;</span>
+              <span className="text-3xl font-bold text-wine">{t.scoreAfter}/10</span>
+            </div>
 
             <p className="text-text-secondary leading-relaxed text-sm flex-1 italic">
               &ldquo;{t.result}&rdquo;
