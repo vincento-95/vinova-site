@@ -5,16 +5,16 @@ import { SECTION_IDS } from "@/lib/constants";
 
 const testimonials = [
   {
-    flag: "\uD83C\uDDEB\uD83C\uDDF7",
+    flag: "🇫🇷",
     profile: "Importateur bordelais",
     refs: "650 références",
     scoreBefore: 6.2,
     scoreAfter: 8.5,
     result:
-      "Fiches générées pour 5 vins test en moins de 3 minutes. Accords mets-vins développés, dégustation structurée \u0153il/nez/bouche, notes presse intégrées.",
+      "Fiches générées pour 5 vins test en moins de 3 minutes. Accords mets-vins développés, dégustation structurée oeil/nez/bouche, notes presse intégrées.",
   },
   {
-    flag: "\uD83C\uDDEE\uD83C\uDDF9",
+    flag: "🇮🇹",
     profile: "Distributeur italien",
     refs: "500 références",
     scoreBefore: 2,
@@ -23,7 +23,7 @@ const testimonials = [
       "Aucune fiche technique existante, uniquement des pages e-commerce. 5 fiches PDF professionnelles créées de zéro avec branding.",
   },
   {
-    flag: "\uD83C\uDDEB\uD83C\uDDF7",
+    flag: "🇫🇷",
     profile: "Négociant parisien",
     refs: "200 références",
     scoreBefore: 6,
