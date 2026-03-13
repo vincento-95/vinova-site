@@ -7,16 +7,17 @@ import { AGENCY_NAME, SECTION_IDS } from "@/lib/constants";
 const navLinks = [
   { label: "Problème", href: `#${SECTION_IDS.problem}` },
   { label: "Solution", href: `#${SECTION_IDS.beforeAfter}` },
-  { label: "Méthode", href: `#${SECTION_IDS.howItWorks}` },
+  { label: "Comment ça marche", href: `#${SECTION_IDS.howItWorks}` },
   { label: "Tarifs", href: `#${SECTION_IDS.pricing}` },
-  { label: "Générer", href: `#${SECTION_IDS.contact}` },
+  { label: "Témoignages", href: `#${SECTION_IDS.testimonials}` },
+  { label: "FAQ", href: `#${SECTION_IDS.faq}` },
 ];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[rgba(255,255,255,0.95)] backdrop-blur-[12px] border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[rgba(255,255,255,0.92)] backdrop-blur-[14px] border-b border-border">
       <nav className="mx-auto max-w-6xl flex items-center justify-between px-6 h-14">
         <ScrollLink
           href={`#${SECTION_IDS.hero}`}
@@ -26,7 +27,7 @@ export default function Header() {
         </ScrollLink>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex gap-8">
+        <div className="hidden lg:flex items-center gap-7">
           {navLinks.map((link) => (
             <ScrollLink
               key={link.href}
@@ -36,12 +37,18 @@ export default function Header() {
               {link.label}
             </ScrollLink>
           ))}
+          <ScrollLink
+            href={`#${SECTION_IDS.contactForm}`}
+            className="ml-2 bg-wine hover:bg-wine-dark text-white px-5 py-2 rounded-[var(--radius)] text-sm font-medium transition-colors"
+          >
+            5 fiches gratuites
+          </ScrollLink>
         </div>
 
         {/* Mobile hamburger */}
         <button
           type="button"
-          className="md:hidden p-2 text-text-secondary hover:text-wine transition-colors"
+          className="lg:hidden p-2 text-text-secondary hover:text-wine transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Menu de navigation"
         >
@@ -59,7 +66,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[rgba(255,255,255,0.95)] backdrop-blur-[12px] border-b border-border px-6 pb-4">
+        <div className="lg:hidden bg-[rgba(255,255,255,0.95)] backdrop-blur-[14px] border-b border-border px-6 pb-4">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <ScrollLink
@@ -71,6 +78,13 @@ export default function Header() {
                 {link.label}
               </ScrollLink>
             ))}
+            <ScrollLink
+              href={`#${SECTION_IDS.contactForm}`}
+              className="bg-wine hover:bg-wine-dark text-white px-5 py-2.5 rounded-[var(--radius)] text-sm font-medium transition-colors text-center"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              5 fiches gratuites
+            </ScrollLink>
           </div>
         </div>
       )}

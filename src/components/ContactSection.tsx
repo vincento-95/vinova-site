@@ -88,12 +88,10 @@ export default function ContactSection() {
   return (
     <SectionWrapper id={SECTION_IDS.contact} bgColor="bg">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif">
-        Générez votre <span className="text-wine">fiche technique</span>
+        Testez une fiche à l&apos;unité pour <span className="text-wine">1 €</span>
       </h2>
       <p className="text-center text-text-secondary mb-12 max-w-xl mx-auto">
-        Remplissez les informations connues.
-        <br />
-        Notre IA s&apos;occupe du reste pour créer votre fiche professionnelle.
+        Remplissez les informations, payez en ligne, téléchargez votre fiche PDF instantanément.
       </p>
 
       <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-5">

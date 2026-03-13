@@ -4,19 +4,12 @@ import Image from "next/image";
 import SectionWrapper from "./SectionWrapper";
 import { SECTION_IDS } from "@/lib/constants";
 
-const highlights = [
-  {
-    before: "Fiche Word générique sans mise en forme",
-    after: "Fiche PDF brandée avec votre identité",
-  },
-  {
-    before: "Données copiées-collées, erreurs fréquentes",
-    after: "Données structurées et vérifiées par l'IA",
-  },
-  {
-    before: "Mise en page manuelle, résultat inégal",
-    after: "Design professionnel et cohérent",
-  },
+const improvements = [
+  "Dégustation structurée : oeil, nez, bouche",
+  "4 accords mets-vins développés",
+  "Température de service précise",
+  "Potentiel de garde",
+  "Mise en page professionnelle avec votre logo",
 ];
 
 export default function BeforeAfterSection() {
@@ -31,7 +24,7 @@ export default function BeforeAfterSection() {
       </p>
 
       {/* Comparatif visuel */}
-      <div className="grid md:grid-cols-2 gap-6 mb-12 max-w-5xl mx-auto items-end">
+      <div className="grid md:grid-cols-2 gap-6 mb-14 max-w-5xl mx-auto items-end">
         {/* Avant */}
         <div className="relative">
           <div className="absolute -top-3 left-4 bg-gray-400 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full z-10">
@@ -65,6 +58,18 @@ export default function BeforeAfterSection() {
         </div>
       </div>
 
+      {/* Liste des améliorations */}
+      <div className="max-w-2xl mx-auto bg-accent rounded-[var(--radius-lg)] p-8 border border-border">
+        <h3 className="text-lg font-semibold text-text mb-4 font-serif">Ce qui change avec Vinova :</h3>
+        <ul className="space-y-3">
+          {improvements.map((item) => (
+            <li key={item} className="flex items-start gap-3 text-text-secondary">
+              <span className="text-wine font-bold mt-0.5">&#10003;</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </SectionWrapper>
   );
 }
