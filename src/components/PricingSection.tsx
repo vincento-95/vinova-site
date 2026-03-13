@@ -85,7 +85,7 @@ export default function PricingSection() {
                 key={plan.name}
                 className={`rounded-[var(--radius-lg)] p-8 flex flex-col h-full transition-all duration-300 hover:scale-[1.02] ${
                   isHighlighted
-                    ? "bg-wine text-white border-2 border-wine shadow-[0_8px_40px_rgba(114,47,55,0.3)] relative md:-mt-4 md:mb-0 md:py-10 scale-[1.01] hover:shadow-[0_12px_48px_rgba(114,47,55,0.4)]"
+                    ? "bg-surface border-2 border-wine shadow-[0_8px_40px_rgba(114,47,55,0.25)] relative md:-mt-4 md:mb-0 md:py-10 scale-[1.01] hover:shadow-[0_12px_48px_rgba(114,47,55,0.35)]"
                     : "bg-surface border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-lg)]"
                 }`}
               >
@@ -93,20 +93,20 @@ export default function PricingSection() {
                 <span
                   className={`inline-block self-start text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 ${
                     isHighlighted
-                      ? "bg-white/20 text-white"
+                      ? "bg-wine text-white"
                       : "bg-primary-light text-wine"
                   }`}
                 >
                   {plan.badge}
                 </span>
 
-                <h3 className={`text-xl font-semibold mb-2 font-serif ${isHighlighted ? "" : "text-text"}`}>
+                <h3 className="text-xl font-semibold mb-2 font-serif text-text">
                   {plan.name}
                 </h3>
 
                 <div className="flex items-baseline gap-1 mb-6">
-                  <span className={`text-4xl font-bold ${isHighlighted ? "" : "text-text"}`}>{plan.price}</span>
-                  <span className={`text-sm ${isHighlighted ? "text-white/70" : "text-text-secondary"}`}>
+                  <span className="text-4xl font-bold text-text">{plan.price}</span>
+                  <span className="text-sm text-text-secondary">
                     {plan.priceSuffix}
                   </span>
                 </div>
@@ -114,14 +114,14 @@ export default function PricingSection() {
                 <ul className="space-y-3 mb-6 flex-1">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-sm">
-                      <span className={`mt-0.5 ${isHighlighted ? "text-white/80" : "text-wine"}`}>&#10003;</span>
-                      <span className={isHighlighted ? "text-white/90" : "text-text-secondary"}>{f}</span>
+                      <span className="mt-0.5 text-wine">&#10003;</span>
+                      <span className="text-text-secondary">{f}</span>
                     </li>
                   ))}
                 </ul>
 
                 {plan.setup && (
-                  <p className={`text-xs mb-4 ${isHighlighted ? "text-white/60" : "text-text-secondary"}`}>
+                  <p className="text-xs mb-4 text-text-secondary">
                     {plan.setup}
                   </p>
                 )}
@@ -130,7 +130,7 @@ export default function PricingSection() {
                   href={plan.ctaHref}
                   className={`block text-center py-3.5 px-6 rounded-[var(--radius)] font-medium transition-colors ${
                     isHighlighted
-                      ? "bg-white text-wine hover:bg-accent text-base"
+                      ? "bg-wine text-white hover:bg-wine-dark text-base shadow-[var(--shadow-card)]"
                       : isPremium
                         ? "border-2 border-wine text-wine hover:bg-wine hover:text-white text-sm"
                         : "border border-border text-text-secondary hover:border-wine hover:text-wine text-sm"

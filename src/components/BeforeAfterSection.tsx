@@ -27,19 +27,21 @@ function ComparisonSlider() {
   return (
     <div
       ref={containerRef}
-      className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-[var(--shadow-card-lg)] border border-border select-none cursor-col-resize"
+      className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-[var(--shadow-card-lg)] border border-border select-none cursor-col-resize bg-white"
       style={{ aspectRatio: "3/4" }}
       onMouseMove={(e) => e.buttons === 1 && handleMove(e.clientX)}
       onTouchMove={(e) => handleMove(e.touches[0].clientX)}
     >
       {/* After image (background) */}
-      <Image
-        src="/fiche-apres.png"
-        alt="Fiche technique IA Vinova - après"
-        fill
-        className="object-contain"
-        draggable={false}
-      />
+      <div className="absolute inset-0 p-4 flex items-center justify-center">
+        <Image
+          src="/fiche-apres.png"
+          alt="Fiche technique IA Vinova - après"
+          fill
+          className="object-contain p-4"
+          draggable={false}
+        />
+      </div>
 
       {/* Before image (clipped) */}
       <div
@@ -50,7 +52,7 @@ function ComparisonSlider() {
           src="/fiche-avant.png"
           alt="Fiche technique classique - avant"
           fill
-          className="object-contain"
+          className="object-contain p-4"
           draggable={false}
         />
       </div>
