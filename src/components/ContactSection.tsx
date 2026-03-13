@@ -88,7 +88,7 @@ export default function ContactSection() {
   return (
     <SectionWrapper id={SECTION_IDS.contact} bgColor="bg">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif">
-        Testez une fiche à l&apos;unité pour <span className="text-wine">1 €</span>
+        Testez une fiche à l&apos;unité pour <span className="text-wine">9 €</span>
       </h2>
       <p className="text-center text-text-secondary mb-12 max-w-xl mx-auto">
         Remplissez les informations, payez en ligne, téléchargez votre fiche PDF instantanément.
@@ -272,7 +272,7 @@ export default function ContactSection() {
           disabled={loading}
           className="w-full bg-wine hover:bg-wine-dark text-white py-4 rounded-[var(--radius)] font-medium text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[var(--shadow-card)]"
         >
-          {loading ? "Redirection vers le paiement..." : "Générer ma fiche pour 1 € seulement"}
+          {loading ? "Redirection vers le paiement..." : "Générer ma fiche pour 9 € seulement"}
         </button>
 
         <p className="text-center text-text-secondary text-xs">

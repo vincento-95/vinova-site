@@ -4,9 +4,9 @@ import { SECTION_IDS } from "@/lib/constants";
 const plans = [
   {
     name: "Fiche à l'unité",
-    price: "1 €",
+    price: "9 €",
     priceSuffix: "/fiche",
-    badge: "Pour tester",
+    badge: "À l'unité",
     style: "default" as const,
     features: [
       "1 fiche technique PDF",
@@ -19,7 +19,7 @@ const plans = [
   },
   {
     name: "Standard",
-    price: "790 €",
+    price: "490 €",
     priceSuffix: "/mois HT",
     badge: "Le plus populaire",
     style: "highlighted" as const,
@@ -30,13 +30,13 @@ const plans = [
       "Mises à jour incluses",
       "Support prioritaire",
     ],
-    setup: "Setup initial : 490 €",
+    setup: "withOffer" as const,
     cta: "Demander mes 5 fiches gratuites",
     ctaHref: `#${SECTION_IDS.contactForm}`,
   },
   {
     name: "Premium",
-    price: "1 190 €",
+    price: "990 €",
     priceSuffix: "/mois HT",
     badge: "Pour les exportateurs",
     style: "premium" as const,
@@ -46,7 +46,7 @@ const plans = [
       "Emails de prospection personnalisés",
       "Traduction EN / IT / ES",
     ],
-    setup: "Setup initial : 490 €",
+    setup: "withOffer" as const,
     cta: "Demander mes 5 fiches gratuites",
     ctaHref: `#${SECTION_IDS.contactForm}`,
   },
@@ -120,9 +120,10 @@ export default function PricingSection() {
                   ))}
                 </ul>
 
-                {plan.setup && (
-                  <p className="text-xs mb-4 text-text-secondary">
-                    {plan.setup}
+                {plan.setup === "withOffer" && (
+                  <p className="text-sm text-text-secondary mb-4">
+                    Setup initial : <del className="text-text-secondary">490 €</del>{" "}
+                    <span className="text-green-600 font-semibold">Offert pour les 20 premiers clients</span>
                   </p>
                 )}
 
@@ -160,7 +161,7 @@ export default function PricingSection() {
           <p className="text-text leading-relaxed">
             <span className="font-semibold">Comparez :</span> un graphiste freelance facture 30-50 € par fiche.
             Pour 100 fiches, c&apos;est 3 000 à 5 000 €.
-            Vinova vous coûte <span className="font-bold text-wine">790 €/mois</span> pour des fiches illimitées.
+            Vinova vous coûte <span className="font-bold text-wine">490 €/mois</span> pour des fiches illimitées.
           </p>
         </div>
       </div>
