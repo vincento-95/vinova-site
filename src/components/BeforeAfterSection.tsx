@@ -7,7 +7,7 @@ import { SECTION_IDS } from "@/lib/constants";
 
 const improvements = [
   "Dégustation structurée : oeil, nez, bouche",
-  "4 accords mets-vins développés",
+  "Accords mets-vins développés",
   "Température de service précise",
   "Potentiel de garde",
   "Mise en page professionnelle avec votre logo",
