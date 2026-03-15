@@ -98,16 +98,16 @@ export default function ContactFormSection() {
             </div>
             <div>
               <label htmlFor="contact-company" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
-                Entreprise *
+                Site internet *
               </label>
               <input
                 id="contact-company"
                 name="company"
-                type="text"
+                type="url"
                 value={formData.company}
                 onChange={handleChange}
                 required
-                placeholder="Nom de votre société"
+                placeholder="https://www.votresite.fr"
                 className={inputClass}
               />
             </div>
