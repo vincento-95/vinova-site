@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Vinova — Fiches techniques vin pour importateurs et négociants",
+  title: "FicheVin — Fiches techniques vin pour importateurs et négociants",
   description:
     "Générez vos fiches techniques vin en 30 secondes. Dégustation, accords mets-vins, mise en page brandée. Test gratuit sur 5 vins.",
   keywords: [
@@ -14,17 +14,17 @@ export const metadata: Metadata = {
     "fiches techniques automatisées",
   ],
   openGraph: {
-    title: "Vinova — Fiches techniques vin pour importateurs et négociants",
+    title: "FicheVin — Fiches techniques vin pour importateurs et négociants",
     description:
       "Générez vos fiches techniques vin en 30 secondes. Dégustation, accords mets-vins, mise en page brandée. Test gratuit sur 5 vins.",
-    siteName: "Vinova",
-    url: "https://vinova-site.vercel.app",
+    siteName: "FicheVin",
+    url: "https://fichevin.fr",
     images: [
       {
-        url: "https://vinova-site.vercel.app/fiche-apres.png",
+        url: "https://fichevin.fr/fiche-apres.png",
         width: 800,
         height: 1100,
-        alt: "Exemple de fiche technique vin générée par Vinova",
+        alt: "Exemple de fiche technique vin générée par FicheVin",
       },
     ],
     locale: "fr_FR",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vinova — Fiches techniques vin pour importateurs et négociants",
+    title: "FicheVin — Fiches techniques vin pour importateurs et négociants",
     description:
       "Générez vos fiches techniques vin en 30 secondes. Dégustation, accords mets-vins, mise en page brandée.",
-    images: ["https://vinova-site.vercel.app/fiche-apres.png"],
+    images: ["https://fichevin.fr/fiche-apres.png"],
   },
   robots: {
     index: true,
@@ -49,10 +49,10 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Vinova",
+  name: "FicheVin",
   description:
     "Service d'automatisation de fiches techniques vin pour importateurs et négociants",
-  url: "https://vinova-site.vercel.app",
+  url: "https://fichevin.fr",
   areaServed: {
     "@type": "Country",
     name: "France",

@@ -44,7 +44,7 @@ export default function HeroSection() {
           <div className="relative rounded-xl shadow-[var(--shadow-card-lg)] overflow-hidden border border-border bg-white">
             <Image
               src="/fiche-apres.png"
-              alt="Exemple de fiche technique vin générée par Vinova"
+              alt="Exemple de fiche technique vin générée par FicheVin"
               width={800}
               height={1100}
               className="w-full h-auto"

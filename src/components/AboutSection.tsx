@@ -10,10 +10,10 @@ export default function AboutSection() {
           </svg>
         </div>
         <h2 className="text-2xl md:text-3xl font-bold text-text mb-6 font-serif">
-          Qui est derrière <span className="text-wine">Vinova</span> ?
+          Qui est derrière <span className="text-wine">FicheVin</span> ?
         </h2>
         <p className="text-text-secondary leading-relaxed mb-4">
-          Vinova est née d&apos;un constat simple : les importateurs et négociants de vin passent un temps fou sur des tâches administratives qui n&apos;apportent aucune valeur. Fiches techniques, catalogues, mises à jour — autant de temps perdu qui pourrait servir à vendre.
+          FicheVin est née d&apos;un constat simple : les importateurs et négociants de vin passent un temps fou sur des tâches administratives qui n&apos;apportent aucune valeur. Fiches techniques, catalogues, mises à jour — autant de temps perdu qui pourrait servir à vendre.
         </p>
         <p className="text-text-secondary leading-relaxed mb-6">
           Notre mission : rendre chaque vin aussi bien présenté qu&apos;il mérite de l&apos;être, en une fraction du temps.

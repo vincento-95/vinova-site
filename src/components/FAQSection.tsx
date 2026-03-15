@@ -33,7 +33,7 @@ const faqs = [
   {
     question: "490 €/mois, c'est cher pour des fiches techniques.",
     answer:
-      "Comparez avec le coût actuel : 30 min par fiche \u00d7 80 références = 40h de travail. Ou un graphiste à 30-50 €/fiche. Vinova est rentabilisé dès le premier mois.",
+      "Comparez avec le coût actuel : 30 min par fiche \u00d7 80 références = 40h de travail. Ou un graphiste à 30-50 €/fiche. FicheVin est rentabilisé dès le premier mois.",
   },
 ];
 

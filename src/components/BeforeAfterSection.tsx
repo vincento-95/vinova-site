@@ -36,7 +36,7 @@ function ComparisonSlider() {
       <div className="absolute inset-0 p-4 flex items-center justify-center">
         <Image
           src="/fiche-apres.png"
-          alt="Fiche technique IA Vinova - après"
+          alt="Fiche technique IA FicheVin - après"
           fill
           className="object-contain p-4"
           draggable={false}
@@ -73,7 +73,7 @@ function ComparisonSlider() {
         Avant
       </div>
       <div className="absolute top-3 right-3 bg-wine/90 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded z-10">
-        Après — Vinova
+        Après — FicheVin
       </div>
 
       {/* Hidden range input for accessibility */}
@@ -108,7 +108,7 @@ export default function BeforeAfterSection() {
 
       {/* Liste des améliorations */}
       <div className="max-w-2xl mx-auto bg-accent rounded-[var(--radius-lg)] p-8 border border-border">
-        <h3 className="text-lg font-semibold text-text mb-4 font-serif">Ce qui change avec Vinova :</h3>
+        <h3 className="text-lg font-semibold text-text mb-4 font-serif">Ce qui change avec FicheVin :</h3>
         <ul className="space-y-3">
           {improvements.map((item) => (
             <li key={item} className="flex items-start gap-3 text-text-secondary">

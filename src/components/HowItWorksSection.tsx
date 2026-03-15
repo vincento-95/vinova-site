@@ -72,7 +72,7 @@ export default function HowItWorksSection() {
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
-            <p className="text-sm font-medium">Voir Vinova en action</p>
+            <p className="text-sm font-medium">Voir FicheVin en action</p>
             <p className="text-xs text-white/50 mt-1">Démo disponible bientôt</p>
           </div>
         </div>
