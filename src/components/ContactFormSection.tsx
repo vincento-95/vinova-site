@@ -49,7 +49,7 @@ export default function ContactFormSection() {
   }
 
   const inputClass =
-    "w-full px-4 py-3 rounded-[var(--radius)] border border-border focus:ring-2 focus:ring-wine/30 focus:border-wine outline-none transition bg-white text-sm";
+    "w-full px-4 py-3 rounded-[var(--radius)] border border-border focus:ring-2 focus:ring-wine/30 focus:border-wine outline-none transition bg-white text-sm text-gray-900";
 
   if (submitted) {
     return (
