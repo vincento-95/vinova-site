@@ -71,7 +71,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
 export default function FAQSection() {
   return (
-    <SectionWrapper id={SECTION_IDS.faq} bgColor="bg">
+    <SectionWrapper id={SECTION_IDS.faq} bgColor="surface">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-14 font-serif">
         Questions <span className="text-wine">fréquentes</span>
       </h2>

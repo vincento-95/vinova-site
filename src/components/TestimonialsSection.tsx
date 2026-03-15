@@ -35,7 +35,7 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <SectionWrapper id={SECTION_IDS.testimonials} bgColor="surface">
+    <SectionWrapper id={SECTION_IDS.testimonials} bgColor="bg">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif">
         Ils nous font <span className="text-wine">confiance</span>
       </h2>
