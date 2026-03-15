@@ -73,7 +73,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
       const availableH = bodyRef.current.clientHeight;
       const contentH = contentRef.current.scrollHeight;
       if (contentH > availableH + 5 && availableH > 0) {
-        setBodyScale(Math.max(0.48, availableH / contentH));
+        setBodyScale(Math.max(0.85, availableH / contentH));
       } else {
         setBodyScale(1);
       }
@@ -99,8 +99,8 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
       className="wine-sheet"
       style={{
         width: compact ? '100%' : 794,
-        height: compact ? 'auto' : 1120,
-        maxHeight: compact ? 'none' : 1120,
+        height: compact ? 'auto' : 1180,
+        maxHeight: compact ? 'none' : 1180,
         margin: '0 auto',
         background: '#FFFDF7',
         overflow: 'hidden',
