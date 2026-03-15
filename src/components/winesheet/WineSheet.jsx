@@ -232,6 +232,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
                   lineHeight: 1.65,
                   color: '#3a3a3a',
                   margin: '0 0 14px 0',
+                  textAlign: 'justify',
                 }}>
                   {wine.domaineDesc}
                 </p>
