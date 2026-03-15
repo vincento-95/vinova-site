@@ -7,7 +7,6 @@ import { AGENCY_NAME, SECTION_IDS } from "@/lib/constants";
 const navLinks = [
   { label: "Problème", href: `#${SECTION_IDS.problem}` },
   { label: "Solution", href: `#${SECTION_IDS.beforeAfter}` },
-  { label: "Comment ça marche", href: `#${SECTION_IDS.howItWorks}` },
   { label: "Tarifs", href: `#${SECTION_IDS.pricing}` },
   { label: "Témoignages", href: `#${SECTION_IDS.testimonials}` },
   { label: "FAQ", href: `#${SECTION_IDS.faq}` },
