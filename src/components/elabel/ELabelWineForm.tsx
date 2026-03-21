@@ -333,7 +333,7 @@ export default function ELabelWineForm() {
             <div ref={qrSvgRef} className="hidden">
               <QRCodeSVG value={elabelUrl} size={344} fgColor="#722F37" bgColor="#FFFFFF" level="M" />
             </div>
-            <p className="text-xs text-text-secondary mt-4 break-all max-w-xs">{elabelUrl}</p>
+            {/* URL masquée — trop longue pour l'affichage */}
           </div>
           <div className="flex justify-center gap-4 mb-6">
             <button onClick={downloadPNG} className="rounded-[var(--radius)] bg-wine px-6 py-3 text-white font-medium hover:bg-wine-dark transition">Télécharger PNG</button>
