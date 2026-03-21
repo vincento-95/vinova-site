@@ -10,12 +10,16 @@
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "gray-matter": "^4.0.3",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.0",
     "next": "16.1.6",
+    "next-mdx-remote": "^6.0.0",
     "qrcode.react": "^4.2.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "reading-time": "^1.5.0",
     "stripe": "^20.4.1",
     "uuid": "^13.0.0"
   },

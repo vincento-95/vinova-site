@@ -43,6 +43,12 @@ export default function Header() {
           >
             E-Label
           </Link>
+          <Link
+            href="/blog"
+            className="text-sm text-text-secondary hover:text-wine transition-colors"
+          >
+            Blog
+          </Link>
           <ScrollLink
             href={`#${SECTION_IDS.contactForm}`}
             className="ml-2 bg-wine hover:bg-wine-dark text-white px-5 py-2 rounded-[var(--radius)] text-sm font-medium transition-colors"
@@ -90,6 +96,13 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               E-Label
+            </Link>
+            <Link
+              href="/blog"
+              className="text-sm text-text-secondary hover:text-wine transition-colors py-1"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Blog
             </Link>
             <ScrollLink
               href={`#${SECTION_IDS.contactForm}`}
