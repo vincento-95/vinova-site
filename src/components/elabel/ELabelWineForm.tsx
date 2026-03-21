@@ -71,34 +71,37 @@ export default function ELabelWineForm() {
 
   const [elabelUrl, setElabelUrl] = useState('')
 
-  const compressPhoto = (dataUrl: string, maxWidth: number, quality: number): Promise<string> => {
-    return new Promise((resolve) => {
-      const img = new Image()
-      img.onload = () => {
-        const canvas = document.createElement('canvas')
-        const ratio = maxWidth / img.width
-        canvas.width = maxWidth
-        canvas.height = img.height * ratio
-        const ctx = canvas.getContext('2d')!
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-        // Output as JPEG for smaller size
-        const compressed = canvas.toDataURL('image/jpeg', quality)
-        resolve(compressed)
-      }
-      img.src = dataUrl
-    })
+  const [generating, setGenerating] = useState(false)
+
+  const uploadPhoto = async (dataUrl: string): Promise<string | null> => {
+    try {
+      // Convert base64 data URL to File
+      const res = await fetch(dataUrl)
+      const blob = await res.blob()
+      const file = new File([blob], 'photo.jpg', { type: 'image/jpeg' })
+
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const uploadRes = await fetch('/api/upload-photo', { method: 'POST', body: formData })
+      if (!uploadRes.ok) return null
+
+      const data = await uploadRes.json()
+      return data.url || null
+    } catch {
+      return null
+    }
   }
 
   const handleGenerate = async () => {
+    setGenerating(true)
     const newSlug = generateSlug(name)
     setSlug(newSlug)
 
-    // Compress photo to tiny thumbnail if present
-    let miniPhoto: string | null = null
+    // Upload photo if present
+    let photoUrl: string | null = null
     if (photo) {
-      miniPhoto = await compressPhoto(photo, 120, 0.4)
-      // Strip the data:image/jpeg;base64, prefix to save space
-      miniPhoto = miniPhoto.split(',')[1] || null
+      photoUrl = await uploadPhoto(photo)
     }
 
     const data: any = {
@@ -116,11 +119,12 @@ export default function ELabelWineForm() {
       l: languages,
     }
 
-    if (miniPhoto) data.p = miniPhoto
+    if (photoUrl) data.p = photoUrl
 
     const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))))
     const url = `${baseUrl}/wines/label?d=${encoded}`
     setElabelUrl(url)
+    setGenerating(false)
     setStep(3)
   }
 
@@ -386,7 +390,9 @@ export default function ELabelWineForm() {
           {step < 2 ? (
             <button onClick={() => setStep(s => s + 1)} disabled={!canNext()} className="rounded-[var(--radius)] bg-wine px-5 py-2.5 text-white font-medium hover:bg-wine-dark transition disabled:opacity-50">Suivant →</button>
           ) : (
-            <button onClick={handleGenerate} disabled={!canNext()} className="rounded-[var(--radius)] bg-wine px-6 py-3 text-white font-semibold hover:bg-wine-dark transition disabled:opacity-50">Générer mon e-label et QR Code</button>
+            <button onClick={handleGenerate} disabled={!canNext() || generating} className="rounded-[var(--radius)] bg-wine px-6 py-3 text-white font-semibold hover:bg-wine-dark transition disabled:opacity-50">
+              {generating ? 'Génération en cours...' : 'Générer mon e-label et QR Code'}
+            </button>
           )}
         </div>
       )}
