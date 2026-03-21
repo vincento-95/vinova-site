@@ -71,12 +71,37 @@ export default function ELabelWineForm() {
 
   const [elabelUrl, setElabelUrl] = useState('')
 
-  const handleGenerate = () => {
+  const compressPhoto = (dataUrl: string, maxWidth: number, quality: number): Promise<string> => {
+    return new Promise((resolve) => {
+      const img = new Image()
+      img.onload = () => {
+        const canvas = document.createElement('canvas')
+        const ratio = maxWidth / img.width
+        canvas.width = maxWidth
+        canvas.height = img.height * ratio
+        const ctx = canvas.getContext('2d')!
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+        // Output as JPEG for smaller size
+        const compressed = canvas.toDataURL('image/jpeg', quality)
+        resolve(compressed)
+      }
+      img.src = dataUrl
+    })
+  }
+
+  const handleGenerate = async () => {
     const newSlug = generateSlug(name)
     setSlug(newSlug)
 
-    // Build compact data object (no photo — too heavy for URL)
-    const data = {
+    // Compress photo to tiny thumbnail if present
+    let miniPhoto: string | null = null
+    if (photo) {
+      miniPhoto = await compressPhoto(photo, 120, 0.4)
+      // Strip the data:image/jpeg;base64, prefix to save space
+      miniPhoto = miniPhoto.split(',')[1] || null
+    }
+
+    const data: any = {
       n: name,
       v: vintage ? parseInt(vintage) : null,
       a: appellation || null,
@@ -90,6 +115,8 @@ export default function ELabelWineForm() {
       ag: [...new Set(allergens.map(a => a.allergenType!))],
       l: languages,
     }
+
+    if (miniPhoto) data.p = miniPhoto
 
     const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))))
     const url = `${baseUrl}/wines/label?d=${encoded}`

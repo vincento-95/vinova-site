@@ -28,7 +28,7 @@ function ELabelRenderer() {
       appellation: data.a,
       alcohol_content: data.al,
       grape_varieties: data.g || [],
-      photo: null,
+      photo: data.p ? `data:image/jpeg;base64,${data.p}` : null,
     }
 
     const elabel = {
