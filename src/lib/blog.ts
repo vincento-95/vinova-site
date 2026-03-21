@@ -10,6 +10,7 @@ export interface BlogPost {
   title: string
   description: string
   date: string
+  lastModified?: string
   author: string
   tags: string[]
   image?: string
@@ -22,6 +23,7 @@ export interface BlogPostMeta {
   title: string
   description: string
   date: string
+  lastModified?: string
   author: string
   tags: string[]
   image?: string
@@ -39,6 +41,7 @@ function parseMdxFile(filename: string): BlogPost {
     title: data.title || 'Sans titre',
     description: data.description || '',
     date: data.date || new Date().toISOString(),
+    lastModified: data.lastModified || undefined,
     author: data.author || 'FicheVin',
     tags: data.tags || [],
     image: data.image || undefined,

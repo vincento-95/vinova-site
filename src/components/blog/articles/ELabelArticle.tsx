@@ -4,7 +4,7 @@ import BlogFAQ from '../BlogFAQ'
 export default function ELabelArticle() {
   return (
     <>
-      <p>Si vous êtes vigneron, négociant ou importateur de vin, vous avez forcément entendu parler du nouvel étiquetage européen. Depuis le millésime 2024, chaque vin commercialisé dans l&apos;Union européenne doit afficher ses ingrédients et ses valeurs nutritionnelles — soit directement sur l&apos;étiquette, soit via un QR code renvoyant vers une page web appelée <strong>e-label</strong>.</p>
+      <p>Si vous êtes vigneron, négociant ou importateur de vin, vous avez forcément entendu parler du nouvel étiquetage européen. Depuis le millésime 2024, chaque vin commercialisé dans l&apos;Union européenne doit afficher ses ingrédients et ses valeurs nutritionnelles — soit directement sur l&apos;étiquette, soit via un QR code renvoyant vers une page web appelée <strong>e-label</strong>. Si vous cherchez un outil pour <Link href="/e-label">créer votre e-label conforme UE</Link>, FicheVin vous permet de le faire en quelques minutes.</p>
 
       <p>Ce guide fait le point sur ce qui est obligatoire, ce qui est facultatif, et comment vous mettre en conformité concrètement sans perdre des journées entières.</p>
 
@@ -57,6 +57,36 @@ export default function ELabelArticle() {
       <p>Les <strong>mentions d&apos;allergènes</strong>, notamment &quot;contient des sulfites&quot;. Si votre vin contient des substances issues de lait ou d&apos;œuf (utilisées comme agents de collage), cela doit aussi apparaître sur l&apos;étiquette physique.</p>
 
       <p>Toutes les autres mentions obligatoires qui existaient déjà avant la réforme : dénomination, degré d&apos;alcool, volume, provenance, numéro de lot, embouteilleur.</p>
+
+      {/* Schéma : ce qui va où */}
+      <figure style={{ margin: '36px 0', textAlign: 'center' }}>
+        <div style={{ background: '#F7F5F2', borderRadius: 10, padding: '32px 24px', display: 'inline-block', width: '100%', maxWidth: 600 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 40, flexWrap: 'wrap' }}>
+            <div style={{ textAlign: 'center', flex: '1 1 200px' }}>
+              <div style={{ fontSize: 32, marginBottom: 8 }}>🏷️</div>
+              <div style={{ fontWeight: 600, color: '#1A1A1A', fontSize: 15, marginBottom: 6 }}>Étiquette physique</div>
+              <ul style={{ listStyle: 'none', padding: 0, fontSize: 13, color: '#5A5A5A', lineHeight: 1.8 }}>
+                <li>Valeur énergétique (kJ/kcal)</li>
+                <li>Mentions d&apos;allergènes</li>
+                <li>Dénomination, degré, volume</li>
+                <li>QR code + mention</li>
+              </ul>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', fontSize: 24, color: '#722F37' }}>→</div>
+            <div style={{ textAlign: 'center', flex: '1 1 200px' }}>
+              <div style={{ fontSize: 32, marginBottom: 8 }}>📱</div>
+              <div style={{ fontWeight: 600, color: '#1A1A1A', fontSize: 15, marginBottom: 6 }}>Page e-label (QR code)</div>
+              <ul style={{ listStyle: 'none', padding: 0, fontSize: 13, color: '#5A5A5A', lineHeight: 1.8 }}>
+                <li>Liste complète des ingrédients</li>
+                <li>Tableau nutritionnel détaillé</li>
+                <li>Allergènes en gras</li>
+                <li>Multi-langues</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <figcaption style={{ fontSize: 13, color: '#8A8A8A', marginTop: 12 }}>Répartition des informations entre étiquette physique et e-label numérique</figcaption>
+      </figure>
 
       <h3>Ce qui peut être dématérialisé via le QR code</h3>
 
@@ -138,7 +168,7 @@ export default function ELabelArticle() {
 
       <div className="blog-callout blog-callout-tip">
         <div className="blog-callout-label">💡 Astuce</div>
-        <p>Vous n&apos;avez pas envie de faire ces calculs vous-même ? FicheVin génère automatiquement les valeurs nutritionnelles à partir de votre degré d&apos;alcool, sucre résiduel et acidité. En 30 secondes.</p>
+        <p>Vous n&apos;avez pas envie de faire ces calculs vous-même ? Notre <Link href="/e-label">générateur d&apos;e-labels</Link> calcule automatiquement les valeurs nutritionnelles à partir de votre degré d&apos;alcool, sucre résiduel et acidité. En 30 secondes.</p>
       </div>
 
       <div className="blog-divider" />
@@ -154,6 +184,32 @@ export default function ELabelArticle() {
 
       <h3>Taille et lisibilité</h3>
       <p>Pas de taille minimale imposée, mais le QR code doit être scannable facilement. Un minimum de <strong>13 mm × 13 mm</strong> est recommandé, imprimé à 300 dpi. Testez toujours vos QR codes une fois imprimés sur l&apos;étiquette finale.</p>
+
+      {/* Schéma : flux QR code */}
+      <figure style={{ margin: '36px 0', textAlign: 'center' }}>
+        <div style={{ background: '#F7F5F2', borderRadius: 10, padding: '28px 24px', display: 'inline-block', width: '100%', maxWidth: 600 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+            <div style={{ background: '#fff', border: '1px solid #E8E5E0', borderRadius: 8, padding: '16px 20px', textAlign: 'center' }}>
+              <div style={{ fontSize: 24, marginBottom: 4 }}>📝</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: '#1A1A1A' }}>Remplir le formulaire</div>
+              <div style={{ fontSize: 11, color: '#8A8A8A' }}>Degré, sucre, acidité, ingrédients</div>
+            </div>
+            <div style={{ fontSize: 20, color: '#722F37' }}>→</div>
+            <div style={{ background: '#fff', border: '1px solid #E8E5E0', borderRadius: 8, padding: '16px 20px', textAlign: 'center' }}>
+              <div style={{ fontSize: 24, marginBottom: 4 }}>⚙️</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: '#1A1A1A' }}>Calcul automatique</div>
+              <div style={{ fontSize: 11, color: '#8A8A8A' }}>Valeurs nutritionnelles UE</div>
+            </div>
+            <div style={{ fontSize: 20, color: '#722F37' }}>→</div>
+            <div style={{ background: '#fff', border: '1px solid #E8E5E0', borderRadius: 8, padding: '16px 20px', textAlign: 'center' }}>
+              <div style={{ fontSize: 24, marginBottom: 4 }}>📲</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: '#1A1A1A' }}>QR code + page</div>
+              <div style={{ fontSize: 11, color: '#8A8A8A' }}>Téléchargement PNG / SVG</div>
+            </div>
+          </div>
+        </div>
+        <figcaption style={{ fontSize: 13, color: '#8A8A8A', marginTop: 12 }}>Les 3 étapes pour créer un e-label avec <Link href="/e-label" style={{ color: '#722F37' }}>FicheVin</Link></figcaption>
+      </figure>
 
       <h3>Un QR code par vin</h3>
       <p>Chaque cuvée/millésime distinct doit avoir son propre QR code. Un Merlot 2024 et un Merlot 2025 sont deux vins différents, ils ont besoin de deux QR codes. En revanche, toutes les bouteilles d&apos;un même vin peuvent partager le même QR code.</p>
@@ -183,7 +239,7 @@ export default function ELabelArticle() {
       <p>Vous créez une page web statique sur votre propre site. C&apos;est gratuit, mais vous devez vous assurer que la page reste en ligne pendant 10 ans, qu&apos;elle ne contient aucun contenu marketing, et qu&apos;elle est traduite. Pour 5 vins, c&apos;est faisable. Pour 50, c&apos;est un cauchemar.</p>
 
       <h3>Option 3 : utiliser un outil dédié</h3>
-      <p>Des plateformes spécialisées génèrent votre e-label, votre QR code et hébergent votre page automatiquement. Vous remplissez un formulaire, vous récupérez votre QR code prêt à envoyer à l&apos;imprimeur. C&apos;est la solution choisie par la majorité des producteurs.</p>
+      <p>Des plateformes spécialisées comme <Link href="/e-label">FicheVin</Link> génèrent votre e-label, votre QR code et hébergent votre page automatiquement. Vous remplissez un formulaire, vous récupérez votre QR code prêt à envoyer à l&apos;imprimeur. C&apos;est la solution choisie par la majorité des producteurs.</p>
 
       <div className="blog-cta">
         <h3>Générez votre e-label + fiche technique en 30 secondes</h3>

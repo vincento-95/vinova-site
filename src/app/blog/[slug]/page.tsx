@@ -54,6 +54,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
+    dateModified: post.lastModified || post.date,
     author: { '@type': 'Organization', name: post.author },
     publisher: { '@type': 'Organization', name: 'FicheVin', url: 'https://fichevin.fr' },
     mainEntityOfPage: `https://fichevin.fr/blog/${post.slug}`,
