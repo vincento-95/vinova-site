@@ -69,35 +69,33 @@ export default function ELabelWineForm() {
 
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
 
+  const [elabelUrl, setElabelUrl] = useState('')
+
   const handleGenerate = () => {
     const newSlug = generateSlug(name)
     setSlug(newSlug)
 
-    const elabelData = {
-      wine: {
-        name,
-        vintage: vintage ? parseInt(vintage) : null,
-        appellation,
-        alcohol_content: alcoholContent,
-        grape_varieties: grapeVarieties.filter(g => g.trim()),
-        photo: photo || null,
-      },
-      elabel: {
-        ingredients: selectedIngredientObjects.map(i => ({
-          id: i.id, name: i.name, code: i.code, category: i.category,
-          isAllergen: i.isAllergen, allergenType: i.allergenType,
-        })),
-        nutrition,
-        allergens: [...new Set(allergens.map(a => a.allergenType!))],
-        fining_agents: selectedIngredientObjects.filter(i => i.category === 'agent_collage').map(i => i.name),
-        languages,
-      },
+    // Build compact data object (no photo — too heavy for URL)
+    const data = {
+      n: name,
+      v: vintage ? parseInt(vintage) : null,
+      a: appellation || null,
+      al: alcoholContent,
+      g: grapeVarieties.filter(g => g.trim()),
+      i: selectedIngredientObjects.map(i => ({
+        id: i.id, n: i.name, c: i.code || null, cat: i.category,
+        al: i.isAllergen, at: i.allergenType || null,
+      })),
+      nu: nutrition,
+      ag: [...new Set(allergens.map(a => a.allergenType!))],
+      l: languages,
     }
-    localStorage.setItem(`elabel-${newSlug}`, JSON.stringify(elabelData))
+
+    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))))
+    const url = `${baseUrl}/wines/label?d=${encoded}`
+    setElabelUrl(url)
     setStep(3)
   }
-
-  const elabelUrl = slug ? `${baseUrl}/wines/${slug}` : ''
 
   const downloadPNG = () => {
     const canvas = qrCanvasRef.current?.querySelector('canvas')
