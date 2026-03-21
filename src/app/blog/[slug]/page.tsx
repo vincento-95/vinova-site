@@ -3,11 +3,9 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import MDXContent from '@/components/blog/MDXContent'
-import TableOfContents from '@/components/blog/TableOfContents'
-import BlogCTA from '@/components/blog/BlogCTA'
-import BlogCard from '@/components/blog/BlogCard'
 import { getPostBySlug, getAllPosts, getRelatedPosts, extractHeadings } from '@/lib/blog'
+import BlogCard from '@/components/blog/BlogCard'
+import ArticleContent from '@/components/blog/ArticleContent'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -34,13 +32,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `https://fichevin.fr/blog/${post.slug}`,
       publishedTime: post.date,
       authors: [post.author],
-      ...(post.image ? { images: [{ url: post.image }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      ...(post.image ? { images: [post.image] } : {}),
     },
     alternates: {
       canonical: `https://fichevin.fr/blog/${post.slug}`,
@@ -53,7 +49,6 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = getPostBySlug(slug)
   if (!post) notFound()
 
-  const headings = extractHeadings(post.content)
   const related = getRelatedPosts(post.slug, post.tags, 2)
 
   const formattedDate = new Date(post.date).toLocaleDateString('fr-FR', {
@@ -68,30 +63,21 @@ export default async function BlogPostPage({ params }: PageProps) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    author: {
-      '@type': 'Organization',
-      name: post.author,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'FicheVin',
-      url: 'https://fichevin.fr',
-    },
+    author: { '@type': 'Organization', name: post.author },
+    publisher: { '@type': 'Organization', name: 'FicheVin', url: 'https://fichevin.fr' },
     mainEntityOfPage: `https://fichevin.fr/blog/${post.slug}`,
-    ...(post.image ? { image: post.image } : {}),
   }
 
   return (
     <>
       <Header />
       <main className="pt-14 min-h-screen bg-bg">
-        {/* JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        <article className="mx-auto max-w-5xl px-6 py-12">
+        <article className="mx-auto max-w-3xl px-6 py-12">
           {/* Breadcrumbs */}
           <nav className="text-sm text-text-secondary mb-6">
             <Link href="/" className="hover:text-wine">Accueil</Link>
@@ -102,14 +88,10 @@ export default async function BlogPostPage({ params }: PageProps) {
           </nav>
 
           {/* Header */}
-          <header className="mb-8">
+          <header className="mb-10">
             <div className="flex flex-wrap gap-2 mb-3">
               {post.tags.map(tag => (
-                <Link
-                  key={tag}
-                  href="/blog"
-                  className="text-xs bg-wine-50 text-wine px-2.5 py-1 rounded-full hover:bg-wine-100 transition"
-                >
+                <Link key={tag} href="/blog" className="text-xs bg-wine-50 text-wine px-2.5 py-1 rounded-full hover:bg-wine-100 transition">
                   {tag}
                 </Link>
               ))}
@@ -126,38 +108,24 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           </header>
 
-          {/* Hero image */}
-          {post.image && (
-            <div className="mb-10 rounded-[var(--radius-lg)] overflow-hidden">
-              <img src={post.image} alt={post.title} className="w-full" loading="eager" />
-            </div>
-          )}
-
-          {/* Content + TOC */}
-          <div className="flex gap-10">
-            {/* Article */}
-            <div className="flex-1 min-w-0">
-              <TableOfContents headings={headings} />
-              <MDXContent source={post.content} />
-            </div>
-
-            {/* Sidebar TOC (desktop) */}
-            <TableOfContents headings={headings} />
-          </div>
+          {/* Article body */}
+          <ArticleContent slug={slug} />
 
           {/* Bottom CTA */}
-          <div className="mt-12">
-            <BlogCTA />
+          <div className="mt-14 bg-wine rounded-[var(--radius-lg)] p-8 text-center">
+            <h3 className="text-xl font-bold text-white mb-2">Mettez-vous en conformité en 2 minutes</h3>
+            <p className="text-white/80 text-sm mb-5">FicheVin génère votre e-label conforme UE + votre fiche technique commerciale + votre QR code. Testez gratuitement.</p>
+            <Link href="/#contact" className="inline-block bg-white text-wine font-semibold px-6 py-3 rounded-[var(--radius)] hover:bg-gray-100 transition">
+              Créer mon e-label gratuit
+            </Link>
           </div>
 
-          {/* Related articles */}
+          {/* Related */}
           {related.length > 0 && (
             <section className="mt-16">
               <h2 className="text-xl font-bold text-text mb-6">Articles suggérés</h2>
               <div className="grid md:grid-cols-2 gap-6">
-                {related.map(p => (
-                  <BlogCard key={p.slug} post={p} />
-                ))}
+                {related.map(p => <BlogCard key={p.slug} post={p} />)}
               </div>
             </section>
           )}
