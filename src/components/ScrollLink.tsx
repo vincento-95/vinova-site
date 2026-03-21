@@ -14,17 +14,23 @@ export default function ScrollLink({
   onClick,
 }: ScrollLinkProps) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
     const targetId = href.replace("#", "");
     const element = document.getElementById(targetId);
+
     if (element) {
+      // On est sur la homepage, scroll direct
+      e.preventDefault();
       element.scrollIntoView({ behavior: "smooth" });
+      onClick?.();
+    } else {
+      // On est sur une autre page, naviguer vers /#section
+      e.preventDefault();
+      window.location.href = `/${href}`;
     }
-    onClick?.();
   };
 
   return (
-    <a href={href} onClick={handleClick} className={className}>
+    <a href={`/${href}`} onClick={handleClick} className={className}>
       {children}
     </a>
   );
