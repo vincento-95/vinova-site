@@ -3,13 +3,6 @@ import { createClient } from '@supabase/supabase-js'
 import Stripe from 'stripe'
 import { v4 as uuidv4 } from 'uuid'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
-
 function generateSlug(name: string): string {
   const base = name
     .toLowerCase()
@@ -28,6 +21,11 @@ export async function POST(request: Request) {
     if (!body.name || !body.alcoholContent) {
       return NextResponse.json({ error: 'Champs requis manquants' }, { status: 400 })
     }
+
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
 
     const slug = generateSlug(body.name)
 
@@ -80,10 +78,12 @@ export async function POST(request: Request) {
       .single()
 
     if (error) {
+      console.error('Supabase insert error:', error)
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
     // Create Stripe Checkout session
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fichevin.fr'
 
     const session = await stripe.checkout.sessions.create({
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
         {
           price_data: {
             currency: 'eur',
-            unit_amount: 300, // 3€
+            unit_amount: 300,
             product_data: {
               name: `E-label — ${body.name}`,
               description: 'E-label conforme UE avec QR code pour étiquette de vin',
@@ -111,6 +111,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ checkoutUrl: session.url })
   } catch (err: any) {
+    console.error('create-elabel error:', err.message || err)
     return NextResponse.json({ error: err.message || 'Erreur serveur' }, { status: 500 })
   }
 }
