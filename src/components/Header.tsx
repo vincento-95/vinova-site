@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import ScrollLink from "./ScrollLink";
 import { AGENCY_NAME, SECTION_IDS } from "@/lib/constants";
 
@@ -36,6 +37,12 @@ export default function Header() {
               {link.label}
             </ScrollLink>
           ))}
+          <Link
+            href="/e-label"
+            className="text-sm text-text-secondary hover:text-wine transition-colors font-medium"
+          >
+            E-Label
+          </Link>
           <ScrollLink
             href={`#${SECTION_IDS.contactForm}`}
             className="ml-2 bg-wine hover:bg-wine-dark text-white px-5 py-2 rounded-[var(--radius)] text-sm font-medium transition-colors"
@@ -77,6 +84,13 @@ export default function Header() {
                 {link.label}
               </ScrollLink>
             ))}
+            <Link
+              href="/e-label"
+              className="text-sm text-text-secondary hover:text-wine transition-colors py-1 font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              E-Label
+            </Link>
             <ScrollLink
               href={`#${SECTION_IDS.contactForm}`}
               className="bg-wine hover:bg-wine-dark text-white px-5 py-2.5 rounded-[var(--radius)] text-sm font-medium transition-colors text-center"
