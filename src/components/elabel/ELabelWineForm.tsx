@@ -42,6 +42,19 @@ export default function ELabelWineForm() {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>(['raisins', 'e220'])
   const [languages, setLanguages] = useState<string[]>(['fr'])
   const [slug, setSlug] = useState('')
+  const [photo, setPhoto] = useState<string | null>(null)
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Image trop lourde (max 5 Mo)')
+      return
+    }
+    const reader = new FileReader()
+    reader.onload = () => setPhoto(reader.result as string)
+    reader.readAsDataURL(file)
+  }
 
   const nutrition = calculateNutrition({ alcoholContent, residualSugar, totalAcidity })
   const selectedIngredientObjects = INGREDIENTS.filter(i => selectedIngredients.includes(i.id))
@@ -67,6 +80,7 @@ export default function ELabelWineForm() {
         appellation,
         alcohol_content: alcoholContent,
         grape_varieties: grapeVarieties.filter(g => g.trim()),
+        photo: photo || null,
       },
       elabel: {
         ingredients: selectedIngredientObjects.map(i => ({
@@ -197,6 +211,27 @@ export default function ELabelWineForm() {
               <input type="number" step="0.1" value={totalAcidity} onChange={e => setTotalAcidity(parseFloat(e.target.value) || 0)} className={inputClass} />
             </div>
           </div>
+          {/* Photo */}
+          <div>
+            <label className="block text-sm font-medium text-text mb-1">Photo du vin <span className="text-text-secondary">(optionnel)</span></label>
+            <div className="flex items-start gap-4">
+              <label className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-border rounded-[var(--radius)] p-6 hover:border-wine cursor-pointer transition">
+                <svg className="w-8 h-8 text-text-secondary mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" />
+                </svg>
+                <span className="text-sm text-text-secondary">Cliquez pour ajouter une photo</span>
+                <span className="text-xs text-text-secondary mt-1">JPG, PNG — max 5 Mo</span>
+                <input type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
+              </label>
+              {photo && (
+                <div className="relative">
+                  <img src={photo} alt="Aperçu" className="w-24 h-32 object-cover rounded-[var(--radius)] border border-border" />
+                  <button type="button" onClick={() => setPhoto(null)} className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs flex items-center justify-center hover:bg-red-600">×</button>
+                </div>
+              )}
+            </div>
+          </div>
+
           <div className="bg-accent rounded-[var(--radius)] p-4">
             <p className="text-sm font-medium text-text mb-2">Aperçu nutritionnel (pour 100 ml)</p>
             <p className="text-sm text-text-secondary">
@@ -253,6 +288,11 @@ export default function ELabelWineForm() {
           <div>
             <h3 className="text-sm font-semibold text-text mb-2">Prévisualisation</h3>
             <div className="border border-border rounded-[var(--radius-lg)] p-6 bg-surface">
+              {photo && (
+                <div className="flex justify-center mb-4">
+                  <img src={photo} alt={name} className="h-40 object-contain rounded-[var(--radius)]" />
+                </div>
+              )}
               <h2 className="text-lg font-bold text-text mb-1">{name}</h2>
               {vintage && <p className="text-sm text-text-secondary">Millésime {vintage}</p>}
               {appellation && <p className="text-sm text-text-secondary">{appellation}</p>}

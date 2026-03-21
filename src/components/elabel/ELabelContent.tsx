@@ -11,6 +11,7 @@ interface Props {
     appellation: string | null
     alcohol_content: number
     grape_varieties: string[]
+    photo?: string | null
   }
   elabel: {
     ingredients: IngredientData[]
@@ -38,6 +39,12 @@ export default function ELabelContent({ wine, elabel }: Props) {
           <select value={lang} onChange={e => setLang(e.target.value)} className="rounded border border-gray-300 px-2 py-1 text-sm">
             {availableLanguages.map(code => <option key={code} value={code}>{EU_LANGUAGES[code]}</option>)}
           </select>
+        </div>
+      )}
+
+      {wine.photo && (
+        <div className="flex justify-center mb-4">
+          <img src={wine.photo} alt={wine.name} className="h-44 object-contain rounded-lg" />
         </div>
       )}
 
