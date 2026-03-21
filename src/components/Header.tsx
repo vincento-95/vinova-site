@@ -5,13 +5,7 @@ import Link from "next/link";
 import ScrollLink from "./ScrollLink";
 import { AGENCY_NAME, SECTION_IDS } from "@/lib/constants";
 
-const navLinks = [
-  { label: "Problème", href: `#${SECTION_IDS.problem}` },
-  { label: "Solution", href: `#${SECTION_IDS.beforeAfter}` },
-  { label: "Tarifs", href: `#${SECTION_IDS.pricing}` },
-  { label: "Témoignages", href: `#${SECTION_IDS.testimonials}` },
-  { label: "FAQ", href: `#${SECTION_IDS.faq}` },
-];
+const navLinks: { label: string; href: string }[] = [];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,15 +22,12 @@ export default function Header() {
 
         {/* Desktop nav */}
         <div className="hidden lg:flex items-center gap-7">
-          {navLinks.map((link) => (
-            <ScrollLink
-              key={link.href}
-              href={link.href}
-              className="text-sm text-text-secondary hover:text-wine transition-colors"
-            >
-              {link.label}
-            </ScrollLink>
-          ))}
+          <Link
+            href="/"
+            className="text-sm text-text-secondary hover:text-wine transition-colors"
+          >
+            Fiche Technique
+          </Link>
           <Link
             href="/e-label"
             className="text-sm text-text-secondary hover:text-wine transition-colors font-medium"
@@ -80,16 +71,13 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[rgba(255,255,255,0.95)] backdrop-blur-[14px] border-b border-border px-6 pb-4">
           <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <ScrollLink
-                key={link.href}
-                href={link.href}
-                className="text-sm text-text-secondary hover:text-wine transition-colors py-1"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
-              </ScrollLink>
-            ))}
+            <Link
+              href="/"
+              className="text-sm text-text-secondary hover:text-wine transition-colors py-1"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Fiche Technique
+            </Link>
             <Link
               href="/e-label"
               className="text-sm text-text-secondary hover:text-wine transition-colors py-1 font-medium"
