@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import Stripe from 'stripe'
 import { v4 as uuidv4 } from 'uuid'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 function generateSlug(name: string): string {
   const base = name
@@ -31,7 +34,6 @@ export async function POST(request: Request) {
     // Upload photo to Supabase Storage if provided
     let photoUrl: string | null = null
     if (body.photo) {
-      // Convert base64 data URL to buffer
       const base64Data = body.photo.split(',')[1]
       if (base64Data) {
         const buffer = Buffer.from(base64Data, 'base64')
@@ -53,7 +55,7 @@ export async function POST(request: Request) {
       }
     }
 
-    // Insert e-label
+    // Insert e-label (unpaid)
     const { data, error } = await supabase
       .from('elabels')
       .insert({
@@ -72,6 +74,7 @@ export async function POST(request: Request) {
         languages: body.languages || ['fr'],
         photo_url: photoUrl,
         email: body.email || null,
+        paid: false,
       })
       .select()
       .single()
@@ -80,7 +83,33 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
-    return NextResponse.json({ slug: data.slug })
+    // Create Stripe Checkout session
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fichevin.fr'
+
+    const session = await stripe.checkout.sessions.create({
+      mode: 'payment',
+      ...(body.email ? { customer_email: body.email } : {}),
+      line_items: [
+        {
+          price_data: {
+            currency: 'eur',
+            unit_amount: 300, // 3€
+            product_data: {
+              name: `E-label — ${body.name}`,
+              description: 'E-label conforme UE avec QR code pour étiquette de vin',
+            },
+          },
+          quantity: 1,
+        },
+      ],
+      success_url: `${baseUrl}/e-label/succes?slug=${slug}`,
+      cancel_url: `${baseUrl}/e-label?cancelled=true`,
+      metadata: {
+        elabel_slug: slug,
+      },
+    })
+
+    return NextResponse.json({ checkoutUrl: session.url })
   } catch (err: any) {
     return NextResponse.json({ error: err.message || 'Erreur serveur' }, { status: 500 })
   }

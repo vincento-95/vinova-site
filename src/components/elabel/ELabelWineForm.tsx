@@ -105,9 +105,10 @@ export default function ELabelWineForm() {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Erreur')
 
-      setSlug(data.slug)
-      setElabelUrl(`${baseUrl}/wines/${data.slug}`)
-      setStep(3)
+      // Redirect to Stripe Checkout
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl
+      }
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -382,7 +383,7 @@ export default function ELabelWineForm() {
             <button onClick={() => setStep(s => s + 1)} disabled={!canNext()} className="rounded-[var(--radius)] bg-wine px-5 py-2.5 text-white font-medium hover:bg-wine-dark transition disabled:opacity-50">Suivant →</button>
           ) : (
             <button onClick={handleGenerate} disabled={!canNext() || generating} className="rounded-[var(--radius)] bg-wine px-6 py-3 text-white font-semibold hover:bg-wine-dark transition disabled:opacity-50">
-              {generating ? 'Génération en cours...' : 'Générer mon e-label et QR Code'}
+              {generating ? 'Redirection vers le paiement...' : 'Payer 3 € et générer mon e-label'}
             </button>
           )}
         </div>
