@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import Stripe from 'stripe'
 import { v4 as uuidv4 } from 'uuid'
 
 function generateSlug(name: string): string {
@@ -82,32 +81,37 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
-    // Create Stripe Checkout session
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fichevin.fr'
+    // Create Stripe Checkout session (using REST API like create-checkout-session)
+    const origin = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fichevin.fr'
 
-    const session = await stripe.checkout.sessions.create({
-      mode: 'payment',
-      ...(body.email ? { customer_email: body.email } : {}),
-      line_items: [
-        {
-          price_data: {
-            currency: 'eur',
-            unit_amount: 300,
-            product_data: {
-              name: `E-label — ${body.name}`,
-              description: 'E-label conforme UE avec QR code pour étiquette de vin',
-            },
-          },
-          quantity: 1,
-        },
-      ],
-      success_url: `${baseUrl}/e-label/succes?slug=${slug}`,
-      cancel_url: `${baseUrl}/e-label?cancelled=true`,
-      metadata: {
-        elabel_slug: slug,
+    const params = new URLSearchParams()
+    params.append('payment_method_types[]', 'card')
+    params.append('line_items[0][price_data][currency]', 'eur')
+    params.append('line_items[0][price_data][product_data][name]', `E-label — ${body.name}`)
+    params.append('line_items[0][price_data][product_data][description]', 'E-label conforme UE avec QR code')
+    params.append('line_items[0][price_data][unit_amount]', '300')
+    params.append('line_items[0][quantity]', '1')
+    params.append('mode', 'payment')
+    params.append('metadata[elabel_slug]', slug)
+    if (body.email) params.append('customer_email', body.email)
+    params.append('success_url', `${origin}/e-label/succes?slug=${slug}`)
+    params.append('cancel_url', `${origin}/e-label?cancelled=true`)
+
+    const stripeRes = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
+      body: params.toString(),
     })
+
+    const session = await stripeRes.json()
+
+    if (!stripeRes.ok) {
+      console.error('Stripe API error:', session)
+      return NextResponse.json({ error: session.error?.message || 'Erreur Stripe' }, { status: stripeRes.status })
+    }
 
     return NextResponse.json({ checkoutUrl: session.url })
   } catch (err: any) {
