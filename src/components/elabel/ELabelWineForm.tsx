@@ -7,7 +7,6 @@ import { calculateNutrition } from '@/lib/nutrition'
 import { INGREDIENTS, INGREDIENT_CATEGORIES, getIngredientsByCategory, type IngredientCategory } from '@/lib/ingredients'
 import { EU_LANGUAGES, type LanguageCode } from '@/lib/elabel-translations'
 import ELabelNutritionPreview from './ELabelNutritionPreview'
-import { generateSlug } from '@/lib/slug'
 
 const WINE_COLORS: { value: WineColor; label: string }[] = [
   { value: 'rouge', label: 'Rouge' },
@@ -72,60 +71,48 @@ export default function ELabelWineForm() {
   const [elabelUrl, setElabelUrl] = useState('')
 
   const [generating, setGenerating] = useState(false)
-
-  const uploadPhoto = async (dataUrl: string): Promise<string | null> => {
-    try {
-      // Convert base64 data URL to File
-      const res = await fetch(dataUrl)
-      const blob = await res.blob()
-      const file = new File([blob], 'photo.jpg', { type: 'image/jpeg' })
-
-      const formData = new FormData()
-      formData.append('file', file)
-
-      const uploadRes = await fetch('/api/upload-photo', { method: 'POST', body: formData })
-      if (!uploadRes.ok) return null
-
-      const data = await uploadRes.json()
-      return data.url || null
-    } catch {
-      return null
-    }
-  }
+  const [error, setError] = useState('')
 
   const handleGenerate = async () => {
     setGenerating(true)
-    const newSlug = generateSlug(name)
-    setSlug(newSlug)
+    setError('')
 
-    // Upload photo if present
-    let photoUrl: string | null = null
-    if (photo) {
-      photoUrl = await uploadPhoto(photo)
+    try {
+      const res = await fetch('/api/create-elabel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          vintage: vintage ? parseInt(vintage) : null,
+          appellation,
+          color,
+          grapeVarieties: grapeVarieties.filter(g => g.trim()),
+          alcoholContent,
+          residualSugar,
+          totalAcidity,
+          ingredients: selectedIngredientObjects.map(i => ({
+            id: i.id, name: i.name, code: i.code, category: i.category,
+            isAllergen: i.isAllergen, allergenType: i.allergenType,
+          })),
+          nutrition,
+          allergens: [...new Set(allergens.map(a => a.allergenType!))],
+          languages,
+          email,
+          photo: photo || null,
+        }),
+      })
+
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Erreur')
+
+      setSlug(data.slug)
+      setElabelUrl(`${baseUrl}/wines/${data.slug}`)
+      setStep(3)
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setGenerating(false)
     }
-
-    const data: any = {
-      n: name,
-      v: vintage ? parseInt(vintage) : null,
-      a: appellation || null,
-      al: alcoholContent,
-      g: grapeVarieties.filter(g => g.trim()),
-      i: selectedIngredientObjects.map(i => ({
-        id: i.id, n: i.name, c: i.code || null, cat: i.category,
-        al: i.isAllergen, at: i.allergenType || null,
-      })),
-      nu: nutrition,
-      ag: [...new Set(allergens.map(a => a.allergenType!))],
-      l: languages,
-    }
-
-    if (photoUrl) data.p = photoUrl
-
-    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))))
-    const url = `${baseUrl}/wines/label?d=${encoded}`
-    setElabelUrl(url)
-    setGenerating(false)
-    setStep(3)
   }
 
   const downloadPNG = () => {
@@ -186,6 +173,10 @@ export default function ELabelWineForm() {
           </div>
         ))}
       </div>
+
+      {error && (
+        <div className="mb-6 bg-red-50 border border-red-200 text-red-700 rounded-[var(--radius)] px-4 py-3 text-sm">{error}</div>
+      )}
 
       {/* Step 1: General info */}
       {step === 0 && (
