@@ -82,7 +82,7 @@ export async function POST(request: Request) {
     }
 
     // Create Stripe Checkout session (using REST API like create-checkout-session)
-    const origin = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.fichevin.fr'
+    const origin = request.headers.get('origin') || 'https://www.fichevin.fr'
 
     const params = new URLSearchParams()
     params.append('payment_method_types[]', 'card')
