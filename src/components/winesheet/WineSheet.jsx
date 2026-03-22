@@ -278,20 +278,21 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
               ]
                 .filter((n) => n.text)
                 .map((note) => (
-                  <div key={note.label} style={{ display: 'flex', gap: p(14), alignItems: 'flex-start' }}>
+                  <div key={note.label} style={{ display: 'flex', gap: p(14) }}>
                     <div style={{
-                      width: p(38),
-                      height: p(38),
-                      borderRadius: p(19),
+                      width: `${p(38)}px`,
+                      minWidth: `${p(38)}px`,
+                      height: `${p(38)}px`,
+                      borderRadius: '50%',
                       background: `${wc}12`,
                       border: `1px solid ${wc}20`,
-                      fontSize: p(14),
+                      fontSize: `${p(14)}px`,
                       fontWeight: 800,
-                      lineHeight: `${p(36)}px`,
+                      lineHeight: `${p(38)}px`,
                       textAlign: 'center',
                       color: wc,
-                      flexShrink: 0,
-                      marginTop: 2,
+                      marginTop: `${p(2)}px`,
+                      overflow: 'hidden',
                     }}>
                       {note.letter}
                     </div>
