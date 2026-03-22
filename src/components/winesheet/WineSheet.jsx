@@ -292,7 +292,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
                       color: wc,
                       background: `${wc}12`,
                       border: `1px solid ${wc}20`,
-                      marginTop: '4px',
+                      marginTop: '8px',
                     }}>
                       {note.letter}
                     </div>
