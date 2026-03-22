@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { getTranslation, EU_LANGUAGES, type LanguageCode } from '@/lib/elabel-translations'
+import { getTranslation, translateIngredient, translateAllergen, EU_LANGUAGES, type LanguageCode } from '@/lib/elabel-translations'
 import type { NutritionData, IngredientData } from '@/lib/types'
 
 interface Props {
@@ -31,6 +31,14 @@ export default function ELabelContent({ wine, elabel }: Props) {
   const mainIngredients = elabel.ingredients.filter(i => i.category !== 'agent_collage')
   const finingIngredients = elabel.ingredients.filter(i => i.category === 'agent_collage')
 
+  // Translate ingredient name
+  const getIngredientName = (ingredient: IngredientData) => {
+    return translateIngredient(ingredient.id, lang) || ingredient.name
+  }
+
+  // Translate allergen names
+  const translatedAllergens = elabel.allergens.map(a => translateAllergen(a, lang))
+
   return (
     <div>
       {availableLanguages.length > 1 && (
@@ -56,12 +64,18 @@ export default function ELabelContent({ wine, elabel }: Props) {
       <section className="mb-6">
         <h2 className="text-base font-bold text-gray-900 mb-2 border-b pb-1">{t.ingredients}</h2>
         <p className="text-sm text-gray-700 leading-relaxed">
-          {mainIngredients.map((ingredient, idx) => (
-            <span key={ingredient.id}>
-              {idx > 0 && ', '}
-              {ingredient.isAllergen ? <strong className="underline">{ingredient.name}{ingredient.code && ` (${ingredient.code})`}</strong> : <>{ingredient.name}{ingredient.code && ` (${ingredient.code})`}</>}
-            </span>
-          ))}.
+          {mainIngredients.map((ingredient, idx) => {
+            const name = getIngredientName(ingredient)
+            return (
+              <span key={ingredient.id}>
+                {idx > 0 && ', '}
+                {ingredient.isAllergen
+                  ? <strong className="underline">{name}{ingredient.code && ` (${ingredient.code})`}</strong>
+                  : <>{name}{ingredient.code && ` (${ingredient.code})`}</>
+                }
+              </span>
+            )
+          })}.
         </p>
       </section>
 
@@ -70,16 +84,22 @@ export default function ELabelContent({ wine, elabel }: Props) {
           <h3 className="text-sm font-semibold text-gray-800 mb-1">{t.finingAgents}</h3>
           <p className="text-sm text-gray-600">
             {t.containsTraces}{' '}
-            {finingIngredients.map((ingredient, idx) => (
-              <span key={ingredient.id}>{idx > 0 && ', '}{ingredient.isAllergen ? <strong className="underline">{ingredient.name}</strong> : ingredient.name}</span>
-            ))}.
+            {finingIngredients.map((ingredient, idx) => {
+              const name = getIngredientName(ingredient)
+              return (
+                <span key={ingredient.id}>
+                  {idx > 0 && ', '}
+                  {ingredient.isAllergen ? <strong className="underline">{name}</strong> : name}
+                </span>
+              )
+            })}.
           </p>
         </section>
       )}
 
-      {elabel.allergens.length > 0 && (
+      {translatedAllergens.length > 0 && (
         <section className="mb-6 bg-orange-50 border border-orange-200 rounded-lg px-4 py-3">
-          <p className="text-sm font-bold text-orange-900">{t.allergensWarning} <span className="underline">{elabel.allergens.join(', ')}</span></p>
+          <p className="text-sm font-bold text-orange-900">{t.allergensWarning} <span className="underline">{translatedAllergens.join(', ')}</span></p>
         </section>
       )}
 
