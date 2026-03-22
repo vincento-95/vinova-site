@@ -278,31 +278,32 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
               ]
                 .filter((n) => n.text)
                 .map((note) => (
-                  <div key={note.label} style={{ display: 'flex', gap: p(14), alignItems: 'flex-start' }}>
-                    <div style={{
-                      display: 'block',
-                      width: '38px',
-                      height: '38px',
-                      minWidth: '38px',
-                      borderRadius: '50%',
-                      textAlign: 'center',
-                      lineHeight: '38px',
-                      fontSize: '14px',
-                      fontWeight: 800,
-                      color: wc,
-                      background: `${wc}12`,
-                      border: `1px solid ${wc}20`,
-                      marginTop: '8px',
-                    }}>
-                      {note.letter}
-                    </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: p(13), fontWeight: 700, color: '#1a1a1a', marginBottom: 3 }}>
+                  <div key={note.label}>
+                    {/* Ligne titre : cercle + label alignés au centre */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: `${p(10)}px`, marginBottom: `${p(4)}px` }}>
+                      <div style={{
+                        display: 'inline-block',
+                        width: '32px',
+                        height: '32px',
+                        minWidth: '32px',
+                        borderRadius: '50%',
+                        textAlign: 'center',
+                        lineHeight: '32px',
+                        fontSize: '13px',
+                        fontWeight: 800,
+                        color: wc,
+                        background: `${wc}12`,
+                        border: `1px solid ${wc}20`,
+                      }}>
+                        {note.letter}
+                      </div>
+                      <div style={{ fontSize: `${p(13)}px`, fontWeight: 700, color: '#1a1a1a' }}>
                         {note.label}
                       </div>
-                      <div style={{ fontSize: p(12.5), lineHeight: 1.85, color: '#444' }}>
-                        {note.text}
-                      </div>
+                    </div>
+                    {/* Paragraphe descriptif, indenté sous le cercle */}
+                    <div style={{ marginLeft: `${32 + p(10)}px`, fontSize: `${p(12.5)}px`, lineHeight: '1.85', color: '#444' }}>
+                      {note.text}
                     </div>
                   </div>
                 ))}
