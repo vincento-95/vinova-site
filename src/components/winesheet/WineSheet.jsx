@@ -270,41 +270,17 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
               {labels.notesDegustation}
             </h3>
 
-            <div style={{ display: 'grid', gap: p(14) }}>
+            <div style={{ display: 'grid', gap: p(12) }}>
               {[
-                { label: labels.oeil, letter: labels.oeilLetter, text: wine.oeil },
-                { label: labels.nez, letter: labels.nezLetter, text: wine.nez },
-                { label: labels.bouche, letter: labels.boucheLetter, text: wine.bouche },
+                { label: labels.oeil, text: wine.oeil },
+                { label: labels.nez, text: wine.nez },
+                { label: labels.bouche, text: wine.bouche },
               ]
                 .filter((n) => n.text)
                 .map((note) => (
-                  <div key={note.label}>
-                    {/* Ligne titre : cercle + label alignés au centre */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: `${p(10)}px`, marginBottom: `${p(4)}px` }}>
-                      <div style={{
-                        display: 'inline-block',
-                        width: '32px',
-                        height: '32px',
-                        minWidth: '32px',
-                        borderRadius: '50%',
-                        textAlign: 'center',
-                        lineHeight: '32px',
-                        fontSize: '13px',
-                        fontWeight: 800,
-                        color: wc,
-                        background: `${wc}12`,
-                        border: `1px solid ${wc}20`,
-                      }}>
-                        {note.letter}
-                      </div>
-                      <div style={{ fontSize: `${p(13)}px`, fontWeight: 700, color: '#1a1a1a' }}>
-                        {note.label}
-                      </div>
-                    </div>
-                    {/* Paragraphe descriptif, indenté sous le cercle */}
-                    <div style={{ marginLeft: `${32 + p(10)}px`, fontSize: `${p(12.5)}px`, lineHeight: '1.85', color: '#444' }}>
-                      {note.text}
-                    </div>
+                  <div key={note.label} style={{ fontSize: p(12.5), lineHeight: 1.85, color: '#444' }}>
+                    <strong style={{ color: wc, fontSize: p(12.5) }}>{note.label} : </strong>
+                    {note.text}
                   </div>
                 ))}
             </div>

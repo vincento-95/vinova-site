@@ -32,15 +32,11 @@ async function getBrowser() {
 function buildHTML(wine: any, labels: any, agencyName: string, agencyLogo: string) {
   const wc = wine.color || '#722F37'
 
-  const noteHTML = (letter: string, label: string, text: string) => {
+  const noteHTML = (_letter: string, label: string, text: string) => {
     if (!text) return ''
     return `
-      <div style="margin-bottom: 14px;">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
-          <div style="display: inline-block; width: 32px; height: 32px; min-width: 32px; border-radius: 50%; text-align: center; line-height: 32px; font-size: 13px; font-weight: 800; color: ${wc}; background: ${wc}12; border: 1px solid ${wc}20;">${letter}</div>
-          <div style="font-size: 13px; font-weight: 700; color: #1a1a1a;">${label}</div>
-        </div>
-        <div style="margin-left: 42px; font-size: 12.5px; line-height: 1.85; color: #444;">${text}</div>
+      <div style="font-size: 12.5px; line-height: 1.85; color: #444; margin-bottom: 12px;">
+        <strong style="color: ${wc}; font-size: 12.5px;">${label} : </strong>${text}
       </div>`
   }
 
