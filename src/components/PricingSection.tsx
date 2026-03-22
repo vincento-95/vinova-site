@@ -6,7 +6,7 @@ const guarantees = [
     text: "Satisfait ou refait — Toute fiche qui ne vous convient pas est corrigée gratuitement",
   },
   {
-    text: "Sans engagement — L'abonnement est résiliable à tout moment",
+    text: "Paiement unique — Pas d'abonnement, pas de frais cachés",
   },
   {
     text: "Test gratuit — Jugez sur 5 fiches avant de vous engager",
@@ -44,22 +44,13 @@ export default function PricingSection() {
 
             <ul className="space-y-3 mb-6 flex-1">
               {[
-                "Template FicheVin standard",
-                "Dégustation IA + accords + données complètes",
-                "PDF téléchargeable immédiat",
+                "Template standard FicheVin",
+                "Pas de personnalisation",
+                "Téléchargement immédiat",
               ].map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm">
                   <span className="mt-0.5 text-wine">&#10003;</span>
                   <span className="text-text-secondary">{f}</span>
-                </li>
-              ))}
-              {[
-                "Pas de logo client",
-                "Pas de personnalisation",
-              ].map((f) => (
-                <li key={f} className="flex items-start gap-2 text-sm">
-                  <span className="mt-0.5 text-text-secondary/40">—</span>
-                  <span className="text-text-secondary/60">{f}</span>
                 </li>
               ))}
             </ul>
@@ -72,28 +63,27 @@ export default function PricingSection() {
             </ScrollLink>
           </div>
 
-          {/* Offre 2 — Pack personnalisé */}
-          <div className="bg-surface border border-border shadow-[var(--shadow-card)] rounded-[var(--radius-lg)] p-7 flex flex-col h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-[var(--shadow-card-lg)]">
-            <span className="inline-block self-start text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 bg-accent text-text">
-              One-shot
+          {/* Offre 2 — Pack Pro */}
+          <div className="bg-surface border-2 border-wine shadow-[0_8px_40px_rgba(114,47,55,0.25)] rounded-[var(--radius-lg)] p-7 md:py-9 flex flex-col h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_12px_48px_rgba(114,47,55,0.35)]">
+            <span className="inline-block self-start text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 bg-wine text-white">
+              Le plus populaire
             </span>
 
             <h3 className="text-lg font-semibold mb-2 font-serif text-text">
-              Pack personnalisé
+              Pack Pro
             </h3>
 
             <div className="flex items-baseline gap-1 mb-5">
-              <span className="text-4xl font-bold text-text">490 €</span>
+              <span className="text-4xl font-bold text-text">249 €</span>
               <span className="text-sm text-text-secondary">HT</span>
             </div>
 
             <ul className="space-y-3 mb-6 flex-1">
               {[
-                "Votre logo, vos couleurs, votre template",
                 "50 fiches incluses",
-                "Traduction EN incluse",
-                "IT / ES en option",
-                "Livraison sous 48h",
+                "Votre logo + vos couleurs",
+                "Template personnalisé",
+                "Livraison 48h",
               ].map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm">
                   <span className="mt-0.5 text-wine">&#10003;</span>
@@ -103,40 +93,39 @@ export default function PricingSection() {
             </ul>
 
             <p className="text-xs text-text-secondary mb-4">
-              Fiches supplémentaires : <span className="font-semibold text-text">7 €/fiche</span>
+              Fiches supplémentaires : <span className="font-semibold text-text">5 €/fiche</span>
             </p>
 
             <ScrollLink
               href={`#${SECTION_IDS.contactForm}`}
-              className="block text-center py-3 px-6 rounded-[var(--radius)] font-medium transition-colors border-2 border-wine text-wine hover:bg-wine hover:text-white text-sm"
+              className="block text-center py-3.5 px-6 rounded-[var(--radius)] font-medium transition-colors bg-wine text-white hover:bg-wine-dark text-base shadow-[var(--shadow-card)]"
             >
-              Demander un devis
+              Demander mes 5 fiches gratuites
             </ScrollLink>
           </div>
 
-          {/* Offre 3 — Abonnement illimité */}
-          <div className="bg-surface border-2 border-wine shadow-[0_8px_40px_rgba(114,47,55,0.25)] rounded-[var(--radius-lg)] p-7 md:py-9 flex flex-col h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_12px_48px_rgba(114,47,55,0.35)]">
-            <span className="inline-block self-start text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 bg-wine text-white">
-              Le plus populaire
+          {/* Offre 3 — Pack Premium */}
+          <div className="bg-surface border border-border shadow-[var(--shadow-card)] rounded-[var(--radius-lg)] p-7 flex flex-col h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-[var(--shadow-card-lg)]">
+            <span className="inline-block self-start text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 bg-accent text-text">
+              Premium
             </span>
 
             <h3 className="text-lg font-semibold mb-2 font-serif text-text">
-              Abonnement illimité
+              Pack Premium
             </h3>
 
             <div className="flex items-baseline gap-1 mb-5">
-              <span className="text-4xl font-bold text-text">490 €</span>
-              <span className="text-sm text-text-secondary">/mois HT</span>
+              <span className="text-4xl font-bold text-text">449 €</span>
+              <span className="text-sm text-text-secondary">HT</span>
             </div>
 
             <ul className="space-y-3 mb-6 flex-1">
               {[
-                "Tout le pack personnalisé inclus",
-                "Fiches illimitées",
-                "Traduction EN / IT / ES incluse",
-                "Mises à jour millésime incluses",
+                "100 fiches incluses",
+                "Tout le Pack Pro inclus",
+                "Traduction EN incluse",
+                "Mises à jour millésime pendant 12 mois",
                 "Support prioritaire",
-                "Sans engagement",
               ].map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm">
                   <span className="mt-0.5 text-wine">&#10003;</span>
@@ -145,11 +134,15 @@ export default function PricingSection() {
               ))}
             </ul>
 
+            <p className="text-xs text-text-secondary mb-4">
+              Fiches supplémentaires : <span className="font-semibold text-text">4 €/fiche</span>
+            </p>
+
             <ScrollLink
               href={`#${SECTION_IDS.contactForm}`}
-              className="block text-center py-3.5 px-6 rounded-[var(--radius)] font-medium transition-colors bg-wine text-white hover:bg-wine-dark text-base shadow-[var(--shadow-card)]"
+              className="block text-center py-3 px-6 rounded-[var(--radius)] font-medium transition-colors border-2 border-wine text-wine hover:bg-wine hover:text-white text-sm"
             >
-              Demander mes 5 fiches gratuites
+              Demander un devis
             </ScrollLink>
           </div>
         </div>
@@ -171,7 +164,7 @@ export default function PricingSection() {
           <p className="text-text leading-relaxed">
             <span className="font-semibold">Comparez :</span> un graphiste freelance facture 30-50 € par fiche.
             Pour 100 fiches, c&apos;est 3 000 à 5 000 €.
-            Le pack personnalisé FicheVin : <span className="font-bold text-wine">490 € HT</span> pour 50 fiches brandées, livrées sous 48h.
+            Le Pack Pro FicheVin : <span className="font-bold text-wine">249 € HT</span> pour 50 fiches brandées, livrées sous 48h.
           </p>
         </div>
       </div>
