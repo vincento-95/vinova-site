@@ -112,9 +112,11 @@ function buildHTML(wine: any, labels: any, agencyName: string, agencyLogo: strin
     ${(wine.oeil || wine.nez || wine.bouche) ? `
       <div style="margin-bottom: 22px;">
         <h3 class="section-heading">${labels.notesDegustation}</h3>
+        <div style="padding-left: 17px;">
         ${noteHTML(labels.oeilLetter, labels.oeil, wine.oeil)}
         ${noteHTML(labels.nezLetter, labels.nez, wine.nez)}
         ${noteHTML(labels.boucheLetter, labels.bouche, wine.bouche)}
+        </div>
       </div>` : ''}
 
     <!-- Accords + Service -->
