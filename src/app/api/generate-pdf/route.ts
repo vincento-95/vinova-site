@@ -35,8 +35,8 @@ function buildHTML(wine: any, labels: any, agencyName: string, agencyLogo: strin
   const noteHTML = (_letter: string, label: string, text: string) => {
     if (!text) return ''
     return `
-      <div style="margin-bottom: 14px;">
-        <div style="font-size: 13px; font-weight: 700; color: ${wc}; margin-bottom: 2px;">${label}</div>
+      <div style="margin-bottom: 18px;">
+        <div style="font-size: 13px; font-weight: 700; color: ${wc}; margin-bottom: 4px;">${label}</div>
         <div style="font-size: 12.5px; line-height: 1.85; color: #444;">${text}</div>
       </div>`
   }

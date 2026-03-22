@@ -270,7 +270,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
               {labels.notesDegustation}
             </h3>
 
-            <div style={{ display: 'grid', gap: p(14), paddingLeft: p(17) }}>
+            <div style={{ display: 'grid', gap: p(18), paddingLeft: p(17) }}>
               {[
                 { label: labels.oeil, text: wine.oeil },
                 { label: labels.nez, text: wine.nez },
@@ -279,7 +279,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
                 .filter((n) => n.text)
                 .map((note) => (
                   <div key={note.label}>
-                    <div style={{ fontSize: p(13), fontWeight: 700, color: wc, marginBottom: p(2) }}>{note.label}</div>
+                    <div style={{ fontSize: p(13), fontWeight: 700, color: wc, marginBottom: p(4) }}>{note.label}</div>
                     <div style={{ fontSize: p(12.5), lineHeight: 1.85, color: '#444' }}>{note.text}</div>
                   </div>
                 ))}
