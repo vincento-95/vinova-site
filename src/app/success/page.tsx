@@ -63,20 +63,52 @@ function SuccessContent() {
       });
   }, [sessionId]);
 
-  // Download PDF using html2canvas
+  // Download PDF using Puppeteer API (server-side)
   const handleDownload = useCallback(async () => {
-    if (!sheetRef.current || !wine) return;
+    if (!wine) return;
     setDownloading(true);
 
     try {
-      const { exportSingleWinePDF } = await import("@/lib/pdfExport");
-      const el = sheetRef.current.querySelector(".wine-sheet");
-      if (el instanceof HTMLElement) {
-        await exportSingleWinePDF(el, wine);
+      const res = await fetch("/api/generate-pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          wine,
+          agencyName: "",
+          agencyLogo: "",
+          lang: wine.lang || "FR",
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Erreur PDF");
       }
+
+      // Download the PDF blob
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const parts = [wine.domaine, wine.name, wine.vintage]
+        .filter(Boolean)
+        .map((s) => String(s).trim().toLowerCase().replace(/[^a-z0-9]+/gi, "-").replace(/(^-|-$)/g, ""))
+        .filter(Boolean);
+      a.download = parts.length > 0 ? `${parts.join("-")}.pdf` : "fiche-vin.pdf";
+      a.href = url;
+      a.click();
+      URL.revokeObjectURL(url);
     } catch (err) {
       console.error("PDF export error:", err);
-      alert("Erreur lors de l'export PDF. Veuillez réessayer.");
+      // Fallback to html2canvas
+      try {
+        const { exportSingleWinePDF } = await import("@/lib/pdfExport");
+        const el = sheetRef.current?.querySelector(".wine-sheet");
+        if (el instanceof HTMLElement) {
+          await exportSingleWinePDF(el, wine);
+        }
+      } catch {
+        alert("Erreur lors de l'export PDF. Veuillez réessayer.");
+      }
     } finally {
       setDownloading(false);
     }
