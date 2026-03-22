@@ -3,6 +3,7 @@ import { AGENCY_NAME } from "@/lib/constants";
 
 export const metadata = {
   title: `Mentions légales | ${AGENCY_NAME}`,
+  description: "Mentions légales du site FicheVin. Éditeur, hébergement, propriété intellectuelle et conditions d'utilisation.",
 };
 
 export default function MentionsLegales() {

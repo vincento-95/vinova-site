@@ -45,7 +45,7 @@ function parseMdxFile(filename: string): BlogPost {
     author: data.author || 'FicheVin',
     tags: data.tags || [],
     image: data.image || undefined,
-    readingTime: stats.text.replace('read', 'de lecture').replace('min', 'min'),
+    readingTime: data.readingTime || stats.text.replace('read', 'de lecture').replace('min', 'min'),
     content,
   }
 }

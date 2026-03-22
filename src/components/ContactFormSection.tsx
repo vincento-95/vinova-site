@@ -182,6 +182,10 @@ export default function ContactFormSection() {
           >
             {loading ? "Envoi en cours..." : "Recevoir mes 5 fiches gratuites"}
           </button>
+
+          <p className="text-white/50 text-xs text-center mt-3">
+            Nous vous contacterons pour récupérer les photos de vos bouteilles et finaliser vos fiches.
+          </p>
         </form>
 
         <p className="text-center text-white/60 text-sm mt-6">

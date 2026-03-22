@@ -125,7 +125,7 @@ export default function PricingSection() {
           <p className="text-text leading-relaxed">
             <span className="font-semibold">Comparez :</span> un graphiste freelance facture 30-50 € par fiche.
             Pour 100 fiches, c&apos;est 3 000 à 5 000 €.
-            FicheVin vous coûte <span className="font-bold text-wine">490 €/mois</span> pour des fiches illimitées.
+            FicheVin vous coûte <span className="font-bold text-wine">490 €/mois HT</span> pour des fiches illimitées.
           </p>
         </div>
       </div>

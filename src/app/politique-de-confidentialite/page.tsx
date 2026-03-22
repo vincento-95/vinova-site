@@ -3,6 +3,7 @@ import { AGENCY_NAME } from "@/lib/constants";
 
 export const metadata = {
   title: `Politique de confidentialité | ${AGENCY_NAME}`,
+  description: "Politique de confidentialité de FicheVin. Collecte et traitement des données personnelles, droits des utilisateurs, cookies.",
 };
 
 export default function PolitiqueConfidentialite() {
