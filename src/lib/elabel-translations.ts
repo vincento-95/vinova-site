@@ -639,7 +639,7 @@ export const INGREDIENT_TRANSLATIONS: Record<string, Record<string, string>> = {
     e456: 'Potassium polyaspartate',
     caseine: 'Casein',
     albumine: 'Egg albumin',
-    bentonite: 'Benite',
+    bentonite: 'Bentonite',
     gelatine: 'Gelatin',
     pvpp: 'PVPP',
     proteines_pois: 'Pea proteins',
