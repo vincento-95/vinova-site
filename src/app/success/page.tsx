@@ -160,20 +160,13 @@ function SuccessContent() {
   return (
     <div className="min-h-screen bg-[#f0ece4] py-8 px-4">
       {/* Top bar */}
-      <div className="max-w-[850px] mx-auto mb-6 flex items-center justify-between">
+      <div className="max-w-[850px] mx-auto mb-6">
         <Link
           href="/#generer"
           className="text-wine hover:text-wine-dark font-medium transition-colors text-sm"
         >
           &larr; Générer une autre fiche
         </Link>
-        <button
-          onClick={handleDownload}
-          disabled={downloading}
-          className="bg-wine hover:bg-wine-dark text-white px-6 py-3 rounded-[var(--radius)] font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[var(--shadow-card)]"
-        >
-          {downloading ? "Export en cours..." : "Télécharger le PDF"}
-        </button>
       </div>
 
       {/* Wine Sheet */}
