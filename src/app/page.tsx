@@ -25,8 +25,6 @@ export default function Home() {
         <ProblemSection />
         <BeforeAfterSection />
         <PricingSection />
-        <TestimonialsSection />
-        <AboutSection />
         <FAQSection />
         <ContactFormSection />
         <ContactSection />
