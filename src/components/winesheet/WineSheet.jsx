@@ -259,9 +259,20 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
                   <span key={i}>{item}{i < arr.length - 1 ? <span style={{ margin: `0 ${p(10)}px`, opacity: 0.35 }}>·</span> : ''}</span>
                 ))}
               </div>
-              {wine.colisage && (
-                <div style={{ marginTop: p(4) }}><strong style={{ color: wc }}>Colis.</strong> {wine.colisage}</div>
-              )}
+              {wine.colisage && (() => {
+                // Sépare les infos palette sur une 2e ligne
+                const text = wine.colisage;
+                const paletteMatch = text.match(/^(.*?\.)\s*(\d+\s*cartons?\s*par\s*palette.*)$/i);
+                if (paletteMatch) {
+                  return (
+                    <div style={{ marginTop: p(4) }}>
+                      <div><strong style={{ color: wc }}>Colis.</strong> {paletteMatch[1]}</div>
+                      <div style={{ marginTop: p(2) }}>{paletteMatch[2]}</div>
+                    </div>
+                  );
+                }
+                return <div style={{ marginTop: p(4) }}><strong style={{ color: wc }}>Colis.</strong> {text}</div>;
+              })()}
             </div>
           </div>
         </div>
