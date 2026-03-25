@@ -23,6 +23,12 @@ export default function Footer() {
           {/* Links */}
           <div className="flex flex-col sm:flex-row gap-6 text-sm items-center">
             <a
+              href="mailto:contact@fichevin.fr"
+              className="hover:text-white transition-colors"
+            >
+              contact@fichevin.fr
+            </a>
+            <a
               href={AGENCY_LINKEDIN}
               target="_blank"
               rel="noopener noreferrer"
