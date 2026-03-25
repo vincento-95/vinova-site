@@ -242,10 +242,10 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
             )}
 
             <div style={{
-              padding: `${p(7)}px ${p(14)}px`,
+              padding: `${p(10)}px ${p(16)}px`,
               border: '1px solid #ddd5c8',
               fontSize: p(11),
-              lineHeight: 1.7,
+              lineHeight: 1.9,
               color: '#444',
             }}>
               <div>
@@ -255,11 +255,11 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
                   wine.temperature && <><strong style={{ color: wc }}>{labels.temperature}</strong> {wine.temperature}</>,
                   wine.garde && <><strong style={{ color: wc }}>{labels.garde}</strong> {wine.garde.charAt(0).toUpperCase() + wine.garde.slice(1)}</>,
                 ].filter(Boolean).map((item, i, arr) => (
-                  <span key={i}>{item}{i < arr.length - 1 ? <span style={{ margin: `0 ${p(8)}px`, opacity: 0.4 }}>·</span> : ''}</span>
+                  <span key={i}>{item}{i < arr.length - 1 ? <span style={{ margin: `0 ${p(10)}px`, opacity: 0.35 }}>·</span> : ''}</span>
                 ))}
               </div>
               {wine.colisage && (
-                <div><strong style={{ color: wc }}>Colis.</strong> {wine.colisage}</div>
+                <div style={{ marginTop: p(4) }}><strong style={{ color: wc }}>Colis.</strong> {wine.colisage}</div>
               )}
             </div>
           </div>
