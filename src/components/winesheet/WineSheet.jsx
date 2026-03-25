@@ -362,7 +362,29 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
           lineHeight: 1.5,
           zIndex: 10,
         }}>
-          {coordonnees}
+          {(() => {
+            // Split par tiret cadratin ou double tiret
+            const parts = coordonnees.split(/\s*[—–]\s*/).map(s => s.trim()).filter(Boolean);
+            // Ligne 1 : nom entreprise, nom personne, site web (pas de +33, pas de @, pas de numéro de rue)
+            const line1 = [];
+            const line2 = [];
+            for (const part of parts) {
+              const isPhone = /^\+?\d[\d\s.()-]{6,}/.test(part);
+              const isEmail = /@/.test(part) && !part.startsWith('http') && !part.startsWith('www');
+              const isAddress = /\d{4,5}\s/.test(part) || /rue |imp\.|avenue |boulevard |allée |chemin |place /i.test(part);
+              if (isPhone || isEmail || isAddress) {
+                line2.push(part);
+              } else {
+                line1.push(part);
+              }
+            }
+            return (
+              <>
+                {line1.length > 0 && <div>{line1.join(' — ')}</div>}
+                {line2.length > 0 && <div style={{ marginTop: p(2), opacity: 0.85 }}>{line2.join(' — ')}</div>}
+              </>
+            );
+          })()}
         </div>
       )}
     </div>
