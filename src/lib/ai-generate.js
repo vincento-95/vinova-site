@@ -259,6 +259,29 @@ STYLE D'ÉCRITURE — RÈGLES STRICTES :
 - BOUCHE : TOUJOURS décrire une progression : attaque → milieu de bouche → finale. La finale doit être qualifiée qualitativement (arôme persistant identifié, sensation laissée). JAMAIS de durée en secondes ou caudalies.
 - TON : professionnel mais engageant. Chaque phrase doit donner envie. Écrire comme un sommelier passionné qui recommande CE vin à un client exigeant.
 
+TEMPÉRATURE DE SERVICE — RÈGLES (si l'utilisateur n'a PAS fourni de température) :
+- Effervescent doux / Moscato / Asti : 8-12°C
+- Blanc sec léger : 8-10°C
+- Blanc sec corsé / boisé : 10-12°C
+- Rosé : 8-10°C
+- Rouge léger (Pinot Noir, Gamay) : 14-16°C
+- Rouge moyen (Merlot, Sangiovese) : 16-17°C
+- Rouge puissant (Cabernet, Barolo, Amarone) : 17-18°C
+- Champagne / Crémant : 6-8°C
+- Vin doux / liquoreux : 8-10°C
+RÈGLE ABSOLUE : si l'utilisateur a fourni une température dans "informations supplémentaires", utilise SA valeur, pas la règle ci-dessus.
+
+GARDE — RÈGLES (si aucune drinking window de critique n'est trouvée ET si l'utilisateur n'a PAS fourni de garde) :
+- Effervescent doux à faible degré (Moscato d'Asti, Lambrusco, < 8% vol) : "À boire dans l'année" ou "À boire maintenant – ${new Date().getFullYear() + 1}"
+- Blanc sec simple : "À boire maintenant – ${new Date().getFullYear() + 3}"
+- Blanc sec de garde (Bourgogne, Riesling GC) : "À boire maintenant – ${new Date().getFullYear() + 10}"
+- Rosé : "À boire maintenant – ${new Date().getFullYear() + 2}"
+- Rouge léger / jeune : "À boire maintenant – ${new Date().getFullYear() + 4}"
+- Rouge de garde (Barolo, Amarone, Bordeaux GCC) : "À boire maintenant – ${new Date().getFullYear() + 20}"
+- Prosecco / Crémant : "À boire maintenant – ${new Date().getFullYear() + 2}"
+- Champagne millésimé : "À boire maintenant – ${new Date().getFullYear() + 12}"
+RÈGLE ABSOLUE : si l'utilisateur a fourni une garde dans "informations supplémentaires", utilise SA valeur. L'utilisateur a TOUJOURS raison.
+
 CARAFAGE — RÈGLES :
 - Vin rouge de moins de 5 ans d'âge : minimum 30 minutes de carafage recommandé, sauf Pinot Noir léger/jeune.
 - Vin rouge structuré/tannique de moins de 5 ans : recommander 1h minimum.
