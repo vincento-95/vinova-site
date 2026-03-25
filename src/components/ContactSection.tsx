@@ -185,7 +185,7 @@ export default function ContactSection() {
         {/* Vinification / Élevage */}
         <div>
           <label htmlFor="vinification" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
-            Vinification et élevage (optionnel)
+            Vinification et élevage
           </label>
           <textarea
             id="vinification"
