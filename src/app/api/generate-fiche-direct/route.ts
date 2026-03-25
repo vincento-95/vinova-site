@@ -48,11 +48,53 @@ export async function POST(request: NextRequest) {
       anthropicApiKey,
       perplexityApiKey || undefined,
       { userFields, langCode }
-    );
+    ) as any;
 
-    // Add vinification and colisage as direct fields on the wine object
-    if (vinification) (wineData as any).vinificationUser = vinification;
-    if (colisage) (wineData as any).colisage = colisage;
+    // ══════════════════════════════════════════════════════════════
+    // FORCE USER FIELDS — L'utilisateur a TOUJOURS raison.
+    // L'IA peut inventer des noms/valeurs différentes, on écrase.
+    // ══════════════════════════════════════════════════════════════
+
+    // Bug 1: Le champ "Domaine" doit TOUJOURS être celui de l'utilisateur
+    if (domaine) wineData.domaine = domaine;
+
+    // Le nom du vin tel que saisi
+    if (nomVin) wineData.name = nomVin;
+
+    // Millésime tel que saisi
+    if (millesime) wineData.vintage = millesime;
+
+    // Cépages tels que saisis
+    if (cepages) wineData.grape = cepages;
+
+    // Degré d'alcool tel que saisi
+    if (alcool) wineData.alcohol = alcool;
+
+    // Appellation/région telle que saisie
+    if (appellation) wineData.region = appellation;
+
+    // Bug 3: Extraire température/garde/carafage des infos supplémentaires
+    // et écraser les valeurs IA si l'utilisateur les a fournies
+    if (extraInfo) {
+      // Température : cherche "XX-XX°C" ou "XX°C" dans extraInfo
+      const tempMatch = extraInfo.match(/(\d{1,2}\s*[-–]\s*\d{1,2}\s*°\s*C)/i);
+      if (tempMatch) wineData.temperature = tempMatch[1].replace(/\s+/g, '');
+
+      // Garde : cherche des patterns comme "à boire dans l'année", "2025-2027", etc.
+      const gardePatterns = [
+        /garde\s*[:：]\s*([^\n.]+)/i,
+        /à boire\s+([^\n.]+)/i,
+        /drinking window\s*[:：]\s*([^\n.]+)/i,
+      ];
+      for (const pattern of gardePatterns) {
+        const m = extraInfo.match(pattern);
+        if (m) { wineData.garde = m[1].trim(); break; }
+      }
+    }
+
+    // Add vinification and colisage as direct fields
+    if (vinification) wineData.vinificationUser = vinification;
+    if (colisage) wineData.colisage = colisage;
 
     return NextResponse.json({ wine: wineData });
   } catch (err) {

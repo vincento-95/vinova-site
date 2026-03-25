@@ -73,15 +73,16 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
       const availableH = bodyRef.current.clientHeight;
       const contentH = contentRef.current.scrollHeight;
       if (contentH > availableH + 5 && availableH > 0) {
-        setBodyScale(Math.max(0.85, availableH / contentH));
+        setBodyScale(Math.max(0.72, availableH / contentH));
       } else {
         setBodyScale(1);
       }
     };
     recalc();
     const t = setTimeout(recalc, 150);
-    return () => clearTimeout(t);
-  }, [wine, compact, lang, blendedImage]);
+    const t2 = setTimeout(recalc, 500);
+    return () => { clearTimeout(t); clearTimeout(t2); };
+  }, [wine, compact, lang, blendedImage, coordonnees]);
 
   const sectionHeading = {
     fontSize: p(13),

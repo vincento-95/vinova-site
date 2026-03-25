@@ -438,7 +438,13 @@ RAPPEL : Tous les textes descriptifs doivent être en ${lang.promptLang}. Le cha
     formatQuery += `
 ${userFieldsBlock}
 
-RAPPEL : Les données client (cépages, appellation, millésime, degré) sont PRIORITAIRES sur toute autre source. Recopie-les TELLES QUELLES dans le JSON.`;
+RAPPEL CRITIQUE :
+- Les données client (cépages, appellation, millésime, degré, température) sont PRIORITAIRES sur toute autre source. Recopie-les TELLES QUELLES dans le JSON.
+- Le champ "domaine" du JSON doit être EXACTEMENT le nom fourni par le client, pas celui trouvé par la recherche.
+- Si les informations supplémentaires contiennent une description du domaine, UTILISE-LA EN PRIORITÉ pour rédiger "domaineDesc". Tu peux compléter mais JAMAIS ignorer ce que le client a écrit.
+- Si les informations supplémentaires mentionnent une température (ex: "10-12°C"), utilise CETTE température, pas celle que tu estimerais.
+- Si les informations supplémentaires mentionnent une garde ou fenêtre de dégustation, utilise-la en priorité.
+- GARDE pour les vins effervescents légers (Moscato d'Asti, Prosecco, Asti Spumante, < 8% vol) : "À boire dans l'année" ou "À boire maintenant – ${new Date().getFullYear() + 1}". Ces vins ne se gardent PAS.`;
   }
 
   if (criticData) {
