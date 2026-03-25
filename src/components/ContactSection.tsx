@@ -222,7 +222,7 @@ export default function ContactSection() {
             value={coordonnees}
             onChange={(e) => setCoordonnees(e.target.value)}
             rows={2}
-            placeholder="Ex : YR Vins Distribution — Yves Ramon — +33 6 14 58 74 67 — y.ramon@yr-vins-distribution.fr — 7 imp. Jean Baptiste Clément, 31120 Portet-sur-Garonne"
+            placeholder="Ex : Nom de votre entreprise — Contact — Téléphone — Email — Adresse"
             className={inputClass + " resize-none"}
           />
         </div>
