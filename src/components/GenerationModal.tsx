@@ -25,6 +25,8 @@ export default function GenerationModal() {
   const [wine, setWine] = useState<WineData | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [downloading, setDownloading] = useState(false);
+  const [coordonnees, setCoordonnees] = useState("");
+  const [agencyLogo, setAgencyLogo] = useState("");
   const sheetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,6 +48,16 @@ export default function GenerationModal() {
           data.wine.image = bottleImage;
           localStorage.removeItem("vinova_bottle_image");
         }
+
+        // Récupérer les champs stockés avant Stripe
+        const logo = localStorage.getItem("fichevin_agency_logo");
+        if (logo) { setAgencyLogo(logo); localStorage.removeItem("fichevin_agency_logo"); }
+        const coords = localStorage.getItem("fichevin_coordonnees");
+        if (coords) { setCoordonnees(coords); localStorage.removeItem("fichevin_coordonnees"); }
+        const vinif = localStorage.getItem("fichevin_vinification");
+        if (vinif) { data.wine.vinificationUser = vinif; localStorage.removeItem("fichevin_vinification"); }
+        const colis = localStorage.getItem("fichevin_colisage");
+        if (colis) { data.wine.colisage = colis; localStorage.removeItem("fichevin_colisage"); }
 
         setWine(data.wine);
         setStatus("ready");
@@ -122,7 +134,7 @@ export default function GenerationModal() {
         {status === "ready" && wine && (
           <>
             {/* Top bar */}
-            <div className="flex items-center justify-between mb-3 px-1">
+            <div className="flex items-center justify-end mb-3 px-1">
               <button
                 onClick={handleClose}
                 className="text-white/80 hover:text-white font-medium transition-colors text-sm flex items-center gap-1"
@@ -132,18 +144,11 @@ export default function GenerationModal() {
                 </svg>
                 Fermer
               </button>
-              <button
-                onClick={handleDownload}
-                disabled={downloading}
-                className="bg-wine hover:bg-wine-dark text-white px-6 py-2.5 rounded-[var(--radius)] font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-sm"
-              >
-                {downloading ? "Export en cours..." : "Télécharger le PDF"}
-              </button>
             </div>
 
             {/* Wine Sheet (scrollable) */}
             <div ref={sheetRef} className="overflow-y-auto rounded-xl shadow-2xl bg-white">
-              <WineSheet wine={wine} lang={wine?.lang || "FR"} />
+              <WineSheet wine={wine} lang={wine?.lang || "FR"} agencyLogo={agencyLogo} coordonnees={coordonnees} />
             </div>
 
             {/* Bottom download button */}
