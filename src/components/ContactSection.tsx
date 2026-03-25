@@ -79,7 +79,11 @@ export default function ContactSection() {
         localStorage.removeItem("fichevin_coordonnees");
       }
 
-      const res = await fetch("/api/generate-fiche-direct", {
+      // Store extra fields in localStorage for after payment
+      if (vinification) localStorage.setItem("fichevin_vinification", vinification);
+      if (colisage) localStorage.setItem("fichevin_colisage", colisage);
+
+      const res = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -90,21 +94,17 @@ export default function ContactSection() {
           millesime,
           alcool,
           langue,
-          extraInfo,
-          vinification,
-          colisage,
+          extraInfo: [extraInfo, vinification ? `Vinification: ${vinification}` : '', colisage ? `Colisage: ${colisage}` : ''].filter(Boolean).join('\n'),
         }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Erreur lors de la génération.");
+        throw new Error(data.error || "Erreur lors de la création du paiement.");
       }
 
-      // Store wine data and redirect to success page
-      localStorage.setItem("fichevin_wine_data", JSON.stringify(data.wine));
-      window.location.href = "/success?direct=true";
+      window.location.href = data.url;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Une erreur est survenue.");
       setLoading(false);
@@ -117,10 +117,10 @@ export default function ContactSection() {
   return (
     <SectionWrapper id={SECTION_IDS.contact} bgColor="bg">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif">
-        Générez votre fiche technique <span className="text-wine">gratuitement</span>
+        Générez votre fiche technique pour <span className="text-wine">9 €</span>
       </h2>
       <p className="text-center text-text-secondary mb-12 max-w-xl mx-auto">
-        Remplissez les informations, votre fiche PDF est générée instantanément.
+        Remplissez les informations, payez en ligne, téléchargez votre fiche PDF instantanément.
       </p>
 
       <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-5">
@@ -302,7 +302,7 @@ export default function ContactSection() {
           disabled={loading}
           className="w-full bg-wine hover:bg-wine-dark text-white py-4 rounded-[var(--radius)] font-medium text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[var(--shadow-card)]"
         >
-          {loading ? "Génération en cours..." : "Générer ma fiche technique"}
+          {loading ? "Redirection vers le paiement..." : "Générer ma fiche pour 9 €"}
         </button>
       </form>
     </SectionWrapper>

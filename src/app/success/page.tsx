@@ -90,8 +90,19 @@ function SuccessContent() {
           const bottleImage = localStorage.getItem("vinova_bottle_image");
           if (bottleImage) {
             data.wine.bottleImage = bottleImage;
+            data.wine.image = bottleImage;
             localStorage.removeItem("vinova_bottle_image");
           }
+
+          // Récupérer logo, coordonnées, vinification, colisage
+          const logo = localStorage.getItem("fichevin_agency_logo");
+          if (logo) { setAgencyLogo(logo); localStorage.removeItem("fichevin_agency_logo"); }
+          const coords = localStorage.getItem("fichevin_coordonnees");
+          if (coords) { setCoordonnees(coords); localStorage.removeItem("fichevin_coordonnees"); }
+          const vinif = localStorage.getItem("fichevin_vinification");
+          if (vinif) { data.wine.vinificationUser = vinif; localStorage.removeItem("fichevin_vinification"); }
+          const colis = localStorage.getItem("fichevin_colisage");
+          if (colis) { data.wine.colisage = colis; localStorage.removeItem("fichevin_colisage"); }
 
           setWine(data.wine);
           setStatus("ready");
