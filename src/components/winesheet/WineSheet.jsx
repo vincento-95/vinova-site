@@ -198,7 +198,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
               alignItems: 'center',
               justifyContent: 'center',
               position: 'relative',
-              marginTop: p(-40),
+              marginTop: p(-10),
               marginBottom: p(10),
               zIndex: 2,
             }}>
