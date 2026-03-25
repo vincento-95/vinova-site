@@ -261,6 +261,9 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
               {wine.garde && (
                 <div><strong style={{ color: wc }}>{labels.garde}</strong> {wine.garde}</div>
               )}
+              {wine.colisage && (
+                <div><strong style={{ color: wc }}>Colis.</strong> {wine.colisage}</div>
+              )}
             </div>
           </div>
         </div>
@@ -345,28 +348,6 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
 
         </div>
       </div>
-
-      {/* CONDITIONNEMENT (hors zone scalée pour ne jamais être coupé) */}
-      {wine.colisage && (
-        <div style={{
-          padding: `${p(8)}px ${p(48)}px ${p(6)}px`,
-          borderTop: `1px solid #e8e0d0`,
-        }}>
-          <h3 style={{
-            fontSize: p(11),
-            fontWeight: 700,
-            color: '#1a1a1a',
-            margin: '0 0 4px 0',
-            textTransform: 'uppercase',
-            letterSpacing: 2,
-          }}>
-            Conditionnement
-          </h3>
-          <p style={{ fontSize: p(10.5), lineHeight: 1.6, color: '#444', margin: 0 }}>
-            {wine.colisage}
-          </p>
-        </div>
-      )}
 
       {/* BANDEAU COORDONNÉES IMPORTATEUR — fixé en bas, pleine largeur */}
       {coordonnees && (
