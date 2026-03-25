@@ -195,10 +195,11 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
               width: p(175),
               minWidth: p(175),
               display: 'flex',
-              alignItems: 'flex-end',
+              alignItems: 'center',
               justifyContent: 'center',
               position: 'relative',
-              marginTop: p(-50),
+              marginTop: p(-40),
+              marginBottom: p(10),
               zIndex: 2,
             }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -206,7 +207,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
                 src={blendedImage || wine.image}
                 alt={wine.name}
                 style={{
-                  height: p(260),
+                  height: p(240),
                   maxWidth: p(155),
                   objectFit: 'contain',
                   filter: 'drop-shadow(6px 8px 18px rgba(0,0,0,0.30))',
