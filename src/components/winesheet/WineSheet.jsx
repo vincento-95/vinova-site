@@ -242,25 +242,22 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
             )}
 
             <div style={{
-              display: 'flex',
-              gap: p(24),
-              padding: `${p(10)}px ${p(20)}px`,
+              padding: `${p(7)}px ${p(14)}px`,
               border: '1px solid #ddd5c8',
-              fontSize: p(12.5),
-              flexWrap: 'wrap',
+              fontSize: p(11),
+              lineHeight: 1.7,
+              color: '#444',
             }}>
-              {wine.type && (
-                <div><strong style={{ color: wc }}>{labels.type}</strong> {wine.type}</div>
-              )}
-              {wine.alcohol && (
-                <div><strong style={{ color: wc }}>{labels.alcool}</strong> {wine.alcohol}</div>
-              )}
-              {wine.temperature && (
-                <div><strong style={{ color: wc }}>{labels.temperature}</strong> {wine.temperature}</div>
-              )}
-              {wine.garde && (
-                <div><strong style={{ color: wc }}>{labels.garde}</strong> {wine.garde.charAt(0).toUpperCase() + wine.garde.slice(1)}</div>
-              )}
+              <div>
+                {[
+                  wine.type && <><strong style={{ color: wc }}>{labels.type}</strong> {wine.type}</>,
+                  wine.alcohol && <><strong style={{ color: wc }}>{labels.alcool}</strong> {wine.alcohol}</>,
+                  wine.temperature && <><strong style={{ color: wc }}>{labels.temperature}</strong> {wine.temperature}</>,
+                  wine.garde && <><strong style={{ color: wc }}>{labels.garde}</strong> {wine.garde.charAt(0).toUpperCase() + wine.garde.slice(1)}</>,
+                ].filter(Boolean).map((item, i, arr) => (
+                  <span key={i}>{item}{i < arr.length - 1 ? <span style={{ margin: `0 ${p(8)}px`, opacity: 0.4 }}>·</span> : ''}</span>
+                ))}
+              </div>
               {wine.colisage && (
                 <div><strong style={{ color: wc }}>Colis.</strong> {wine.colisage}</div>
               )}
