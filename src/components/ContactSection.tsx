@@ -47,14 +47,15 @@ export default function ContactSection() {
     setError("");
 
     try {
-      // Store bottle image in localStorage before Stripe redirect
+      // Store bottle image in localStorage for the success page
       if (bottlePreview) {
         localStorage.setItem("vinova_bottle_image", bottlePreview);
       } else {
         localStorage.removeItem("vinova_bottle_image");
       }
 
-      const res = await fetch("/api/create-checkout-session", {
+      // Generate fiche directly (no Stripe)
+      const res = await fetch("/api/generate-fiche-direct", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -72,10 +73,12 @@ export default function ContactSection() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Erreur lors de la création du paiement.");
+        throw new Error(data.error || "Erreur lors de la génération.");
       }
 
-      window.location.href = data.url;
+      // Store wine data and redirect to success page
+      localStorage.setItem("fichevin_wine_data", JSON.stringify(data.wine));
+      window.location.href = "/success?direct=true";
     } catch (err) {
       setError(err instanceof Error ? err.message : "Une erreur est survenue.");
       setLoading(false);
@@ -88,10 +91,10 @@ export default function ContactSection() {
   return (
     <SectionWrapper id={SECTION_IDS.contact} bgColor="bg">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif">
-        Testez une fiche à l&apos;unité pour <span className="text-wine">9 €</span>
+        Générez votre fiche technique <span className="text-wine">gratuitement</span>
       </h2>
       <p className="text-center text-text-secondary mb-12 max-w-xl mx-auto">
-        Remplissez les informations, payez en ligne, téléchargez votre fiche PDF instantanément.
+        Remplissez les informations, votre fiche PDF est générée instantanément.
       </p>
 
       <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-5">
@@ -272,7 +275,7 @@ export default function ContactSection() {
           disabled={loading}
           className="w-full bg-wine hover:bg-wine-dark text-white py-4 rounded-[var(--radius)] font-medium text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[var(--shadow-card)]"
         >
-          {loading ? "Redirection vers le paiement..." : "Générer ma fiche pour 9 € seulement"}
+          {loading ? "Génération en cours..." : "Générer ma fiche technique"}
         </button>
 
         <p className="text-center text-text-secondary text-xs">

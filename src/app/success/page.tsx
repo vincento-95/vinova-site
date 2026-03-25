@@ -28,40 +28,66 @@ function SuccessContent() {
   const [downloading, setDownloading] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
 
-  // Generate wine data after payment
+  const isDirect = searchParams.get("direct") === "true";
+
+  // Generate wine data
   useEffect(() => {
-    if (!sessionId) {
-      setStatus("error");
-      setErrorMsg("Aucune session de paiement trouvée.");
-      return;
-    }
+    // Mode direct : données déjà dans localStorage
+    if (isDirect) {
+      const stored = localStorage.getItem("fichevin_wine_data");
+      if (stored) {
+        const wineData = JSON.parse(stored);
+        localStorage.removeItem("fichevin_wine_data");
 
-    setStatus("generating");
-
-    fetch("/api/generate-fiche", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId }),
-    })
-      .then(async (res) => {
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Erreur de génération");
-
-        // Retrieve bottle image from localStorage
         const bottleImage = localStorage.getItem("vinova_bottle_image");
         if (bottleImage) {
-          data.wine.bottleImage = bottleImage;
+          wineData.bottleImage = bottleImage;
           localStorage.removeItem("vinova_bottle_image");
         }
 
-        setWine(data.wine);
+        // Ajouter image au wine data
+        wineData.image = wineData.bottleImage || wineData.image || '';
+
+        setWine(wineData);
         setStatus("ready");
+        return;
+      }
+    }
+
+    // Mode Stripe : vérifier le paiement
+    if (!sessionId && !isDirect) {
+      setStatus("error");
+      setErrorMsg("Aucune session trouvée.");
+      return;
+    }
+
+    if (sessionId) {
+      setStatus("generating");
+
+      fetch("/api/generate-fiche", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId }),
       })
-      .catch((err) => {
-        setErrorMsg(err instanceof Error ? err.message : "Erreur inconnue");
-        setStatus("error");
-      });
-  }, [sessionId]);
+        .then(async (res) => {
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Erreur de génération");
+
+          const bottleImage = localStorage.getItem("vinova_bottle_image");
+          if (bottleImage) {
+            data.wine.bottleImage = bottleImage;
+            localStorage.removeItem("vinova_bottle_image");
+          }
+
+          setWine(data.wine);
+          setStatus("ready");
+        })
+        .catch((err) => {
+          setErrorMsg(err instanceof Error ? err.message : "Erreur inconnue");
+          setStatus("error");
+        });
+    }
+  }, [sessionId, isDirect]);
 
   // Download PDF using Puppeteer API (server-side)
   const handleDownload = useCallback(async () => {
