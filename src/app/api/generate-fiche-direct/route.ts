@@ -92,9 +92,13 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Add vinification and colisage as direct fields
-    if (vinification) wineData.vinificationUser = vinification;
-    if (colisage) wineData.colisage = colisage;
+    // Add vinification and colisage as direct fields (trim + limit length)
+    if (vinification && vinification.trim().length > 0 && vinification.trim().length < 500) {
+      wineData.vinificationUser = vinification.trim();
+    }
+    if (colisage && colisage.trim().length > 0 && colisage.trim().length < 500) {
+      wineData.colisage = colisage.trim();
+    }
 
     return NextResponse.json({ wine: wineData });
   } catch (err) {
