@@ -242,55 +242,28 @@ export default function ContactSection() {
           />
         </div>
 
-        {/* Uploads : Bouteille + Logo */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Bottle image upload */}
-          <div>
-            <label className="block text-xs font-semibold text-text mb-2 uppercase tracking-wide">
-              Photo de la bouteille
+        {/* Bottle image upload */}
+        <div>
+          <label className="block text-xs font-semibold text-text mb-2 uppercase tracking-wide">
+            Photo de la bouteille
+          </label>
+          <div className="flex items-center gap-3">
+            <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius)] border border-dashed border-border hover:border-wine/50 transition text-sm text-text-secondary hover:text-wine">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+              </svg>
+              Choisir une image
+              <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
             </label>
-            <div className="flex items-center gap-3">
-              <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius)] border border-dashed border-border hover:border-wine/50 transition text-sm text-text-secondary hover:text-wine">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                </svg>
-                Choisir une image
-                <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
-              </label>
-              {bottlePreview && (
-                <div className="relative">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={bottlePreview} alt="Aperçu bouteille" className="h-16 w-auto rounded border border-border" />
-                  <button type="button" onClick={removeImage} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs leading-none hover:bg-red-600">x</button>
-                </div>
-              )}
-            </div>
-            <p className="text-xs text-text-secondary mt-1">Le fond sera automatiquement supprimé.</p>
+            {bottlePreview && (
+              <div className="relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={bottlePreview} alt="Aperçu bouteille" className="h-16 w-auto rounded border border-border" />
+                <button type="button" onClick={removeImage} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs leading-none hover:bg-red-600">x</button>
+              </div>
+            )}
           </div>
-
-          {/* Logo upload */}
-          <div>
-            <label className="block text-xs font-semibold text-text mb-2 uppercase tracking-wide">
-              Logo de votre entreprise (optionnel)
-            </label>
-            <div className="flex items-center gap-3">
-              <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius)] border border-dashed border-border hover:border-wine/50 transition text-sm text-text-secondary hover:text-wine">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                </svg>
-                Choisir un logo
-                <input ref={logoInputRef} type="file" accept="image/*" onChange={handleLogoChange} className="hidden" />
-              </label>
-              {logoPreview && (
-                <div className="relative">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={logoPreview} alt="Aperçu logo" className="h-12 w-auto rounded border border-border" />
-                  <button type="button" onClick={removeLogo} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs leading-none hover:bg-red-600">x</button>
-                </div>
-              )}
-            </div>
-            <p className="text-xs text-text-secondary mt-1">Apparaîtra en haut à droite de la fiche.</p>
-          </div>
+          <p className="text-xs text-text-secondary mt-1">Le fond sera automatiquement supprimé.</p>
         </div>
 
         {error && (
