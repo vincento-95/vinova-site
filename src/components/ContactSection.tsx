@@ -22,6 +22,7 @@ export default function ContactSection() {
   const [extraInfo, setExtraInfo] = useState("");
   const [vinification, setVinification] = useState("");
   const [colisage, setColisage] = useState("");
+  const [coordonnees, setCoordonnees] = useState("");
   const [bottlePreview, setBottlePreview] = useState<string | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -71,6 +72,11 @@ export default function ContactSection() {
         localStorage.setItem("fichevin_agency_logo", logoPreview);
       } else {
         localStorage.removeItem("fichevin_agency_logo");
+      }
+      if (coordonnees) {
+        localStorage.setItem("fichevin_coordonnees", coordonnees);
+      } else {
+        localStorage.removeItem("fichevin_coordonnees");
       }
 
       const res = await fetch("/api/generate-fiche-direct", {
@@ -202,6 +208,21 @@ export default function ContactSection() {
             onChange={(e) => setColisage(e.target.value)}
             rows={2}
             placeholder="Ex : 6 bouteilles par carton, 60 cartons par palette EUR, 50 cartons par palette US..."
+            className={inputClass + " resize-none"}
+          />
+        </div>
+
+        {/* Coordonnées importateur */}
+        <div>
+          <label htmlFor="coordonnees" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+            Vos coordonnées (optionnel)
+          </label>
+          <textarea
+            id="coordonnees"
+            value={coordonnees}
+            onChange={(e) => setCoordonnees(e.target.value)}
+            rows={2}
+            placeholder="Ex : YR Vins Distribution — Yves Ramon — +33 6 14 58 74 67 — y.ramon@yr-vins-distribution.fr — 7 imp. Jean Baptiste Clément, 31120 Portet-sur-Garonne"
             className={inputClass + " resize-none"}
           />
         </div>

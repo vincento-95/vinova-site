@@ -6,7 +6,7 @@
 import { useRef, useLayoutEffect, useEffect, useState } from 'react';
 import { t } from '../../lib/translations';
 
-export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName = '', agencyLogo = '', compact = false, lang }) {
+export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName = '', agencyLogo = '', compact = false, lang, coordonnees = '' }) {
   if (!wine) return null;
 
   const scale = compact ? 0.82 : 1;
@@ -356,9 +356,23 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
         </div>
       </div>
 
+      {/* BANDEAU COORDONNÉES IMPORTATEUR */}
+      {coordonnees && (
+        <div style={{
+          background: wc,
+          padding: `${p(10)}px ${p(48)}px`,
+          textAlign: 'center',
+          fontSize: p(10),
+          color: 'rgba(255,255,255,0.9)',
+          lineHeight: 1.5,
+        }}>
+          {coordonnees}
+        </div>
+      )}
+
       {/* FOOTER */}
       <div style={{
-        padding: `${p(14)}px ${p(48)}px`,
+        padding: `${p(10)}px ${p(48)}px`,
         borderTop: 'none',
         display: 'flex',
         justifyContent: 'space-between',

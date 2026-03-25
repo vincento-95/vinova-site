@@ -27,6 +27,7 @@ function SuccessContent() {
   const [errorMsg, setErrorMsg] = useState("");
   const [downloading, setDownloading] = useState(false);
   const [agencyLogo, setAgencyLogo] = useState("");
+  const [coordonnees, setCoordonnees] = useState("");
   const sheetRef = useRef<HTMLDivElement>(null);
 
   const isDirect = searchParams.get("direct") === "true";
@@ -49,11 +50,16 @@ function SuccessContent() {
         // Ajouter image au wine data
         wineData.image = wineData.bottleImage || wineData.image || '';
 
-        // Récupérer le logo
+        // Récupérer le logo et les coordonnées
         const logo = localStorage.getItem("fichevin_agency_logo");
         if (logo) {
           setAgencyLogo(logo);
           localStorage.removeItem("fichevin_agency_logo");
+        }
+        const coords = localStorage.getItem("fichevin_coordonnees");
+        if (coords) {
+          setCoordonnees(coords);
+          localStorage.removeItem("fichevin_coordonnees");
         }
 
         setWine(wineData);
@@ -205,7 +211,7 @@ function SuccessContent() {
 
       {/* Wine Sheet */}
       <div ref={sheetRef} className="max-w-[850px] mx-auto">
-        <WineSheet wine={wine} lang={wine?.lang || "FR"} agencyLogo={agencyLogo} />
+        <WineSheet wine={wine} lang={wine?.lang || "FR"} agencyLogo={agencyLogo} coordonnees={coordonnees} />
       </div>
 
       {/* Bottom download button */}
