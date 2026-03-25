@@ -200,7 +200,7 @@ export default function ContactSection() {
         {/* Colisage */}
         <div>
           <label htmlFor="colisage" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
-            Colisage / Conditionnement (optionnel)
+            Colisage / Conditionnement
           </label>
           <textarea
             id="colisage"
@@ -215,7 +215,7 @@ export default function ContactSection() {
         {/* Coordonnées importateur */}
         <div>
           <label htmlFor="coordonnees" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
-            Vos coordonnées (optionnel)
+            Vos coordonnées
           </label>
           <textarea
             id="coordonnees"
