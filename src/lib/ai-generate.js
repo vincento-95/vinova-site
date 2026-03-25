@@ -18,59 +18,90 @@ const WINE_COLORS = {
   'Vin de liqueur': '#CC7722',
 };
 
-// ── Anthropic API call (direct, server-side) ──
-async function callAnthropic(apiKey, system, messages, maxTokens = 4096) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: maxTokens,
-      temperature: 0,
-      system,
-      messages,
-    }),
-  });
+// ── Helper: sleep ──
+function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error?.message || `Erreur Anthropic (${res.status})`);
+// ── Anthropic API call (direct, server-side) with retry on overload ──
+async function callAnthropic(apiKey, system, messages, maxTokens = 4096) {
+  const maxRetries = 3;
+
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: maxTokens,
+        temperature: 0,
+        system,
+        messages,
+      }),
+    });
+
+    if (res.status === 529 || res.status === 503 || res.status === 429) {
+      console.warn(`[Anthropic] Overloaded/rate-limited (${res.status}), retry ${attempt}/${maxRetries}...`);
+      if (attempt < maxRetries) {
+        await sleep(2000 * attempt); // 2s, 4s, 6s
+        continue;
+      }
+    }
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error?.message || `Erreur Anthropic (${res.status})`);
+    }
+
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    if (!text) throw new Error('Réponse vide de l\'IA');
+    return text;
   }
 
-  const data = await res.json();
-  const text = data.content?.[0]?.text || '';
-  if (!text) throw new Error('Réponse vide de l\'IA');
-  return text;
+  throw new Error('Serveur IA surchargé. Veuillez réessayer dans quelques instants.');
 }
 
-// ── Perplexity API call (direct, server-side) ──
+// ── Perplexity API call (direct, server-side) with retry ──
 async function callPerplexity(apiKey, messages) {
-  const res = await fetch('https://api.perplexity.ai/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: 'sonar-pro',
-      messages,
-      temperature: 0,
-    }),
-  });
+  const maxRetries = 3;
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error?.message || `Erreur Perplexity (${res.status})`);
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    const res = await fetch('https://api.perplexity.ai/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'sonar-pro',
+        messages,
+        temperature: 0,
+      }),
+    });
+
+    if (res.status === 529 || res.status === 503 || res.status === 429) {
+      console.warn(`[Perplexity] Overloaded/rate-limited (${res.status}), retry ${attempt}/${maxRetries}...`);
+      if (attempt < maxRetries) {
+        await sleep(2000 * attempt);
+        continue;
+      }
+    }
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error?.message || `Erreur Perplexity (${res.status})`);
+    }
+
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content || '';
+    if (!text) throw new Error('Réponse vide de Perplexity');
+    return text;
   }
 
-  const data = await res.json();
-  const text = data.choices?.[0]?.message?.content || '';
-  if (!text) throw new Error('Réponse vide de Perplexity');
-  return text;
+  throw new Error('Serveur de recherche surchargé. Veuillez réessayer.');
 }
 
 // ── Step 2 — Research ──────────────────────────────────────────────
