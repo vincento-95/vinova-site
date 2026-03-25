@@ -243,14 +243,20 @@ RÈGLES ABSOLUES :
    - "carafage" : recommandation concise OBLIGATOIRE
    - "verrerie" : type de verre recommandé, MAX 10 mots (ex: "Verre à Bourgogne pour exprimer la finesse aromatique")
    - "momentService" : quand servir, MAX 15 mots (ex: "Idéal en apéritif ou en fin de repas avec le dessert")
-   - "oeil" : 2-3 phrases, vocabulaire œnologique professionnel
-   - "nez" : 2-3 phrases, minimum 2 arômes SPÉCIFIQUES
-   - "bouche" : 2-3 phrases décrivant une PROGRESSION (attaque → milieu → finale)
-   - "accords" : TOUJOURS 4 plats PRÉCIS adaptés au profil réel
-   - "domaineDesc" : 3-4 phrases max, TERMINER par une phrase sur pourquoi CETTE cuvée mérite attention (positionnement, rapport qualité-prix, place dans la gamme)
+   - "oeil" : MAX 2 phrases courtes, vocabulaire œnologique professionnel. CONCIS.
+   - "nez" : MAX 2 phrases courtes, minimum 2 arômes SPÉCIFIQUES. CONCIS.
+   - "bouche" : MAX 2 phrases courtes décrivant une PROGRESSION (attaque → milieu → finale). CONCIS.
+   - "accords" : TOUJOURS 3 plats PRÉCIS adaptés au profil réel (PAS 4, seulement 3)
+   - "domaineDesc" : MAX 3 phrases COURTES. Terminer par pourquoi cette cuvée mérite attention. PAS de longs paragraphes.
+   - "vinification" : MAX 2 phrases courtes si connu. Sinon "".
+   - "elevage" : MAX 1 phrase courte si connu. Sinon "".
 6. Les scores critiques : UNIQUEMENT des scores réellement publiés. Le champ "critics" est un tableau d'objets contenant UNIQUEMENT des scores RÉELLEMENT trouvés dans le rapport de recherche. Si aucun score → tableau vide [].
 7. Pour les champs factuels (sol, superficie, etc.) : si non vérifié → "".
-8. CONCISION : max 3-4 phrases par champ. La fiche doit tenir sur UNE page A4.
+8. CONCISION ABSOLUE — LA FICHE DOIT TENIR SUR 1 PAGE A4 :
+   - Chaque champ : 2 phrases MAX sauf domaineDesc (3 phrases max).
+   - Privilégie l'impact sur la longueur. Chaque mot doit compter.
+   - INTERDIT de dépasser 2 phrases pour oeil, nez, bouche, carafage, momentService.
+   - Si tu hésites entre une phrase longue et deux phrases courtes, choisis UNE phrase percutante.
 
 STYLE D'ÉCRITURE — RÈGLES STRICTES :
 - BANNIR les arômes génériques seuls. Jamais "fruits rouges" seul → "cassis écrasé, mûre sauvage". Jamais "épices" seul → "poivre noir fraîchement moulu, cannelle douce". Toujours PRÉCISER l'arôme.
@@ -329,7 +335,7 @@ Réponds UNIQUEMENT avec un objet JSON valide (pas de markdown, pas de commentai
   "oeil": "robe, reflets, limpidité — 2-3 phrases évocatrices — en ${lang.promptLang}",
   "nez": "arômes SPÉCIFIQUES (min 2 nommés précisément) — 2-3 phrases — en ${lang.promptLang}",
   "bouche": "progression attaque → milieu → finale qualifiée — 2-3 phrases — en ${lang.promptLang}",
-  "accords": ["plat précis 1", "plat précis 2", "plat précis 3", "plat précis 4"],
+  "accords": ["plat précis 1", "plat précis 2", "plat précis 3"],
   "temperature": "XX-XX°C — OBLIGATOIRE",
   "carafage": "recommandation avec durée — OBLIGATOIRE — en ${lang.promptLang}",
   "garde": "Fenêtre de dégustation des critiques — OBLIGATOIRE, format: 'À boire maintenant – XXXX' ou 'XXXX-XXXX'",
