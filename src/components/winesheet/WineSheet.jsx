@@ -109,6 +109,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
         fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
         fontSize: p(14),
         color: '#333',
+        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         lineHeight: 1.5,
@@ -367,44 +368,24 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
         </div>
       )}
 
-      {/* BANDEAU COORDONNÉES IMPORTATEUR */}
+      {/* BANDEAU COORDONNÉES IMPORTATEUR — fixé en bas, pleine largeur */}
       {coordonnees && (
         <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
           background: wc,
-          padding: `${p(10)}px ${p(48)}px`,
+          padding: `${p(10)}px ${p(24)}px`,
           textAlign: 'center',
           fontSize: p(10),
           color: 'rgba(255,255,255,0.9)',
           lineHeight: 1.5,
+          zIndex: 10,
         }}>
           {coordonnees}
         </div>
       )}
-
-      {/* FOOTER */}
-      <div style={{
-        padding: `${p(10)}px ${p(48)}px`,
-        borderTop: 'none',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontSize: p(11),
-        color: '#aaa',
-      }}>
-        <span>{totalCount > 1 ? `${labels.fiche} ${index + 1}/${totalCount}` : ''}</span>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          {agencyName && <span>{agencyName}</span>}
-          {agencyLogo && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={agencyLogo}
-              alt=""
-              style={{ maxHeight: 20, maxWidth: 48, objectFit: 'contain' }}
-              onError={(e) => { e.target.style.display = 'none'; }}
-            />
-          )}
-        </div>
-      </div>
     </div>
   );
 }
