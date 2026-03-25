@@ -259,7 +259,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
                 <div><strong style={{ color: wc }}>{labels.temperature}</strong> {wine.temperature}</div>
               )}
               {wine.garde && (
-                <div><strong style={{ color: wc }}>{labels.garde}</strong> {wine.garde}</div>
+                <div><strong style={{ color: wc }}>{labels.garde}</strong> {wine.garde.charAt(0).toUpperCase() + wine.garde.slice(1)}</div>
               )}
               {wine.colisage && (
                 <div><strong style={{ color: wc }}>Colis.</strong> {wine.colisage}</div>
