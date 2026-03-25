@@ -20,19 +20,20 @@ export default function ContactSection() {
   const [alcool, setAlcool] = useState("");
   const [langue, setLangue] = useState("FR");
   const [extraInfo, setExtraInfo] = useState("");
+  const [vinification, setVinification] = useState("");
+  const [colisage, setColisage] = useState("");
   const [bottlePreview, setBottlePreview] = useState<string | null>(null);
+  const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const logoInputRef = useRef<HTMLInputElement>(null);
 
   function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = reader.result as string;
-      setBottlePreview(dataUrl);
-    };
+    reader.onload = () => setBottlePreview(reader.result as string);
     reader.readAsDataURL(file);
   }
 
@@ -41,20 +42,37 @@ export default function ContactSection() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
+  function handleLogoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => setLogoPreview(reader.result as string);
+    reader.readAsDataURL(file);
+  }
+
+  function removeLogo() {
+    setLogoPreview(null);
+    if (logoInputRef.current) logoInputRef.current.value = "";
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
-      // Store bottle image in localStorage for the success page
+      // Store images in localStorage for the success page
       if (bottlePreview) {
         localStorage.setItem("vinova_bottle_image", bottlePreview);
       } else {
         localStorage.removeItem("vinova_bottle_image");
       }
+      if (logoPreview) {
+        localStorage.setItem("fichevin_agency_logo", logoPreview);
+      } else {
+        localStorage.removeItem("fichevin_agency_logo");
+      }
 
-      // Generate fiche directly (no Stripe)
       const res = await fetch("/api/generate-fiche-direct", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -67,6 +85,8 @@ export default function ContactSection() {
           alcool,
           langue,
           extraInfo,
+          vinification,
+          colisage,
         }),
       });
 
@@ -104,29 +124,13 @@ export default function ContactSection() {
             <label htmlFor="nomVin" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
               Nom du vin *
             </label>
-            <input
-              id="nomVin"
-              type="text"
-              value={nomVin}
-              onChange={(e) => setNomVin(e.target.value)}
-              required
-              placeholder="Ex : Grand Vin 2018"
-              className={inputClass}
-            />
+            <input id="nomVin" type="text" value={nomVin} onChange={(e) => setNomVin(e.target.value)} required placeholder="Ex : Grand Vin 2018" className={inputClass} />
           </div>
           <div>
             <label htmlFor="domaine" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
               Domaine *
             </label>
-            <input
-              id="domaine"
-              type="text"
-              value={domaine}
-              onChange={(e) => setDomaine(e.target.value)}
-              required
-              placeholder="Ex : Château Margaux"
-              className={inputClass}
-            />
+            <input id="domaine" type="text" value={domaine} onChange={(e) => setDomaine(e.target.value)} required placeholder="Ex : Château Margaux" className={inputClass} />
           </div>
         </div>
 
@@ -136,27 +140,13 @@ export default function ContactSection() {
             <label htmlFor="cepages" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
               Cépage(s)
             </label>
-            <input
-              id="cepages"
-              type="text"
-              value={cepages}
-              onChange={(e) => setCepages(e.target.value)}
-              placeholder="Ex : Cabernet Sauvignon, Merlot"
-              className={inputClass}
-            />
+            <input id="cepages" type="text" value={cepages} onChange={(e) => setCepages(e.target.value)} placeholder="Ex : Cabernet Sauvignon, Merlot" className={inputClass} />
           </div>
           <div>
             <label htmlFor="appellation" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
               Appellation / Région / Pays
             </label>
-            <input
-              id="appellation"
-              type="text"
-              value={appellation}
-              onChange={(e) => setAppellation(e.target.value)}
-              placeholder="Ex : Margaux, Bordeaux, France"
-              className={inputClass}
-            />
+            <input id="appellation" type="text" value={appellation} onChange={(e) => setAppellation(e.target.value)} placeholder="Ex : Margaux, Bordeaux, France" className={inputClass} />
           </div>
         </div>
 
@@ -166,45 +156,54 @@ export default function ContactSection() {
             <label htmlFor="millesime" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
               Millésime
             </label>
-            <input
-              id="millesime"
-              type="text"
-              value={millesime}
-              onChange={(e) => setMillesime(e.target.value)}
-              placeholder="Ex : 2018"
-              className={inputClass}
-            />
+            <input id="millesime" type="text" value={millesime} onChange={(e) => setMillesime(e.target.value)} placeholder="Ex : 2018" className={inputClass} />
           </div>
           <div>
             <label htmlFor="alcool" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
               Degré d&apos;alcool
             </label>
-            <input
-              id="alcool"
-              type="text"
-              value={alcool}
-              onChange={(e) => setAlcool(e.target.value)}
-              placeholder="Ex : 13,5%"
-              className={inputClass}
-            />
+            <input id="alcool" type="text" value={alcool} onChange={(e) => setAlcool(e.target.value)} placeholder="Ex : 13,5%" className={inputClass} />
           </div>
           <div>
             <label htmlFor="langue" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
               Langue
             </label>
-            <select
-              id="langue"
-              value={langue}
-              onChange={(e) => setLangue(e.target.value)}
-              className={inputClass}
-            >
+            <select id="langue" value={langue} onChange={(e) => setLangue(e.target.value)} className={inputClass}>
               {LANGUES.map((l) => (
-                <option key={l.code} value={l.code}>
-                  {l.label}
-                </option>
+                <option key={l.code} value={l.code}>{l.label}</option>
               ))}
             </select>
           </div>
+        </div>
+
+        {/* Vinification / Élevage */}
+        <div>
+          <label htmlFor="vinification" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+            Vinification et élevage (optionnel)
+          </label>
+          <textarea
+            id="vinification"
+            value={vinification}
+            onChange={(e) => setVinification(e.target.value)}
+            rows={2}
+            placeholder="Ex : Fermentation en cuve inox à température contrôlée, élevage 12 mois en fût de chêne français..."
+            className={inputClass + " resize-none"}
+          />
+        </div>
+
+        {/* Colisage */}
+        <div>
+          <label htmlFor="colisage" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+            Colisage / Conditionnement (optionnel)
+          </label>
+          <textarea
+            id="colisage"
+            value={colisage}
+            onChange={(e) => setColisage(e.target.value)}
+            rows={2}
+            placeholder="Ex : 6 bouteilles par carton, 60 cartons par palette EUR, 50 cartons par palette US..."
+            className={inputClass + " resize-none"}
+          />
         </div>
 
         {/* Extra info */}
@@ -222,48 +221,55 @@ export default function ContactSection() {
           />
         </div>
 
-        {/* Bottle image upload */}
-        <div>
-          <label className="block text-xs font-semibold text-text mb-2 uppercase tracking-wide">
-            Photo de la bouteille
-          </label>
-          <div className="flex items-center gap-4">
-            <label
-              className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius)] border border-dashed border-border hover:border-wine/50 transition text-sm text-text-secondary hover:text-wine"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-              </svg>
-              Choisir une image
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
-              />
+        {/* Uploads : Bouteille + Logo */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Bottle image upload */}
+          <div>
+            <label className="block text-xs font-semibold text-text mb-2 uppercase tracking-wide">
+              Photo de la bouteille
             </label>
-            {bottlePreview && (
-              <div className="relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={bottlePreview}
-                  alt="Aperçu bouteille"
-                  className="h-16 w-auto rounded border border-border"
-                />
-                <button
-                  type="button"
-                  onClick={removeImage}
-                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs leading-none hover:bg-red-600"
-                >
-                  x
-                </button>
-              </div>
-            )}
+            <div className="flex items-center gap-3">
+              <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius)] border border-dashed border-border hover:border-wine/50 transition text-sm text-text-secondary hover:text-wine">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+                Choisir une image
+                <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+              </label>
+              {bottlePreview && (
+                <div className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={bottlePreview} alt="Aperçu bouteille" className="h-16 w-auto rounded border border-border" />
+                  <button type="button" onClick={removeImage} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs leading-none hover:bg-red-600">x</button>
+                </div>
+              )}
+            </div>
+            <p className="text-xs text-text-secondary mt-1">Le fond sera automatiquement supprimé.</p>
           </div>
-          <p className="text-xs text-text-secondary mt-1">
-            Obligatoire — Le fond sera automatiquement supprimé.
-          </p>
+
+          {/* Logo upload */}
+          <div>
+            <label className="block text-xs font-semibold text-text mb-2 uppercase tracking-wide">
+              Logo de votre entreprise (optionnel)
+            </label>
+            <div className="flex items-center gap-3">
+              <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius)] border border-dashed border-border hover:border-wine/50 transition text-sm text-text-secondary hover:text-wine">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+                Choisir un logo
+                <input ref={logoInputRef} type="file" accept="image/*" onChange={handleLogoChange} className="hidden" />
+              </label>
+              {logoPreview && (
+                <div className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={logoPreview} alt="Aperçu logo" className="h-12 w-auto rounded border border-border" />
+                  <button type="button" onClick={removeLogo} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs leading-none hover:bg-red-600">x</button>
+                </div>
+              )}
+            </div>
+            <p className="text-xs text-text-secondary mt-1">Apparaîtra en haut à droite de la fiche.</p>
+          </div>
         </div>
 
         {error && (
@@ -277,10 +283,6 @@ export default function ContactSection() {
         >
           {loading ? "Génération en cours..." : "Générer ma fiche technique"}
         </button>
-
-        <p className="text-center text-text-secondary text-xs">
-          Paiement sécurisé par Stripe. Téléchargement immédiat après paiement.
-        </p>
       </form>
     </SectionWrapper>
   );

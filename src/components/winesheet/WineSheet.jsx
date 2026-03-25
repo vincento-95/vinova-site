@@ -263,6 +263,18 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
           </div>
         </div>
 
+        {/* VINIFICATION / ÉLEVAGE (si fourni par l'utilisateur) */}
+        {wine.vinificationUser && (
+          <div style={{ marginBottom: p(22) }}>
+            <h3 style={sectionHeading}>
+              {labels.vinificationElevage || 'Vinification & Élevage'}
+            </h3>
+            <p style={{ fontSize: p(12.5), lineHeight: 1.75, color: '#444', paddingLeft: p(17) }}>
+              {wine.vinificationUser}
+            </p>
+          </div>
+        )}
+
         {/* NOTES DE DÉGUSTATION */}
         {(wine.oeil || wine.nez || wine.bouche) && (
           <div style={{ marginBottom: p(22) }}>
@@ -328,6 +340,18 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
             </div>
           )}
         </div>
+
+        {/* CONDITIONNEMENT (si fourni par l'utilisateur) */}
+        {wine.colisage && (
+          <div style={{ marginTop: p(18) }}>
+            <h3 style={sectionHeading}>
+              Conditionnement
+            </h3>
+            <p style={{ fontSize: p(12), lineHeight: 1.75, color: '#444', paddingLeft: p(17) }}>
+              {wine.colisage}
+            </p>
+          </div>
+        )}
 
         </div>
       </div>
