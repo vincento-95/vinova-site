@@ -170,7 +170,6 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
               <span>{wine.grape}</span>
             </>
           )}
-          {wine.vintage && <span>{wine.vintage}</span>}
         </div>
       </div>
 
