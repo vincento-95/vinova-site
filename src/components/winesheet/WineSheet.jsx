@@ -177,7 +177,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
       {/* BODY */}
       <div ref={bodyRef} style={{
         flex: 1,
-        padding: `${p(20)}px ${p(48)}px ${p(20)}px`,
+        padding: `${p(28)}px ${p(48)}px ${p(20)}px`,
         overflow: 'hidden',
       }}>
         <div ref={contentRef} style={{
