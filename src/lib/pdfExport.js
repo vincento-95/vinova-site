@@ -29,17 +29,11 @@ async function elementToA4Page(element) {
   const imgRatio = canvas.width / canvas.height;
   const a4Ratio = A4_W / A4_H;
 
-  let pdfW, pdfH;
-  if (imgRatio > a4Ratio) {
-    pdfW = A4_W;
-    pdfH = A4_W / imgRatio;
-  } else {
-    pdfH = A4_H;
-    pdfW = A4_H * imgRatio;
-  }
+  // Force pleine largeur A4, pas de marge
+  const pdfW = A4_W;
+  const pdfH = A4_W / imgRatio;
 
-  const x = (A4_W - pdfW) / 2;
-  return { imgData, x, y: 0, pdfW, pdfH };
+  return { imgData, x: 0, y: 0, pdfW, pdfH };
 }
 
 export async function exportSingleWinePDF(element, wine) {

@@ -105,6 +105,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
         margin: '0 auto',
         background: '#FFFDF7',
         overflow: 'hidden',
+        borderRadius: 0,
         boxShadow: '0 2px 20px rgba(0,0,0,0.10)',
         fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
         fontSize: p(14),
@@ -120,6 +121,8 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
         style={{
           background: `linear-gradient(135deg, ${wc} 0%, ${wc}CC 100%)`,
           padding: `${p(24)}px ${p(48)}px ${p(20)}px`,
+          margin: 0,
+          width: '100%',
           color: 'white',
           position: 'relative',
         }}
