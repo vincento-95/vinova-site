@@ -70,12 +70,10 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
     if (compact || !bodyRef.current || !contentRef.current) return;
     const recalc = () => {
       if (!bodyRef.current || !contentRef.current) return;
-      // Réserver de la place pour le bandeau coordonnées (~45px) s'il existe
-      const bandeauReserve = coordonnees ? 45 : 0;
-      const availableH = bodyRef.current.clientHeight - bandeauReserve;
+      const availableH = bodyRef.current.clientHeight;
       const contentH = contentRef.current.scrollHeight;
       if (contentH > availableH + 5 && availableH > 0) {
-        setBodyScale(Math.max(0.65, availableH / contentH));
+        setBodyScale(Math.max(0.72, availableH / contentH));
       } else {
         setBodyScale(1);
       }
@@ -107,7 +105,6 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
         margin: '0 auto',
         background: '#FFFDF7',
         overflow: 'hidden',
-        borderRadius: 0,
         boxShadow: '0 2px 20px rgba(0,0,0,0.10)',
         fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
         fontSize: p(14),
@@ -123,8 +120,6 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
         style={{
           background: `linear-gradient(135deg, ${wc} 0%, ${wc}CC 100%)`,
           padding: `${p(24)}px ${p(48)}px ${p(20)}px`,
-          margin: 0,
-          width: '100%',
           color: 'white',
           position: 'relative',
         }}
@@ -181,7 +176,6 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
       {/* BODY */}
       <div ref={bodyRef} style={{
         flex: 1,
-        minHeight: 0,
         padding: `${p(28)}px ${p(48)}px ${p(20)}px`,
         overflow: 'hidden',
       }}>
@@ -363,11 +357,12 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
         </div>
       </div>
 
-      {/* BANDEAU COORDONNÉES IMPORTATEUR — en bas, pleine largeur */}
+      {/* BANDEAU COORDONNÉES IMPORTATEUR — fixé en bas, pleine largeur */}
       {coordonnees && (
         <div style={{
-          marginTop: 'auto',
-          flexShrink: 0,
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
           width: '100%',
           background: wc,
           padding: `${p(14)}px ${p(24)}px`,
@@ -375,6 +370,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
           fontSize: p(11.5),
           color: 'rgba(255,255,255,0.9)',
           lineHeight: 1.5,
+          zIndex: 10,
         }}>
           {(() => {
             // Split par tiret cadratin ou double tiret
