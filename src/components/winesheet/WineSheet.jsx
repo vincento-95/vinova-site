@@ -70,10 +70,12 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
     if (compact || !bodyRef.current || !contentRef.current) return;
     const recalc = () => {
       if (!bodyRef.current || !contentRef.current) return;
-      const availableH = bodyRef.current.clientHeight;
+      // Réserver de la place pour le bandeau coordonnées (~45px) s'il existe
+      const bandeauReserve = coordonnees ? 45 : 0;
+      const availableH = bodyRef.current.clientHeight - bandeauReserve;
       const contentH = contentRef.current.scrollHeight;
       if (contentH > availableH + 5 && availableH > 0) {
-        setBodyScale(Math.max(0.72, availableH / contentH));
+        setBodyScale(Math.max(0.65, availableH / contentH));
       } else {
         setBodyScale(1);
       }
