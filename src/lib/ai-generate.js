@@ -278,13 +278,13 @@ RÈGLES ABSOLUES :
    - "nez" : MAX 2 phrases courtes, minimum 2 arômes SPÉCIFIQUES. CONCIS.
    - "bouche" : MAX 2 phrases courtes décrivant une PROGRESSION (attaque → milieu → finale). CONCIS.
    - "accords" : TOUJOURS 3 plats PRÉCIS adaptés au profil réel (PAS 4, seulement 3)
-   - "domaineDesc" : 4-5 phrases. Histoire, terroir, philosophie. TERMINER par une phrase sur pourquoi CETTE cuvée mérite attention (positionnement, rapport qualité-prix, place dans la gamme). Section importante — donne envie de découvrir le domaine.
+   - "domaineDesc" : MAX 130 tokens (environ 3-4 phrases courtes). Histoire, terroir, philosophie. TERMINER par une phrase sur pourquoi CETTE cuvée mérite attention. STRICT : ne JAMAIS dépasser 130 tokens pour ce champ.
    - "vinification" : MAX 2 phrases courtes si connu. Sinon "".
    - "elevage" : MAX 1 phrase courte si connu. Sinon "".
 6. Les scores critiques : UNIQUEMENT des scores réellement publiés. Le champ "critics" est un tableau d'objets contenant UNIQUEMENT des scores RÉELLEMENT trouvés dans le rapport de recherche. Si aucun score → tableau vide [].
 7. Pour les champs factuels (sol, superficie, etc.) : si non vérifié → "".
 8. CONCISION ABSOLUE — LA FICHE DOIT TENIR SUR 1 PAGE A4 :
-   - Chaque champ : 2 phrases MAX sauf domaineDesc (4-5 phrases).
+   - Chaque champ : 2 phrases MAX sauf domaineDesc (max 130 tokens).
    - Privilégie l'impact sur la longueur. Chaque mot doit compter.
    - INTERDIT de dépasser 2 phrases pour oeil, nez, bouche, carafage, momentService.
    - Si tu hésites entre une phrase longue et deux phrases courtes, choisis UNE phrase percutante.
