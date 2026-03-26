@@ -295,7 +295,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
               {labels.notesDegustation}
             </h3>
 
-            <div style={{ display: 'grid', gap: p(18), paddingLeft: p(17) }}>
+            <div style={{ display: 'grid', gap: p(10), paddingLeft: p(17) }}>
               {[
                 { label: labels.oeil, text: wine.oeil },
                 { label: labels.nez, text: wine.nez },
