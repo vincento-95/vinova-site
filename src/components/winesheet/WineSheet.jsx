@@ -179,6 +179,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
       {/* BODY */}
       <div ref={bodyRef} style={{
         flex: 1,
+        minHeight: 0,
         padding: `${p(28)}px ${p(48)}px ${p(20)}px`,
         overflow: 'hidden',
       }}>
@@ -364,6 +365,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
       {coordonnees && (
         <div style={{
           marginTop: 'auto',
+          flexShrink: 0,
           width: '100%',
           background: wc,
           padding: `${p(14)}px ${p(24)}px`,
