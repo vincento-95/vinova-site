@@ -360,12 +360,10 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
         </div>
       </div>
 
-      {/* BANDEAU COORDONNÉES IMPORTATEUR — fixé en bas, pleine largeur */}
+      {/* BANDEAU COORDONNÉES IMPORTATEUR — en bas, pleine largeur */}
       {coordonnees && (
         <div style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
+          marginTop: 'auto',
           width: '100%',
           background: wc,
           padding: `${p(14)}px ${p(24)}px`,
@@ -373,7 +371,6 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
           fontSize: p(11.5),
           color: 'rgba(255,255,255,0.9)',
           lineHeight: 1.5,
-          zIndex: 10,
         }}>
           {(() => {
             // Split par tiret cadratin ou double tiret
