@@ -274,9 +274,9 @@ RÈGLES ABSOLUES :
    - "carafage" : recommandation concise OBLIGATOIRE
    - "verrerie" : type de verre recommandé, MAX 10 mots (ex: "Verre à Bourgogne pour exprimer la finesse aromatique")
    - "momentService" : quand servir, MAX 15 mots (ex: "Idéal en apéritif ou en fin de repas avec le dessert")
-   - "oeil" : MAX 2 phrases courtes, vocabulaire œnologique professionnel. CONCIS.
-   - "nez" : MAX 2 phrases courtes, minimum 2 arômes SPÉCIFIQUES. CONCIS.
-   - "bouche" : MAX 2 phrases courtes décrivant une PROGRESSION (attaque → milieu → finale). CONCIS.
+   - "oeil" : MAX 60 tokens. Vocabulaire œnologique professionnel. STRICT : ne JAMAIS dépasser 60 tokens.
+   - "nez" : MAX 60 tokens. Minimum 2 arômes SPÉCIFIQUES. STRICT : ne JAMAIS dépasser 60 tokens.
+   - "bouche" : MAX 60 tokens. Progression attaque → milieu → finale. STRICT : ne JAMAIS dépasser 60 tokens.
    - "accords" : TOUJOURS 3 plats PRÉCIS adaptés au profil réel (PAS 4, seulement 3)
    - "domaineDesc" : MAX 130 tokens (environ 3-4 phrases courtes). Histoire, terroir, philosophie. TERMINER par une phrase sur pourquoi CETTE cuvée mérite attention. STRICT : ne JAMAIS dépasser 130 tokens pour ce champ.
    - "vinification" : MAX 2 phrases courtes si connu. Sinon "".
