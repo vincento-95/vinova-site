@@ -279,8 +279,8 @@ RÈGLES ABSOLUES :
    - "bouche" : MAX 60 tokens. Progression attaque → milieu → finale. STRICT : ne JAMAIS dépasser 60 tokens.
    - "accords" : TOUJOURS 3 plats PRÉCIS adaptés au profil réel (PAS 4, seulement 3)
    - "domaineDesc" : MAX 130 tokens (environ 3-4 phrases courtes). Histoire, terroir, philosophie. TERMINER par une phrase sur pourquoi CETTE cuvée mérite attention. STRICT : ne JAMAIS dépasser 130 tokens pour ce champ.
-   - "vinification" : MAX 2 phrases courtes si connu. Sinon "".
-   - "elevage" : MAX 1 phrase courte si connu. Sinon "".
+   - "vinification" : MAX 60 tokens. STRICT : ne JAMAIS dépasser 60 tokens. Sinon "".
+   - "elevage" : MAX 60 tokens. STRICT : ne JAMAIS dépasser 60 tokens. Sinon "".
 6. Les scores critiques : UNIQUEMENT des scores réellement publiés. Le champ "critics" est un tableau d'objets contenant UNIQUEMENT des scores RÉELLEMENT trouvés dans le rapport de recherche. Si aucun score → tableau vide [].
 7. Pour les champs factuels (sol, superficie, etc.) : si non vérifié → "".
 8. CONCISION ABSOLUE — LA FICHE DOIT TENIR SUR 1 PAGE A4 :
