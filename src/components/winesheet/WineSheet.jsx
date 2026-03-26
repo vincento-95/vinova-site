@@ -365,7 +365,7 @@ export default function WineSheet({ wine, index = 0, totalCount = 1, agencyName 
           left: 0,
           width: '100%',
           background: wc,
-          padding: `${p(14)}px ${p(24)}px`,
+          padding: `${p(8)}px ${p(24)}px`,
           textAlign: 'center',
           fontSize: p(11.5),
           color: 'rgba(255,255,255,0.9)',
