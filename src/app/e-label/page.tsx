@@ -16,8 +16,21 @@ export default function ELabelPage() {
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-text">Générateur d&apos;e-label</h1>
             <p className="text-text-secondary text-sm mt-1">
-              Créez votre e-label conforme UE 2021/2117 en quelques minutes. Calcul nutritionnel automatique et QR code téléchargeable. <strong className="text-text">3 € par e-label</strong>, paiement unique.
+              Créez votre e-label conforme UE 2021/2117 en quelques minutes. Calcul nutritionnel automatique et QR code téléchargeable.
             </p>
+            <div className="mt-4 bg-wine-50 border border-wine-100 rounded-[var(--radius)] px-5 py-4 flex items-center justify-between flex-wrap gap-3">
+              <div>
+                <span className="text-2xl font-bold text-wine">3 €</span>
+                <span className="text-text-secondary text-sm ml-2">par e-label</span>
+              </div>
+              <div className="flex gap-4 text-xs text-text-secondary">
+                <span>Paiement unique</span>
+                <span>·</span>
+                <span>QR code inclus</span>
+                <span>·</span>
+                <span>Page hébergée à vie</span>
+              </div>
+            </div>
           </div>
           <div className="bg-surface border border-border rounded-[var(--radius-lg)] p-6 shadow-[var(--shadow-card)]">
             <ELabelWineForm />
