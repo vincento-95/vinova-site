@@ -61,6 +61,12 @@ export default function ContactSection() {
     setLoading(true);
     setError("");
 
+    if (!bottlePreview) {
+      setError("Veuillez ajouter une photo de la bouteille.");
+      setLoading(false);
+      return;
+    }
+
     try {
       // Store images in localStorage for the success page
       if (bottlePreview) {
@@ -185,12 +191,13 @@ export default function ContactSection() {
         {/* Vinification / Élevage */}
         <div>
           <label htmlFor="vinification" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
-            Vinification et élevage
+            Vinification et élevage *
           </label>
           <textarea
             id="vinification"
             value={vinification}
             onChange={(e) => setVinification(e.target.value)}
+            required
             rows={2}
             placeholder="Ex : Fermentation en cuve inox à température contrôlée, élevage 12 mois en fût de chêne français..."
             className={inputClass + " resize-none"}
@@ -200,12 +207,13 @@ export default function ContactSection() {
         {/* Colisage */}
         <div>
           <label htmlFor="colisage" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
-            Colisage / Conditionnement
+            Colisage / Conditionnement *
           </label>
           <textarea
             id="colisage"
             value={colisage}
             onChange={(e) => setColisage(e.target.value)}
+            required
             rows={2}
             placeholder="Ex : 6 bouteilles par carton, 60 cartons par palette EUR, 50 cartons par palette US..."
             className={inputClass + " resize-none"}
@@ -215,12 +223,13 @@ export default function ContactSection() {
         {/* Coordonnées importateur */}
         <div>
           <label htmlFor="coordonnees" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
-            Vos coordonnées
+            Vos coordonnées *
           </label>
           <textarea
             id="coordonnees"
             value={coordonnees}
             onChange={(e) => setCoordonnees(e.target.value)}
+            required
             rows={2}
             placeholder="Ex : Nom de votre entreprise — Contact — Téléphone — Email — Adresse"
             className={inputClass + " resize-none"}
@@ -245,7 +254,7 @@ export default function ContactSection() {
         {/* Bottle image upload */}
         <div>
           <label className="block text-xs font-semibold text-text mb-2 uppercase tracking-wide">
-            Photo de la bouteille
+            Photo de la bouteille *
           </label>
           <div className="flex items-center gap-3">
             <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius)] border border-dashed border-border hover:border-wine/50 transition text-sm text-text-secondary hover:text-wine">
