@@ -121,11 +121,11 @@ export default function ContactSection() {
     "w-full px-4 py-3 rounded-[var(--radius)] border border-border focus:ring-2 focus:ring-wine/30 focus:border-wine outline-none transition bg-white text-sm";
 
   return (
-    <SectionWrapper id={SECTION_IDS.contact} bgColor="bg">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif">
-        Générez votre fiche technique pour <span className="text-wine">9 €</span>
+    <SectionWrapper id={SECTION_IDS.contact} bgColor="wine">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4 font-serif">
+        Générez votre fiche technique pour <span className="text-white/90">9 €</span>
       </h2>
-      <p className="text-center text-text-secondary mb-12 max-w-2xl mx-auto whitespace-nowrap">
+      <p className="text-center text-white/80 mb-12 max-w-2xl mx-auto whitespace-nowrap">
         Remplissez les informations, payez en ligne, téléchargez votre fiche PDF instantanément.
       </p>
 
@@ -133,13 +133,13 @@ export default function ContactSection() {
         {/* Row 1: Nom du vin + Domaine */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="nomVin" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+            <label htmlFor="nomVin" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
               Nom du vin *
             </label>
             <input id="nomVin" type="text" value={nomVin} onChange={(e) => setNomVin(e.target.value)} required placeholder="Ex : Grand Vin 2018" className={inputClass} />
           </div>
           <div>
-            <label htmlFor="domaine" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+            <label htmlFor="domaine" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
               Domaine *
             </label>
             <input id="domaine" type="text" value={domaine} onChange={(e) => setDomaine(e.target.value)} required placeholder="Ex : Château Margaux" className={inputClass} />
@@ -149,13 +149,13 @@ export default function ContactSection() {
         {/* Row 2: Cépages + Appellation */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="cepages" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+            <label htmlFor="cepages" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
               Cépage(s)
             </label>
             <input id="cepages" type="text" value={cepages} onChange={(e) => setCepages(e.target.value)} placeholder="Ex : Cabernet Sauvignon, Merlot" className={inputClass} />
           </div>
           <div>
-            <label htmlFor="appellation" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+            <label htmlFor="appellation" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
               Appellation / Région / Pays
             </label>
             <input id="appellation" type="text" value={appellation} onChange={(e) => setAppellation(e.target.value)} placeholder="Ex : Margaux, Bordeaux, France" className={inputClass} />
@@ -165,19 +165,19 @@ export default function ContactSection() {
         {/* Row 3: Millésime + Alcool + Langue */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label htmlFor="millesime" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+            <label htmlFor="millesime" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
               Millésime
             </label>
             <input id="millesime" type="text" value={millesime} onChange={(e) => setMillesime(e.target.value)} placeholder="Ex : 2018" className={inputClass} />
           </div>
           <div>
-            <label htmlFor="alcool" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+            <label htmlFor="alcool" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
               Degré d&apos;alcool
             </label>
             <input id="alcool" type="text" value={alcool} onChange={(e) => setAlcool(e.target.value)} placeholder="Ex : 13,5%" className={inputClass} />
           </div>
           <div>
-            <label htmlFor="langue" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+            <label htmlFor="langue" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
               Langue
             </label>
             <select id="langue" value={langue} onChange={(e) => setLangue(e.target.value)} className={inputClass}>
@@ -190,7 +190,7 @@ export default function ContactSection() {
 
         {/* Vinification / Élevage */}
         <div>
-          <label htmlFor="vinification" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+          <label htmlFor="vinification" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
             Vinification et élevage *
           </label>
           <textarea
@@ -206,7 +206,7 @@ export default function ContactSection() {
 
         {/* Colisage */}
         <div>
-          <label htmlFor="colisage" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+          <label htmlFor="colisage" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
             Colisage / Conditionnement *
           </label>
           <textarea
@@ -222,7 +222,7 @@ export default function ContactSection() {
 
         {/* Coordonnées importateur */}
         <div>
-          <label htmlFor="coordonnees" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+          <label htmlFor="coordonnees" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
             Vos coordonnées *
           </label>
           <textarea
@@ -238,7 +238,7 @@ export default function ContactSection() {
 
         {/* Extra info */}
         <div>
-          <label htmlFor="extraInfo" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
+          <label htmlFor="extraInfo" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
             Informations supplémentaires
           </label>
           <textarea
@@ -272,17 +272,17 @@ export default function ContactSection() {
               </div>
             )}
           </div>
-          <p className="text-xs text-text-secondary mt-1">Le fond sera automatiquement supprimé.</p>
+          <p className="text-xs text-white/60 mt-1">Le fond sera automatiquement supprimé.</p>
         </div>
 
         {error && (
-          <p className="text-red-600 text-sm text-center">{error}</p>
+          <p className="text-red-200 text-sm text-center">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-wine hover:bg-wine-dark text-white py-4 rounded-[var(--radius)] font-medium text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[var(--shadow-card)]"
+          className="w-full bg-white hover:bg-accent text-wine py-4 rounded-[var(--radius)] font-medium text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? "Redirection vers le paiement..." : "Générer ma fiche pour 9 €"}
         </button>

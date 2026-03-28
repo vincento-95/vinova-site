@@ -53,15 +53,15 @@ export default function ContactFormSection() {
 
   if (submitted) {
     return (
-      <SectionWrapper id={SECTION_IDS.contactForm} bgColor="wine">
+      <SectionWrapper id={SECTION_IDS.contactForm} bgColor="bg">
         <div className="max-w-xl mx-auto text-center">
-          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="w-16 h-16 bg-wine/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-8 h-8 text-wine" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
           </div>
-          <h2 className="text-3xl font-bold text-white mb-4 font-serif">Merci !</h2>
-          <p className="text-white/90 text-lg">
+          <h2 className="text-3xl font-bold text-text mb-4 font-serif">Merci !</h2>
+          <p className="text-text-secondary text-lg">
             Nous avons bien reçu votre demande. Vous recevrez vos 5 fiches gratuites sous 24h.
           </p>
         </div>
@@ -70,19 +70,19 @@ export default function ContactFormSection() {
   }
 
   return (
-    <SectionWrapper id={SECTION_IDS.contactForm} bgColor="wine">
+    <SectionWrapper id={SECTION_IDS.contactForm} bgColor="bg">
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4 font-serif whitespace-nowrap">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif whitespace-nowrap">
           Testez gratuitement sur 5 de vos vins
         </h2>
-        <p className="text-center text-white/80 mb-10">
+        <p className="text-center text-text-secondary mb-10">
           Envoyez-nous vos informations, on vous répond sous 2h en jours ouvrés et on vous livre<br />5 fiches professionnelles sous 24h en format PDF. Sans engagement.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-name" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
+              <label htmlFor="contact-name" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
                 Nom complet *
               </label>
               <input
@@ -97,7 +97,7 @@ export default function ContactFormSection() {
               />
             </div>
             <div>
-              <label htmlFor="contact-company" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
+              <label htmlFor="contact-company" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
                 Site internet *
               </label>
               <input
@@ -115,7 +115,7 @@ export default function ContactFormSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-email" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
+              <label htmlFor="contact-email" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
                 Email professionnel *
               </label>
               <input
@@ -130,7 +130,7 @@ export default function ContactFormSection() {
               />
             </div>
             <div>
-              <label htmlFor="contact-portfolio" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
+              <label htmlFor="contact-portfolio" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
                 Nombre de références
               </label>
               <select
@@ -150,7 +150,7 @@ export default function ContactFormSection() {
           </div>
 
           <div>
-            <label htmlFor="contact-message" className="block text-xs font-semibold text-white/90 mb-1 uppercase tracking-wide">
+            <label htmlFor="contact-message" className="block text-xs font-semibold text-text mb-1 uppercase tracking-wide">
               Message (optionnel)
             </label>
             <textarea
@@ -165,10 +165,10 @@ export default function ContactFormSection() {
           </div>
 
           {error && (
-            <p className="text-red-200 text-sm text-center">{error}</p>
+            <p className="text-red-600 text-sm text-center">{error}</p>
           )}
 
-          <p className="text-white/70 text-xs text-center flex items-center justify-center gap-1.5">
+          <p className="text-text-secondary text-xs text-center flex items-center justify-center gap-1.5">
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
             </svg>
@@ -178,23 +178,23 @@ export default function ContactFormSection() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-white hover:bg-accent text-wine py-4 rounded-[var(--radius)] font-medium text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-wine hover:bg-wine-dark text-white py-4 rounded-[var(--radius)] font-medium text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[var(--shadow-card)]"
           >
             {loading ? "Envoi en cours..." : "Recevoir mes 5 fiches gratuites"}
           </button>
 
-          <p className="text-white/50 text-xs text-center mt-3">
+          <p className="text-text-secondary text-xs text-center mt-3">
             Nous vous contacterons pour récupérer les photos de vos bouteilles et finaliser vos fiches.
           </p>
         </form>
 
-        <p className="text-center text-white/60 text-sm mt-6">
+        <p className="text-center text-text-secondary text-sm mt-6">
           Vous pouvez aussi nous contacter directement sur{" "}
           <a
             href={AGENCY_LINKEDIN}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/90 underline hover:text-white"
+            className="text-wine underline hover:text-wine-dark"
           >
             LinkedIn
           </a>
