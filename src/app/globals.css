@@ -127,6 +127,7 @@ section[id] {
   line-height: 1.8;
   color: #5A5A5A;
   margin-bottom: 24px;
+  text-align: justify;
 }
 .article-body h2 {
   font-family: 'Source Serif 4', Georgia, serif;
@@ -149,7 +150,7 @@ section[id] {
 .article-body a { color: #722F37; text-decoration: underline; text-underline-offset: 2px; }
 .article-body a:hover { text-decoration: none; }
 .article-body ul, .article-body ol { margin-bottom: 24px; padding-left: 24px; }
-.article-body li { font-size: 17px; line-height: 1.8; color: #5A5A5A; margin-bottom: 8px; }
+.article-body li { font-size: 17px; line-height: 1.8; color: #5A5A5A; margin-bottom: 8px; text-align: justify; }
 .article-body em { font-style: italic; color: #5A5A5A; }
 
 /* TABLE */
