@@ -38,8 +38,8 @@ export default function BlogPage() {
         <div className="mx-auto max-w-5xl px-6 py-12">
           <div className="mb-10">
             <h1 className="text-3xl md:text-4xl font-bold text-text text-center mb-4 font-serif">Blog FicheVin</h1>
-            <p className="text-text-secondary">
-              Guides pratiques pour la documentation de vos vins
+            <p className="text-text-secondary text-base text-center max-w-2xl mx-auto">
+              Des articles pratiques pour les importateurs et négociants. Réglementation, fiches techniques, bonnes pratiques : tout ce que les professionnels du vin doivent savoir.
             </p>
           </div>
 
