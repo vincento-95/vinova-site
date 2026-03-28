@@ -8,7 +8,7 @@ const painPoints = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
       </svg>
     ),
-    title: <>Un temps précieux perdu<br />en mise en page</>,
+    title: "Un temps précieux perdu\nen mise en page",
     description:
       "Vos équipes passent 30 minutes par fiche à copier-coller depuis Excel vers Word. Pour 80 références, c'est 40 heures de travail à faible valeur ajoutée.",
   },
@@ -53,7 +53,7 @@ export default function ProblemSection() {
             <div className="w-14 h-14 bg-primary-light rounded-full flex items-center justify-center mb-5 mx-auto">
               {point.icon}
             </div>
-            <h3 className="text-lg font-semibold text-text mb-3">
+            <h3 className="text-lg font-semibold text-text mb-3 whitespace-pre-line">
               {point.title}
             </h3>
             <p className="text-text-secondary leading-relaxed text-sm">
