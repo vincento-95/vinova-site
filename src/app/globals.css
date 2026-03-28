@@ -50,6 +50,15 @@ section[id] {
   scroll-margin-top: 3.5rem;
 }
 
+/* Slider handle pulse */
+@keyframes pulse-slow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(114, 47, 55, 0.5); }
+  50% { box-shadow: 0 0 0 12px rgba(114, 47, 55, 0); }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 2.5s ease-in-out infinite;
+}
+
 /* Scroll animations */
 .scroll-animate {
   opacity: 0;
