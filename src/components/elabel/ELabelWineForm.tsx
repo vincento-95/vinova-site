@@ -159,7 +159,7 @@ export default function ELabelWineForm() {
   return (
     <div>
       {/* Step indicator */}
-      <div className="flex items-center gap-2 mb-8">
+      <div className="flex items-center justify-between mb-8">
         {STEPS.map((label, i) => (
           <div key={i} className="flex items-center gap-2">
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition ${
@@ -167,10 +167,10 @@ export default function ELabelWineForm() {
             }`}>
               {i < step ? '✓' : i + 1}
             </div>
-            <span className={`text-sm hidden sm:block ${i === step ? 'text-text font-medium' : 'text-text-secondary'}`}>
+            <span className={`text-sm hidden sm:block whitespace-nowrap ${i === step ? 'text-text font-medium' : 'text-text-secondary'}`}>
               {label}
             </span>
-            {i < STEPS.length - 1 && <div className="w-8 h-px bg-border" />}
+            {i < STEPS.length - 1 && <div className="w-12 h-px bg-border flex-shrink-0" />}
           </div>
         ))}
       </div>

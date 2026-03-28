@@ -12,7 +12,7 @@ export default function ELabelPage() {
     <>
       <Header />
       <main className="pt-14 min-h-screen bg-bg">
-        <div className="mx-auto max-w-3xl px-6 py-10">
+        <div className="mx-auto max-w-4xl px-6 py-10">
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-text text-center mb-4 font-serif">Générateur d&apos;E-Label</h1>
             <p className="text-text-secondary text-base mt-1 text-center">
