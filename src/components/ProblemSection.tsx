@@ -48,9 +48,9 @@ export default function ProblemSection() {
         {painPoints.map((point) => (
           <div
             key={point.title}
-            className="bg-accent rounded-[var(--radius-lg)] p-8 shadow-[var(--shadow-card)] border border-border"
+            className="bg-accent rounded-[var(--radius-lg)] p-8 shadow-[var(--shadow-card)] border border-border text-center"
           >
-            <div className="w-14 h-14 bg-primary-light rounded-full flex items-center justify-center mb-5">
+            <div className="w-14 h-14 bg-primary-light rounded-full flex items-center justify-center mb-5 mx-auto">
               {point.icon}
             </div>
             <h3 className="text-lg font-semibold text-text mb-3">
