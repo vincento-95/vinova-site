@@ -125,7 +125,7 @@ export default function ContactSection() {
       <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif">
         Générez votre fiche technique pour <span className="text-wine">9 €</span>
       </h2>
-      <p className="text-center text-text-secondary mb-12 max-w-xl mx-auto">
+      <p className="text-center text-text-secondary mb-12 max-w-2xl mx-auto whitespace-nowrap">
         Remplissez les informations, payez en ligne, téléchargez votre fiche PDF instantanément.
       </p>
 
