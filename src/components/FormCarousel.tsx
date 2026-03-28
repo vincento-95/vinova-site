@@ -15,15 +15,15 @@ export default function FormCarousel() {
   return (
     <div>
       {/* Tab navigation */}
-      <div className="flex justify-center gap-2 px-6 -mb-20 md:-mb-28 pt-10 relative z-10">
+      <div className="flex justify-center gap-4 px-6 py-10">
         {TABS.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-3 rounded-full text-sm font-medium transition-colors ${
+            className={`px-8 py-4 rounded-[var(--radius)] text-base font-semibold transition-all ${
               activeTab === tab.id
-                ? "bg-wine text-white shadow-md"
-                : "bg-white text-text-secondary border border-border hover:border-wine/30 hover:text-wine"
+                ? "bg-wine text-white shadow-lg scale-105"
+                : "bg-white text-text border-2 border-border hover:border-wine/40 hover:text-wine"
             }`}
           >
             {tab.label}
