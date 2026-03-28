@@ -56,7 +56,7 @@ export default function ProblemSection() {
             <h3 className="text-lg font-semibold text-text mb-3 whitespace-pre-line">
               {point.title}
             </h3>
-            <p className="text-text-secondary leading-relaxed text-sm">
+            <p className="text-text-secondary leading-relaxed text-sm text-justify">
               {point.description}
             </p>
           </div>
