@@ -53,7 +53,7 @@ export default function ContactFormSection() {
 
   if (submitted) {
     return (
-      <SectionWrapper id={SECTION_IDS.contactForm} bgColor="wine">
+      <SectionWrapper id={SECTION_IDS.contactForm} bgColor="wine" className="!py-12 md:!py-16">
         <div className="max-w-xl mx-auto text-center">
           <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -70,12 +70,12 @@ export default function ContactFormSection() {
   }
 
   return (
-    <SectionWrapper id={SECTION_IDS.contactForm} bgColor="wine">
+    <SectionWrapper id={SECTION_IDS.contactForm} bgColor="wine" className="!py-12 md:!py-16">
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4 font-serif whitespace-nowrap">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-3 font-serif whitespace-nowrap">
           Testez gratuitement sur 5 de vos vins
         </h2>
-        <p className="text-center text-white/80 mb-10">
+        <p className="text-center text-white/80 mb-8 text-sm">
           Envoyez-nous vos informations, on vous répond sous 2h en jours ouvrés et on vous livre<br />5 fiches professionnelles sous 24h en format PDF. Sans engagement.
         </p>
 

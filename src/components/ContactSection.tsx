@@ -121,11 +121,11 @@ export default function ContactSection() {
     "w-full px-4 py-3 rounded-[var(--radius)] border border-border focus:ring-2 focus:ring-wine/30 focus:border-wine outline-none transition bg-white text-sm";
 
   return (
-    <SectionWrapper id={SECTION_IDS.contact} bgColor="bg">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif">
+    <SectionWrapper id={SECTION_IDS.contact} bgColor="bg" className="!py-12 md:!py-16">
+      <h2 className="text-2xl md:text-3xl font-bold text-center text-text mb-3 font-serif">
         Générez votre fiche technique pour <span className="text-wine">9 €</span>
       </h2>
-      <p className="text-center text-text-secondary mb-12 max-w-2xl mx-auto whitespace-nowrap">
+      <p className="text-center text-text-secondary mb-8 max-w-2xl mx-auto whitespace-nowrap text-sm">
         Remplissez les informations, payez en ligne, téléchargez votre fiche PDF instantanément.
       </p>
 
