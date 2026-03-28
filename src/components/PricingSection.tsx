@@ -3,7 +3,7 @@ import { SECTION_IDS } from "@/lib/constants";
 
 const guarantees = [
   {
-    text: "Satisfait ou refait —\nToute fiche qui ne vous convient pas est corrigée gratuitement",
+    text: "Satisfait ou refait — Toute fiche qui ne vous convient pas est corrigée gratuitement",
   },
   {
     text: "Paiement unique — Pas d'abonnement, pas de frais cachés",
