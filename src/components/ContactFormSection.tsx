@@ -72,7 +72,7 @@ export default function ContactFormSection() {
   return (
     <SectionWrapper id={SECTION_IDS.contactForm} bgColor="wine">
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4 font-serif">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4 font-serif whitespace-nowrap">
           Testez gratuitement sur 5 de vos vins
         </h2>
         <p className="text-center text-white/80 mb-10">
