@@ -21,7 +21,7 @@ export default function SectionWrapper({
   return (
     <section
       id={id}
-      className={`py-20 md:py-28 px-6 md:px-12 lg:px-20 ${bgClasses[bgColor]} ${className}`}
+      className={`py-12 md:py-16 px-6 md:px-12 lg:px-20 ${bgClasses[bgColor]} ${className}`}
     >
       <div className="mx-auto max-w-6xl scroll-animate">{children}</div>
     </section>
