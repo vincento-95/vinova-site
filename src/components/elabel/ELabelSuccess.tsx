@@ -93,7 +93,7 @@ function SuccessContent() {
   return (
     <div className="text-center">
       <div className="text-5xl mb-4">✅</div>
-      <h1 className="text-2xl font-bold text-text mb-2">E-label créé avec succès !</h1>
+      <h1 className="text-2xl font-bold text-text mb-2">E-Label créé avec succès !</h1>
       <p className="text-text-secondary mb-8">{wineName}</p>
 
       {/* QR Code */}
@@ -120,7 +120,7 @@ function SuccessContent() {
       </div>
 
       <Link href={`/wines/${slug}`} target="_blank" className="text-wine hover:underline font-medium">
-        Voir la page e-label →
+        Voir la page E-Label →
       </Link>
 
       <div className="bg-accent rounded-[var(--radius)] p-5 text-left text-sm text-text-secondary mt-8 max-w-lg mx-auto">

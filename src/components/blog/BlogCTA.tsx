@@ -8,8 +8,8 @@ interface CTAProps {
 }
 
 export default function BlogCTA({
-  title = "Générez votre fiche technique + e-label en 30 secondes",
-  description = "Fiche technique + e-label + QR code. Une seule saisie.",
+  title = "Générez votre fiche technique + E-Label en 30 secondes",
+  description = "Fiche technique + E-Label + QR code. Une seule saisie.",
   buttonText = "Essayer gratuitement",
   buttonLink = "/#contact",
 }: CTAProps) {

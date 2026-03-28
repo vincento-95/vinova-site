@@ -19,8 +19,8 @@ export default function ELabelClientPage({ slug }: { slug: string }) {
   if (notFound) {
     return (
       <div className="max-w-md mx-auto text-center py-16 px-4">
-        <h1 className="text-xl font-bold text-gray-900 mb-2">E-label non trouvé</h1>
-        <p className="text-gray-500 text-sm">Ce lien n&apos;est pas valide ou l&apos;e-label n&apos;existe plus.</p>
+        <h1 className="text-xl font-bold text-gray-900 mb-2">E-Label non trouvé</h1>
+        <p className="text-gray-500 text-sm">Ce lien n&apos;est pas valide ou l&apos;E-Label n&apos;existe plus.</p>
       </div>
     )
   }

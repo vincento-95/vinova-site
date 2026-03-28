@@ -20,7 +20,7 @@ const STEPS = [
   'Informations du vin',
   'Ingrédients',
   'Prévisualisation',
-  'Votre e-label',
+  'Votre E-Label',
 ]
 
 export default function ELabelWineForm() {
@@ -293,7 +293,7 @@ export default function ELabelWineForm() {
       {step === 2 && (
         <div className="space-y-6">
           <div>
-            <h3 className="text-sm font-semibold text-text mb-2">Langues de l&apos;e-label</h3>
+            <h3 className="text-sm font-semibold text-text mb-2">Langues de l&apos;E-Label</h3>
             <p className="text-sm text-text-secondary mb-3">Sélectionnez les langues des pays où le vin est commercialisé.</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
               {(Object.entries(EU_LANGUAGES) as [LanguageCode, string][]).map(([code, label]) => (
@@ -362,7 +362,7 @@ export default function ELabelWineForm() {
             <button onClick={downloadPNG} className="rounded-[var(--radius)] bg-wine px-6 py-3 text-white font-medium hover:bg-wine-dark transition">Télécharger PNG</button>
             <button onClick={downloadSVG} className="rounded-[var(--radius)] border border-wine text-wine px-6 py-3 font-medium hover:bg-wine hover:text-white transition">Télécharger SVG</button>
           </div>
-          <a href={`/wines/${slug}`} target="_blank" className="text-wine hover:underline font-medium">Voir la page e-label →</a>
+          <a href={`/wines/${slug}`} target="_blank" className="text-wine hover:underline font-medium">Voir la page E-Label →</a>
           <div className="bg-accent rounded-[var(--radius)] p-5 text-left text-sm text-text-secondary mt-8 max-w-lg mx-auto">
             <p className="font-medium text-text mb-2">Conseils pour vos étiquettes</p>
             <ul className="list-disc list-inside space-y-1">
@@ -383,7 +383,7 @@ export default function ELabelWineForm() {
             <button onClick={() => setStep(s => s + 1)} disabled={!canNext()} className="rounded-[var(--radius)] bg-wine px-5 py-2.5 text-white font-medium hover:bg-wine-dark transition disabled:opacity-50">Suivant →</button>
           ) : (
             <button onClick={handleGenerate} disabled={!canNext() || generating} className="rounded-[var(--radius)] bg-wine px-6 py-3 text-white font-semibold hover:bg-wine-dark transition disabled:opacity-50">
-              {generating ? 'Redirection vers le paiement...' : 'Générer mon e-label pour 3 €'}
+              {generating ? 'Redirection vers le paiement...' : 'Générer mon E-Label pour 3 €'}
             </button>
           )}
         </div>

@@ -3,8 +3,8 @@ import Footer from '@/components/Footer'
 import ELabelWineForm from '@/components/elabel/ELabelWineForm'
 
 export const metadata = {
-  title: "E-Label — Générateur d'e-labels conformes UE | FicheVin",
-  description: "Créez vos e-labels conformes au Règlement UE 2021/2117. Ingrédients, valeurs nutritionnelles, QR code pour vos étiquettes de vin.",
+  title: "E-Label — Générateur d'E-Labels conformes UE | FicheVin",
+  description: "Créez vos E-Labels conformes au Règlement UE 2021/2117. Ingrédients, valeurs nutritionnelles, QR code pour vos étiquettes de vin.",
 }
 
 export default function ELabelPage() {
@@ -16,13 +16,13 @@ export default function ELabelPage() {
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-text text-center mb-4 font-serif">Générateur d&apos;E-Label</h1>
             <p className="text-text-secondary text-base mt-1 text-center">
-              Créez votre e-label conforme UE 2021/2117 en quelques minutes.<br />
+              Créez votre E-Label conforme UE 2021/2117 en quelques minutes.<br />
               Calcul nutritionnel automatique et QR code téléchargeable.
             </p>
             <div className="mt-4 bg-wine-50 border border-wine-100 rounded-[var(--radius)] px-5 py-4 flex items-center justify-between flex-wrap gap-3">
               <div>
                 <span className="text-2xl font-bold text-wine">3 €</span>
-                <span className="text-text-secondary text-sm ml-2">par e-label</span>
+                <span className="text-text-secondary text-sm ml-2">par E-Label</span>
               </div>
               <div className="flex gap-4 text-xs text-text-secondary">
                 <span>Paiement unique</span>

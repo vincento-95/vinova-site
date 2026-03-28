@@ -8,11 +8,11 @@ import BlogTagFilter from '@/components/blog/BlogTagFilter'
 export const metadata: Metadata = {
   title: 'Blog FicheVin — Guides pratiques pour la documentation de vos vins',
   description:
-    'Articles, guides et actualités sur la réglementation viticole UE, les e-labels, les fiches techniques et le marketing du vin.',
+    'Articles, guides et actualités sur la réglementation viticole UE, les E-Labels, les fiches techniques et le marketing du vin.',
   openGraph: {
     title: 'Blog FicheVin — Guides pratiques pour la documentation de vos vins',
     description:
-      'Articles, guides et actualités sur la réglementation viticole UE, les e-labels, les fiches techniques et le marketing du vin.',
+      'Articles, guides et actualités sur la réglementation viticole UE, les E-Labels, les fiches techniques et le marketing du vin.',
     type: 'website',
     locale: 'fr_FR',
     url: 'https://fichevin.fr/blog',
