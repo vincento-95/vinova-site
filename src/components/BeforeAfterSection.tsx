@@ -35,7 +35,7 @@ function ComparisonSlider() {
       {/* After image (background) */}
       <div className="absolute inset-0 p-4 flex items-center justify-center">
         <Image
-          src="/fiche-apres.png"
+          src="/fiche-exemple.png"
           alt="Fiche technique IA FicheVin - après"
           fill
           className="object-contain p-4"

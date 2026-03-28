@@ -43,10 +43,10 @@ export default function HeroSection() {
         <div className="flex-shrink-0 w-full max-w-sm lg:max-w-md">
           <div className="relative rounded-xl shadow-[var(--shadow-card-lg)] overflow-hidden border border-border bg-white">
             <Image
-              src="/fiche-apres.png"
+              src="/fiche-exemple.png"
               alt="Exemple de fiche technique vin générée par FicheVin"
-              width={800}
-              height={1100}
+              width={1655}
+              height={2340}
               className="w-full h-auto"
               priority
             />
