@@ -12,8 +12,9 @@ export default function HeroSection() {
         {/* Left content */}
         <div className="flex-1 text-center lg:text-left">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text leading-tight font-serif">
-            Importateurs, négociants : vos fiches techniques vin générées en{" "}
-            <span className="text-wine">30 secondes</span>
+            Importateurs, négociants :<br />
+            vos fiches techniques vin<br />
+            générées en <span className="text-wine">30 secondes</span>
           </h1>
           <p className="mt-6 text-lg text-text-secondary leading-relaxed max-w-xl mx-auto lg:mx-0">
             Vos commerciaux méritent des fiches qui vendent. Notre IA génère des fiches techniques professionnelles avec dégustation, accords mets-vins et mise en page brandée. Testez gratuitement sur 5 de vos vins.
