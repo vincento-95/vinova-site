@@ -163,7 +163,7 @@ export default function PricingSection() {
         <div className="mt-8 max-w-4xl mx-auto bg-accent rounded-[var(--radius-lg)] p-6 md:p-8 border border-border text-center">
           <p className="text-text leading-relaxed">
             <span className="font-semibold">Comparez :</span> un graphiste freelance facture 30-50 € par fiche.
-            Pour 100 fiches, c&apos;est 3 000 à 5 000 €.
+            Pour 100 fiches, c&apos;est 3 000 à 5 000 €.<br />
             Le Pack Pro FicheVin : <span className="font-bold text-wine">249 € HT</span> pour 50 fiches brandées, livrées sous 48h.
           </p>
         </div>
