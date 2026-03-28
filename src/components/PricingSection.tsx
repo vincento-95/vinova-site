@@ -3,7 +3,7 @@ import { SECTION_IDS } from "@/lib/constants";
 
 const guarantees = [
   {
-    text: "Satisfait ou refait — Toute fiche qui ne vous convient pas est corrigée gratuitement",
+    text: "Satisfait ou refait —\nToute fiche qui ne vous convient pas est corrigée gratuitement",
   },
   {
     text: "Paiement unique — Pas d'abonnement, pas de frais cachés",
@@ -153,7 +153,7 @@ export default function PricingSection() {
             {guarantees.map((g) => (
               <div key={g.text} className="flex items-start gap-2 text-sm text-text">
                 <span className="text-green-600 font-bold mt-0.5 flex-shrink-0">&#10003;</span>
-                <span>{g.text}</span>
+                <span className="whitespace-pre-line">{g.text}</span>
               </div>
             ))}
           </div>
