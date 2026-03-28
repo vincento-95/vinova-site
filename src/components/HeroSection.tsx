@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div className="mx-auto max-w-6xl flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
         {/* Left content */}
         <div className="flex-1 text-center lg:text-left">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text leading-tight font-serif">
+          <h1 className="text-3xl md:text-4xl lg:text-[2.7rem] font-bold text-text leading-tight font-serif">
             Importateurs, négociants :<br />
             vos fiches techniques vin<br />
             générées en <span className="text-wine">30 secondes</span>
