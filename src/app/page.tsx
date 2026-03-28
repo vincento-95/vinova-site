@@ -25,9 +25,9 @@ export default function Home() {
         <ProblemSection />
         <BeforeAfterSection />
         <PricingSection />
-        <FAQSection />
         <ContactFormSection />
         <ContactSection />
+        <FAQSection />
       </main>
       <Footer />
       <Suspense>
