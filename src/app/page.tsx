@@ -8,7 +8,8 @@ import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import AboutSection from "@/components/AboutSection";
 import FAQSection from "@/components/FAQSection";
-import FormCarousel from "@/components/FormCarousel";
+import ContactFormSection from "@/components/ContactFormSection";
+import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import GenerationModal from "@/components/GenerationModal";
 import ScrollAnimations from "@/components/ScrollAnimations";
@@ -24,7 +25,8 @@ export default function Home() {
         <ProblemSection />
         <BeforeAfterSection />
         <PricingSection />
-        <FormCarousel />
+        <ContactFormSection />
+        <ContactSection />
         <FAQSection />
       </main>
       <Footer />
