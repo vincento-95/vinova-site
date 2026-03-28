@@ -76,7 +76,7 @@ export default function ContactFormSection() {
           Testez gratuitement sur 5 de vos vins
         </h2>
         <p className="text-center text-white/80 mb-10">
-          Envoyez-nous vos informations, on vous répond sous 2h en jours ouvrés et on vous livre 5 fiches professionnelles sous 24h en format PDF. Sans engagement.
+          Envoyez-nous vos informations, on vous répond sous 2h en jours ouvrés et on vous livre<br />5 fiches professionnelles sous 24h en format PDF. Sans engagement.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
