@@ -15,7 +15,7 @@ const guarantees = [
 
 export default function PricingSection() {
   return (
-    <section id={SECTION_IDS.pricing} className="py-20 md:py-28 px-6 bg-white">
+    <section id={SECTION_IDS.pricing} className="py-12 md:py-16 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-text mb-4 font-serif">
           Un investissement, <span className="text-wine">pas une dépense</span>
