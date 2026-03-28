@@ -37,7 +37,7 @@ export default function BlogPage() {
       <main className="pt-14 min-h-screen bg-bg">
         <div className="mx-auto max-w-5xl px-6 py-12">
           <div className="mb-10">
-            <h1 className="text-3xl font-bold text-text mb-2">Blog FicheVin</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-text text-center mb-4 font-serif">Blog FicheVin</h1>
             <p className="text-text-secondary">
               Guides pratiques pour la documentation de vos vins
             </p>
