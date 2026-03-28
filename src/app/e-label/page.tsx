@@ -14,7 +14,7 @@ export default function ELabelPage() {
       <main className="pt-14 min-h-screen bg-bg">
         <div className="mx-auto max-w-3xl px-6 py-10">
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-text">Générateur d&apos;e-label</h1>
+            <h1 className="text-2xl font-bold text-text text-center">Générateur d&apos;e-label</h1>
             <p className="text-text-secondary text-sm mt-1">
               Créez votre e-label conforme UE 2021/2117 en quelques minutes.<br />
               Calcul nutritionnel automatique et QR code téléchargeable.
